@@ -15,7 +15,13 @@ export default {
 
     computed: {},
 
-    mounted() {},
+    mounted() {
+        for(let node of this.$el.children){
+            if(node.nodeName !== 'BUTTON'){
+                console.warn(`l-button-group的子元素必须都为button，而你的是${node.nodeName}`)
+            }
+        }
+    },
 
     methods: {}
 };
