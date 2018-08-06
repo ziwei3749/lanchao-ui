@@ -8,6 +8,6 @@ Vue.component('l-icon',Icon)
 new Vue({
     el: "#app",
     data: {
-        message: "hi"
+        loading: false
     }
 });

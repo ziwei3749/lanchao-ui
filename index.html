@@ -31,8 +31,6 @@
         body {
             font-size: var(--font-size)
         }
-
-   
     </style>
 
 </head>
@@ -42,20 +40,25 @@
         <l-button>
             我爱
         </l-button>
-        <l-button icon="settings">
+        <l-button icon="settings" :loading="loading" @click="loading = !loading">
             我爱
         </l-button>
-        <l-button icon="settings" icon-position="left">
+        <l-button icon="settings" icon-position="left" :loading="true">
             我爱JavaScript
         </l-button>
-        <l-button icon="settings" icon-position="right">
+        <l-button icon="settings" icon-position="right" :loading="true">
             我爱JavaScript
         </l-button>
-        <div><l-icon name="settings"></l-icon>哈哈</div>
-        
+        <div>
+            <l-icon name="loading"></l-icon>哈哈
+        </div>
+        <div class="x">
+            哈哈
+        </div>
+
     </div>
     <script src="./src/app.js"></script>
-    <script src="//at.alicdn.com/t/font_779492_upsh95wdt9o.js"></script>
+    <script src="//at.alicdn.com/t/font_779492_06zmige8s21k.js"></script>
 </body>
 
 </html>

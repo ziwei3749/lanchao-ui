@@ -1,7 +1,8 @@
 <!-- button -->
 <template>
-    <button class="l-button" :class="`icon-${iconPosition}`">
-        <l-icon class="icon" v-if="icon" :name="icon"></l-icon>
+    <button class="l-button" :class="`icon-${iconPosition}`" @click="$emit('click')">
+        <l-icon class="icon loading" v-if="loading" name="loading"></l-icon>
+        <l-icon class="icon" v-if="icon && loading !== true" :name="icon"></l-icon>
         <div class="content">
             <slot />
         </div>
@@ -21,6 +22,10 @@ export default {
                 // 属性检查器
                 return value === "left" || value === "right";
             }
+        },
+        loading: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -38,6 +43,14 @@ export default {
 };
 </script>
 <style lang="scss">
+@keyframes spin {
+    to {
+        transform: rotate(0deg);
+    }
+    from {
+        transform: rotate(360deg);
+    }
+}
 .l-button {
     display: inline-flex;
     justify-content: center;
@@ -78,6 +91,9 @@ export default {
         > .content {
             order: 1;
         }
+    }
+    > .loading {
+        animation: spin 2s infinite linear;
     }
 }
 </style>
