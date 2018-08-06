@@ -8,7 +8,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ziwei3749/lanchao-ui.git"
+    "url": "git+https://github.com/ziwei3749/lanchao-ui.git",
+    "start": "./node_modules/.bin/parcel index.html"
   },
   "keywords": [
     "vue",
