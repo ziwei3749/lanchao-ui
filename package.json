@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/ziwei3749/lanchao-ui/issues"
   },
-  "homepage": "https://github.com/ziwei3749/lanchao-ui#readme"
+  "homepage": "https://github.com/ziwei3749/lanchao-ui#readme",
+  "dependencies": {
+    "vue": "^2.5.17"
+  }
 }
