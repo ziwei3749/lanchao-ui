@@ -21,7 +21,7 @@
             --border-radius: 4px;
             --color: #333;
             --border-color: #999;
-            --border-color-hover: #666
+            --border-color-hover: #666;
         }
 
         #app {
@@ -49,16 +49,15 @@
         <l-button icon="settings" icon-position="right" :loading="true">
             我爱JavaScript
         </l-button>
-        <div>
-            <l-icon name="loading"></l-icon>哈哈
-        </div>
-        <div class="x">
-            哈哈
-        </div>
+        <l-button-group>
+            <l-button icon="left">上一页</l-button>
+            <l-button>上一页</l-button>
+            <l-button icon="right" icon-position="right">下一页</l-button>
+        </l-button-group>
 
     </div>
     <script src="./src/app.js"></script>
-    <script src="//at.alicdn.com/t/font_779492_06zmige8s21k.js"></script>
+    <script src="//at.alicdn.com/t/font_779492_ftpdnpu3gl9.js"></script>
 </body>
 
 </html>
