@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,13 +31,35 @@
         body {
             font-size: var(--font-size)
         }
+
+        .icon {
+            width: 1em;
+            height: 1em;
+            vertical-align: -0.15em;
+            /* fill: currentColor; */
+            /* overflow: hidden; */
+        }
     </style>
 
 </head>
+
 <body>
     <div id="app">
-        <l-button></l-button>
+        <l-button>
+            我爱
+        </l-button>
+        <l-button icon="settings">
+            我爱
+        </l-button>
+        <l-button icon="settings" icon-position="left">
+            我爱JavaScript
+        </l-button>
+        <l-button icon="settings" icon-position="right">
+            我爱JavaScript
+        </l-button>
     </div>
     <script src="./src/app.js"></script>
+    <script src="//at.alicdn.com/t/font_779492_upsh95wdt9o.js"></script>
 </body>
+
 </html>
