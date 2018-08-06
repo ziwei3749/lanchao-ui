@@ -1,9 +1,9 @@
 <!-- button -->
 <template>
     <button class="l-button" :class="`icon-${iconPosition}`">
-        <l-icon v-if="icon" :name="icon"></l-icon>
+        <l-icon class="icon" v-if="icon" :name="icon"></l-icon>
         <div class="content">
-            <slot></slot>
+            <slot />
         </div>
     </button>
 </template>
@@ -17,7 +17,8 @@ export default {
         iconPosition: {
             type: String,
             default: "left",
-            validator(value) {  // 属性检查器
+            validator(value) {
+                // 属性检查器
                 return value === "left" || value === "right";
             }
         }
