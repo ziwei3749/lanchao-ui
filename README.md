@@ -1,2 +1,2 @@
-# lanchao-ui 一个兰超的base ui组件库
+# 兰超的基础UI组件库 lanchao-ui
 

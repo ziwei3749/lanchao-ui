@@ -1,0 +1,23 @@
+{
+  "name": "lanchao-ui",
+  "version": "0.0.1",
+  "description": "这是一个ui基础库",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ziwei3749/lanchao-ui.git"
+  },
+  "keywords": [
+    "vue",
+    "ui"
+  ],
+  "author": "吕子威",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ziwei3749/lanchao-ui/issues"
+  },
+  "homepage": "https://github.com/ziwei3749/lanchao-ui#readme"
+}
