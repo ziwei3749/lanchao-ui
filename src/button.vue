@@ -1,13 +1,10 @@
 <!-- button -->
 <template>
     <button class="l-button" :class="`icon-${iconPosition}`">
-        <svg v-if="icon" class="icon" aria-hidden="true">
-            <use :xlink:href="`#i-${icon}`"></use>
-        </svg>
+        <l-icon v-if="icon" :name="icon"></l-icon>
         <div class="content">
             <slot></slot>
         </div>
-
     </button>
 </template>
 
