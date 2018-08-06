@@ -16,9 +16,13 @@ export default {
     computed: {},
 
     mounted() {
-        for(let node of this.$el.children){
-            if(node.nodeName !== 'BUTTON'){
-                console.warn(`l-button-group的子元素必须都为button，而你的是${node.nodeName}`)
+        for (let node of this.$el.children) {
+            if (node.nodeName !== "BUTTON") {
+                console.warn(
+                    `l-button-group的子元素必须都为button，而你的是${
+                        node.nodeName
+                    }`
+                );
             }
         }
     },
@@ -32,7 +36,9 @@ export default {
     vertical-align: middle;
     > .l-button {
         border-radius: 0;
-        margin-left: -1px;
+        &:not(:first-child) {
+            margin-left: -1px;
+        }
         &:first-child {
             border-top-left-radius: var(--border-radius);
             border-bottom-left-radius: var(--border-radius);
@@ -43,7 +49,7 @@ export default {
         }
         &:hover {
             position: relative;
-            z-index: 1
+            z-index: 1;
         }
     }
 }
