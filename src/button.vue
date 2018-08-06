@@ -7,7 +7,7 @@
         <div class="content">
             <slot></slot>
         </div>
-        
+
     </button>
 </template>
 
@@ -19,7 +19,10 @@ export default {
         },
         iconPosition: {
             type: String,
-            default: "left"
+            default: "left",
+            validator(value) {  // 属性检查器
+                return value === "left" || value === "right";
+            }
         }
     },
 
@@ -62,7 +65,7 @@ export default {
 
     > .icon {
         order: 1;
-        margin-right: .3em;
+        margin-right: 0.3em;
     }
     > .content {
         order: 2;
@@ -72,7 +75,7 @@ export default {
         > .icon {
             order: 2;
             margin-right: 0;
-            margin-left: .3em;
+            margin-left: 0.3em;
         }
         > .content {
             order: 1;
