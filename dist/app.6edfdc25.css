@@ -1,0 +1,13 @@
+.l-button {
+  height: var(--button-height);
+  font-size: var(--font-size);
+  padding: 0 1em;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  background: var(--button-bg); }
+  .l-button:hover {
+    border-color: var(--border-color-hover); }
+  .l-button:active {
+    background-color: var(--button-active-bg); }
+  .l-button:focus {
+    outline: none; }

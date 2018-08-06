@@ -20,10 +20,17 @@
     "url": "https://github.com/ziwei3749/lanchao-ui/issues"
   },
   "homepage": "https://github.com/ziwei3749/lanchao-ui#readme",
+  "alias": {
+    "vue": "./node_modules/vue/dist/vue.common.js"
+  },
   "dependencies": {
-    "vue": "^2.5.17"
+    "vue": "^2.5.17",
+    "vue-hot-reload-api": "^2.3.0"
   },
   "devDependencies": {
-    "parcel-bundler": "^1.9.7"
+    "@vue/component-compiler-utils": "^2.1.0",
+    "node-sass": "^4.9.2",
+    "parcel-bundler": "^1.9.7",
+    "vue-template-compiler": "^2.5.17"
   }
 }
