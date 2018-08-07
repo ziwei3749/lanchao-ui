@@ -17,6 +17,9 @@ new Vue({
 // 单元测试
 
 import chai from "chai";
+import spies from "chai-spies";
+
+chai.use(spies);
 
 const expect = chai.expect;
 
@@ -33,10 +36,10 @@ const expect = chai.expect;
     vm.$mount();
     let useElement = vm.$el.querySelector("use");
     let href = useElement.getAttribute("xlink:href");
-    expect( href ).to.eq( "#i-settings" );
-    
-    vm.$el.remove()
-    vm.$destroy()
+    expect(href).to.eq("#i-settings");
+
+    vm.$el.remove();
+    vm.$destroy();
 }
 
 {
@@ -51,10 +54,10 @@ const expect = chai.expect;
     vm.$mount();
     let useElement = vm.$el.querySelector("use");
     let href = useElement.getAttribute("xlink:href");
-    expect( href ).to.eq( "#i-loading" );
-    
-    vm.$el.remove() // 清理内存
-    vm.$destroy() // 注销组件
+    expect(href).to.eq("#i-loading");
+
+    vm.$el.remove(); // 清理内存
+    vm.$destroy(); // 注销组件
 }
 
 {
@@ -70,10 +73,10 @@ const expect = chai.expect;
     vm.$mount(div);
     let svg = vm.$el.querySelector("svg");
     let { order } = window.getComputedStyle(svg);
-    expect( order ).to.eq( "1" );
+    expect(order).to.eq("1");
 
-    vm.$el.remove()
-    vm.$destroy()
+    vm.$el.remove();
+    vm.$destroy();
 }
 
 {
@@ -90,15 +93,14 @@ const expect = chai.expect;
     vm.$mount(div);
     let svg = vm.$el.querySelector("svg");
     let { order } = window.getComputedStyle(svg);
-    expect( order ).to.eq( "2" );
-    
-    vm.$el.remove()
-    vm.$destroy()
+    expect(order).to.eq("2");
+
+    vm.$el.remove();
+    vm.$destroy();
 }
 
-
 {
-    // click
+    // mock 使用chai-spies来监听函数
     // 来判断是否能监听到click
     const Constructor = Vue.extend(Button);
     const vm = new Constructor({
@@ -108,14 +110,14 @@ const expect = chai.expect;
         }
     });
     vm.$mount();
-    vm.$on( 'click', () => {
-        // 期望这个函数被执行
-        console.log(1)
-    } )
-    console.log(vm.$el)
-    let button = vm.$el
+    let spy = chai.spy(() => {});  // 间谍函数
+    vm.$on( "click", spy );   // 监听间谍函数
     
-    button.click()
-    vm.$el.remove()
-    vm.$destroy()
+    let button = vm.$el;
+    button.click();
+    expect(spy).to.have.been.called()    // 期待button.click执行后，间谍函数被调用了
+
+
+    vm.$el.remove();
+    vm.$destroy();
 }
