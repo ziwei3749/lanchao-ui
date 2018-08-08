@@ -24,7 +24,7 @@ chai.use(spies);
 const expect = chai.expect;
 
 {
-    // 根据use的属性xlink:href是否为 #i-settings来判断icon显示是否正常
+    // 测试按钮是否含有 icon
     const Constructor = Vue.extend(Button); // 创造一个构造器
     const vm = new Constructor({
         propsData: {
@@ -43,7 +43,7 @@ const expect = chai.expect;
 }
 
 {
-    // 根据use的属性xlink:href是否为 #i-loading来判断loading显示是否正常
+    // 测试loading的icon是否显示正常
     const Constructor = Vue.extend(Button);
     const vm = new Constructor({
         propsData: {
@@ -61,7 +61,7 @@ const expect = chai.expect;
 }
 
 {
-    // 根据svg的order属性是否为1，来判断是否是在left
+    // 测试设置left或者默认值时，是否icon在左侧
     let div = document.createElement("div");
     document.body.appendChild(div);
     const Constructor = Vue.extend(Button);
@@ -80,7 +80,7 @@ const expect = chai.expect;
 }
 
 {
-    // 根据svg的order属性是否为2，来判断是否是在right
+    // 测试设置right或者默认值时，是否icon在右侧
     let div = document.createElement("div");
     document.body.appendChild(div);
     const Constructor = Vue.extend(Button);

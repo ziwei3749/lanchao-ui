@@ -10,6 +10,9 @@
 </template>
 
 <script>
+// 使用局部组件icon
+import Icon from "./icon.vue";
+
 export default {
     props: {
         icon: {
@@ -33,7 +36,9 @@ export default {
         return {};
     },
 
-    components: {},
+    components: {
+        "l-icon": Icon
+    },
 
     computed: {},
 
