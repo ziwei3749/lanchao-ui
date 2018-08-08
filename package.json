@@ -1,6 +1,6 @@
 {
   "name": "lanchao-ui",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "这是一个ui基础库",
   "main": "dist/index.js",
   "scripts": {
