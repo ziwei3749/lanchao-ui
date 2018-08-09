@@ -37,29 +37,39 @@
 
 <body>
     <div id="app">
-        <l-button>
-            我爱
-        </l-button>
-        <l-button icon="settings" :loading="loading" @click="loading = !loading">
-            我爱
-        </l-button>
-        <l-button icon="settings" icon-position="left" :loading="true">
-            我爱JavaScript
-        </l-button>
-        <l-button icon="settings" icon-position="right" :loading="true">
-            我爱JavaScript
-        </l-button>
-        <l-button-group>
-            <l-button icon="left">上一页</l-button>
-            <l-button>更多</l-button>
-            <l-button icon="right" icon-position="right">下一页</l-button>
-        </l-button-group>
-        <div id="test"></div>
-        <div id="test2"></div>
+        <div>
+            <l-button>
+                我爱
+            </l-button>
+            <l-button icon="settings" :loading="loading" @click="loading = !loading">
+                我爱
+            </l-button>
+            <l-button icon="settings" icon-position="left" :loading="true">
+                我爱JavaScript
+            </l-button>
+            <l-button icon="settings" icon-position="right" :loading="true">
+                我爱JavaScript
+            </l-button>
+            <l-button-group>
+                <l-button icon="left">上一页</l-button>
+                <l-button>更多</l-button>
+                <l-button icon="right" icon-position="right">下一页</l-button>
+            </l-button-group>
+        </div>
+
+        <br>
+        <div>
+            <l-input v-model="name" placeholder="吕子威" :disabled="false" :readonly="false" @change="fn">
+                <template slot="prepend">
+                    Http://
+                </template>
+            </l-input>
+        </div>
+
 
     </div>
     <script src="./src/app.js"></script>
-    <script src="//at.alicdn.com/t/font_779492_ftpdnpu3gl9.js"></script>
+    <script src="http://at.alicdn.com/t/font_779492_ftpdnpu3gl9.js"></script>
 </body>
 
 </html>

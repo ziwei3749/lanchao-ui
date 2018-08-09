@@ -5,7 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "start": "npx parcel index.html --no-cache",
-    "dev-test" : "parcel watch test/* --no-cache & karma start",
+    "dev-test": "parcel watch test/* --no-cache & karma start",
+    "build" :"npx parcel build index.js --no-cache --no-minify",
     "test": "parcel build test/* --no-cache --no-minify && karma start --single-run"
   },
   "repository": {
@@ -27,11 +28,13 @@
     "vue": "./node_modules/vue/dist/vue.common.js"
   },
   "dependencies": {
+    "hoek": "^4.2.1",
+    "tunnel-agent": "^0.6.0",
     "vue": "^2.5.17",
     "vue-hot-reload-api": "^2.3.0"
   },
   "devDependencies": {
-    "@vue/component-compiler-utils": "^2.1.0",
+    "@vue/component-compiler-utils": "^2.1.1",
     "chai": "^4.1.2",
     "chai-spies": "^1.0.0",
     "karma": "^2.0.5",
