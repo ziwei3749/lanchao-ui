@@ -17,9 +17,9 @@ new Vue({
         username: ''
     },
     methods: {
-        fn() {
-            console.log('触发了')
-        }
+      inputChange(e){
+          console.log(e.target.value)
+      }
     }
 });
 

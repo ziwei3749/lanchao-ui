@@ -9,10 +9,10 @@
                :disabled="disabled"
                :class="{'disable':disabled}"
                :readonly="readonly"
-               @change="handleChange"
-               @focus="handleFocus"
-               @blur="handleBlur"
-               @input="handleInput">
+               @change="$emit('change',$event)"
+               @focus="$emit('focus',$event)"
+               @blur="$emit('blur',$event)"
+               @input="$emit('input',$event)">
         <template v-if="error">
             <l-icon name="error" class="icon-error"></l-icon>
             <span class="errorMessage">{{error}}</span>
