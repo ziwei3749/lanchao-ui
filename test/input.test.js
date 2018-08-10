@@ -1,3 +1,15 @@
+/**
+ * karma: 有一个karma.conf.js的配置文件，主要是打开浏览器，打开浏览器后才能测试前端代码。它引入mocha和sinon-chai。
+ * karma用的是无头浏览器、通过file把指定要测试的js/css
+ * karma还有一个reporters,可以指定终端里的报告样式，
+ *
+ * mocha: 引入mocha后，就可以describe和it函数，他们挂载window的全局方法，所以不用引
+ * sinon-chai : sinon-chai包括sinon和chai。sinon就用来做fake函数的，chai提供的expect来断言
+ *
+ * describe
+ * it
+ * exprect
+ */
 const expect = chai.expect;
 import Vue from "vue";
 import Input from "../src/input";
@@ -80,11 +92,14 @@ describe("Input", () => {
                 vm.$on(eventName, callback);
                 // 如何手动触发change事件,这个change的是不可信的，但是几乎可以模拟
                 const event = new Event(eventName);
+                Object.defineProperty(event, "target", {  // 为了给模拟的event对象添加target
+                    value: { value: "hi" }
+                });
                 let inputElement = vm.$el.querySelector("input");
                 inputElement.dispatchEvent(event);
 
                 expect(callback).to.have.been.called;
-                expect(callback).to.have.been.calledWith(event); // change事件的第一个参数是event
+                expect(callback).to.have.been.calledWith('hi'); // change事件的第一个参数是event
             });
         });
 

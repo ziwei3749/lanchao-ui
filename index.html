@@ -63,8 +63,9 @@
 
         <br>
         <div class="box">
-            <l-input value="李四" placeholder="输入用户名" @change="inputChange">
+            <l-input v-model="username" placeholder="输入用户名">
             </l-input>
+            <p>{{username}}</p>
         </div>
 
         <div class="box">
