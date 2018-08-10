@@ -31,6 +31,10 @@
         body {
             font-size: var(--font-size)
         }
+
+        .box {
+            margin: 20px;
+        }
     </style>
 
 </head>
@@ -58,18 +62,30 @@
         </div>
 
         <br>
-        <div>
-            <l-input v-model="name" placeholder="吕子威" :disabled="false" :readonly="false" @change="fn">
-                <template slot="prepend">
-                    Http://
-                </template>
+        <div class="box">
+            <l-input value="李四" placeholder="输入用户名" @change="fn">
             </l-input>
         </div>
+
+        <div class="box">
+            <l-input value="王五" readonly placeholder="输入用户名" @change="fn">
+            </l-input>
+        </div>
+        <div class="box">
+            <l-input value="张三" placeholder="输入用户名" disabled :readonly="false" @change="fn">
+            </l-input>
+        </div>
+
+        <div class="box">
+            <l-input value="老吕" placeholder="输入用户名" @change="fn" error='姓名不能少于2个字'>
+            </l-input>
+        </div>
+
+    </div>
 
 
     </div>
     <script src="./src/app.js"></script>
-    <!-- <script src="http://at.alicdn.com/t/font_779492_ftpdnpu3gl9.js"></script> -->
 </body>
 
 </html>

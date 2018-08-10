@@ -14,6 +14,7 @@
 import Icon from "./icon.vue";
 
 export default {
+    name: 'l-button',
     props: {
         icon: {
             type: String

@@ -1,14 +1,11 @@
 <!-- input -->
 <template>
-    <div class="l-input">
-        <span class="l-input-group--prepend">
-            <slot name="prepend"></slot>
-        </span>
-
+    <div class="wrapper"
+         :class="{'error' : error}">
         <input class="l-input__inner"
                :type="type"
                :placeholder="placeholder"
-               :value="currentValue"
+               :value="value"
                :disabled="disabled"
                :class="{'disable':disabled}"
                :readonly="readonly"
@@ -16,13 +13,19 @@
                @focus="handleFocus"
                @blur="handleBlur"
                @input="handleInput">
-        <slot class="l-input-group--append"
-              name="append"></slot>
+        <template v-if="error">
+            <l-icon name="error" class="icon-error"></l-icon>
+            <span class="errorMessage">{{error}}</span>
+        </template>
+
+        
     </div>
 </template>
 
 <script>
+import Icon from './icon'
 export default {
+    name: "l-input",
     props: {
         type: {
             type: String,
@@ -42,15 +45,18 @@ export default {
         readonly: {
             type: Boolean,
             default: false
+        },
+        error: {
+            type: String
         }
     },
     data() {
-        return {
-            currentValue: this.value
-        };
+        return {};
     },
 
-    components: {},
+    components: {
+        'l-icon' : Icon
+    },
 
     computed: {},
 
@@ -58,72 +64,65 @@ export default {
 
     methods: {
         handleInput(e) {
-            this.currentValue = e.target.value;
             this.$emit("input", e.target.value);
         },
 
-        handleFocus(e){
-            this.$emit('focus',e)
+        handleFocus(e) {
+            this.$emit("focus", e);
         },
 
-        handleChange(e){
-            this.$emit('change',e)
+        handleChange(e) {
+            this.$emit("change", e);
         },
 
-        handleBlur(e){
-            this.$emit('blur',e)
+        handleBlur(e) {
+            this.$emit("blur", e);
         }
     }
 };
 </script>
-<style lang="scss">
-.l-input {
-    font-size: 0;
-    border-radius: 4px;
-    display: inline-block;
-    .l-input-group--prepend {
-        font-size: 14px;
-        display: inline-block;
-        background-color: #f5f7fa;
-        color: #909399;
-        border: 1px solid var(--border-color);
-        border-radius: 4px;
-        padding: 0 20px;
-        height: 32px;
-        line-height: 32px;
-        vertical-align: top;
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
+<style lang="scss" scoped>
+$height: 32px;
+$border-color: #999;
+$border-color-hover: #666;
+$border-radius: 4px;
+$font-size: 12px;
+$box-shadow-color: rgba(0, 0, 0, 0.5);
+$red: #f1453d;
+
+.wrapper {
+    display: inline-flex;
+    align-items: center;
+    font-size: $font-size;
+    > :not(:last-child) {
+        margin-right: .5em
     }
-    .l-input__inner {
-        width: 128px;
-        height: 32px;
-        font-size: 14px;
-        padding: 0 1em;
-        background: #ffffff;
-        border: 1px solid var(--border-color);
+    &.error {
+        > input {
+            border-color: $red;
+        }
+        .icon-error {
+            fill: $red;
+        }
+        .errorMessage {
+            color: $red;
+        }
+    }
+    > input {
+        height: $height;
+        border: 1px solid $border-color;
+        border-radius: $border-radius;
+        padding: 0 8px;
+        font-size: inherit;
+        &:hover {
+            border-color: $border-color-hover;
+        }
         &:focus {
             outline: none;
             border: 1px solid #000;
         }
-        &::-webkit-input-placeholder {
-            /* WebKit browsers */
-            color: #d6d6d6;
-            font-weight: 300;
-        }
-        &:-moz-placeholder {
-            /* Mozilla Firefox 4 to 18 */
-            color: #999;
-        }
-        &::-moz-placeholder {
-            /* Mozilla Firefox 19+ */
-            color: #999;
-        }
-        &:-ms-input-placeholder {
-            /* Internet Explorer 10+ */
-            color: #999;
-        }
-        &.disable {
+        &[disabled],
+        &[readonly] {
             cursor: not-allowed;
             background-color: #f5f7fa;
             border-color: #e4e7ed;
