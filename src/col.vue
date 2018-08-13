@@ -1,11 +1,9 @@
 !<!-- col -->
 <template>
     <div class="col"
-         :style="{'paddingLeft':`${gutter/2}px`,'paddingRight':`${gutter/2}px`}"
-         :class="[span &&`col-${span}`, offset && `offset-${offset}`]">
-         <div :style="'border: 1px solid green; height: 100%'">
-             <slot></slot>
-         </div>
+         :style="colStyle"
+         :class="colClass">
+        <slot></slot>
     </div>
 </template>
 
@@ -34,17 +32,20 @@ export default {
         };
     },
 
-    components: {},
-
-    computed: {},
-
-    created() {},
-
-    mounted() {
-        console.log(this);
-    },
-
-    methods: {}
+    computed: {
+        // data里的数据只在created时读取一次，之后gutter变化没法读取到，所以用计算属性
+        colStyle() {
+            let { gutter } = this;
+            return {
+                paddingLeft: gutter / 2 + "px",
+                paddingRight: gutter / 2 + "px"
+            };
+        },
+        colClass() {
+            let { span, offset } = this;
+            return [span && `col-${span}`, offset && `offset-${offset}`];
+        }
+    }
 };
 </script>
 <style scoped lang="scss">
