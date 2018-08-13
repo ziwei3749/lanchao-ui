@@ -2,6 +2,11 @@
 <template>
     <div class="wrapper"
          :class="{'error' : error}">
+        <span class="prepend_text" v-if="$slots.prepend">
+            <slot name="prepend">
+            </slot>
+        </span>
+
         <input class="l-input__inner"
                :type="type"
                :placeholder="placeholder"
@@ -14,16 +19,16 @@
                @blur="$emit('blur',$event.target.value)"
                @input="$emit('input',$event.target.value)">
         <template v-if="error">
-            <l-icon name="error" class="icon-error"></l-icon>
+            <l-icon name="error"
+                    class="icon-error"></l-icon>
             <span class="errorMessage">{{error}}</span>
         </template>
 
-        
     </div>
 </template>
 
 <script>
-import Icon from './icon'
+import Icon from "./icon";
 export default {
     name: "l-input",
     props: {
@@ -55,12 +60,14 @@ export default {
     },
 
     components: {
-        'l-icon' : Icon
+        "l-icon": Icon
     },
 
     computed: {},
 
-    mounted() {},
+    mounted() {
+        console.log(this.$slots)
+    },
 
     methods: {
         handleInput(e) {
@@ -95,8 +102,16 @@ $red: #f1453d;
     align-items: center;
     font-size: $font-size;
     > :not(:last-child) {
-        margin-right: .5em
+        margin-right: 0.5em;
     }
+    // 这个是复合input的做法，但是样式还没写好
+    > .prepend_text {
+        color: red;
+        width: 100px;
+        height: $height;
+        border: 1px solid #ccc;
+    }
+
     &.error {
         > input {
             border-color: $red;
@@ -108,6 +123,7 @@ $red: #f1453d;
             color: $red;
         }
     }
+
     > input {
         height: $height;
         border: 1px solid $border-color;

@@ -42,6 +42,29 @@ describe("Input", () => {
             expect(inputElement.value).to.equal("111");
         });
 
+        it("设置placeholder", () => {
+            vm = new Constructor({
+                propsData: {
+                    placeholder: "请输入用户名"
+                }
+            }).$mount();
+            const inputElement = vm.$el.querySelector("input");
+            console.log(inputElement.getAttribute("placeholder"));
+            expect(inputElement.getAttribute("placeholder")).to.equal(
+                "请输入用户名"
+            );
+        });
+
+        it("设置type", () => {
+            vm = new Constructor({
+                propsData: {
+                    type: "password"
+                }
+            }).$mount();
+            const inputElement = vm.$el.querySelector("input");
+            expect(inputElement.getAttribute("type")).to.equal("password");
+        });
+
         it("设置disabled.", () => {
             vm = new Constructor({
                 propsData: {
@@ -92,14 +115,15 @@ describe("Input", () => {
                 vm.$on(eventName, callback);
                 // 如何手动触发change事件,这个change的是不可信的，但是几乎可以模拟
                 const event = new Event(eventName);
-                Object.defineProperty(event, "target", {  // 为了给模拟的event对象添加target
+                Object.defineProperty(event, "target", {
+                    // 为了给模拟的event对象添加target
                     value: { value: "hi" }
                 });
                 let inputElement = vm.$el.querySelector("input");
                 inputElement.dispatchEvent(event);
 
                 expect(callback).to.have.been.called;
-                expect(callback).to.have.been.calledWith('hi'); // change事件的第一个参数是event
+                expect(callback).to.have.been.calledWith("hi"); // change事件的第一个参数是event
             });
         });
 

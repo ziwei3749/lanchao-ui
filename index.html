@@ -64,6 +64,9 @@
         <br>
         <div class="box">
             <l-input v-model="username" placeholder="输入用户名">
+                <template slot="prepend">
+                       xxx 
+                </template>
             </l-input>
             <p>{{username}}</p>
         </div>
