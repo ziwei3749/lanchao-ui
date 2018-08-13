@@ -24,9 +24,7 @@
             --border-color-hover: #666;
         }
 
-        #app {
-            margin: 20px;
-        }
+        #app {}
 
         body {
             font-size: var(--font-size)
@@ -36,31 +34,49 @@
             margin: 20px;
         }
 
+        .bg-purple-dark {
+            background: #99a9bf;
+        }
+
+        .bg-purple {
+            background: #d3dce6;
+        }
+
+        .bg-purple-light {
+            background: #e5e9f2;
+        }
     </style>
 
 </head>
 
 <body>
     <div id="app">
-        <l-row>
-            <l-col :span="12"></l-col>
-            <l-col :span="12"></l-col>
+        <l-row :gutter="20">
+            <l-col :span="12">1</l-col>
+            <l-col :span="12">1</l-col>
         </l-row>
-        <l-row>
+        <br>
+        <l-row :gutter="20">
             <l-col :span="8"></l-col>
             <l-col :span="8"></l-col>
             <l-col :span="8"></l-col>
         </l-row>
-        <l-row>
+        <br>
+        <l-row :gutter="20">
             <l-col :span="6"></l-col>
             <l-col :span="6"></l-col>
             <l-col :span="6"></l-col>
             <l-col :span="6"></l-col>
         </l-row>
-
-        <l-row>
-            <l-col :span="1"></l-col>
+        <br>
+        <l-row :gutter="20">
             <l-col :span="2"></l-col>
+            <l-col :span="20" offset="2"></l-col>
+        </l-row>
+        <br>
+        <l-row :gutter="20">
+            <l-col :span="4"></l-col>
+            <l-col :span="20"></l-col>
         </l-row>
 
 

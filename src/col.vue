@@ -1,8 +1,11 @@
 !<!-- col -->
 <template>
     <div class="col"
-         :class="`col-${span}`">
-        <slot></slot>
+         :style="{'paddingLeft':`${gutter/2}px`,'paddingRight':`${gutter/2}px`}"
+         :class="[span &&`col-${span}`, offset && `offset-${offset}`]">
+         <div :style="'border: 1px solid green; height: 100%'">
+             <slot></slot>
+         </div>
     </div>
 </template>
 
@@ -10,39 +13,53 @@
 export default {
     props: {
         span: {
-            type: [Number,String],
-            validator(value){
+            type: [Number, String],
+            validator(value) {
                 // 用正则校验span必须是1-24的整数
-                return /^\d{1,2}$/.test(value) &&  value<=24 && value>=1
+                return /^\d{1,2}$/.test(value) && value <= 24 && value >= 1;
+            }
+        },
+        offset: {
+            type: [Number, String],
+            validator(value) {
+                // 用正则校验span必须是1-24的整数
+                return /^\d{1,2}$/.test(value) && value <= 24 && value >= 1;
             }
         }
     },
 
     data() {
-        return {};
+        return {
+            gutter: 0
+        };
     },
 
     components: {},
 
     computed: {},
 
-    mounted() {},
+    created() {},
+
+    mounted() {
+        console.log(this);
+    },
 
     methods: {}
 };
 </script>
 <style scoped lang="scss">
-$class-prefix: "col-";
+$class-col-prefix: "col-";
+$class-offset-prefix: "offset-";
 
 .col {
     height: 100px;
-    background: grey;
     width: 50%;
-    border: 1px solid red;
-
     @for $n from 1 through 24 {
-        &.#{$class-prefix}#{$n} {
+        &.#{$class-col-prefix}#{$n} {
             width: ($n/24) * 100%;
+        }
+        &.#{$class-offset-prefix}#{$n} {
+            margin-left: ($n/24) * 100%;
         }
     }
 }
