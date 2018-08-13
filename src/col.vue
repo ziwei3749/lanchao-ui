@@ -54,7 +54,6 @@ $class-offset-prefix: "offset-";
 
 .col {
     height: 100px;
-    width: 50%;
     @for $n from 1 through 24 {
         &.#{$class-col-prefix}#{$n} {
             width: ($n/24) * 100%;
