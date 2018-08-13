@@ -52,10 +52,10 @@ export default {
             return [
                 span && `col-${span}`,
                 offset && `offset-${offset}`,
-                ...(ipad && [`col-ipad-${ipad.span}`]),
-                ...(narrowPc && [`col-narrow-pc-${narrowPc.span}`]),
-                ...(pc && [`col-pc-${pc.span}`]),
-                ...(widePc && [`col-wide-pc-${widePc.span}`])
+                ...(ipad ? [`col-ipad-${ipad.span}`] : []),
+                ...(narrowPc ? [`col-narrow-pc-${narrowPc.span}`] : []),
+                ...(pc ? [`col-pc-${pc.span}`] : []),
+                ...(widePc ? [`col-wide-pc-${widePc.span}`] : [])
             ];
         },
 
@@ -82,6 +82,21 @@ export default {
     @for $n from 1 through 24 {
         &.#{$class-prefix}#{$n} {
             margin-left: ($n / 24) * 100%;
+        }
+    }
+
+    @media (min-width: 577px) and (max-width: 768px) {
+        $class-prefix: col-ipad-;
+        @for $n from 1 through 24 {
+            &.#{$class-prefix}#{$n} {
+                width: ($n / 24) * 100%;
+            }
+        }
+        $class-prefix: offset-ipad-;
+        @for $n from 1 through 24 {
+            &.#{$class-prefix}#{$n} {
+                margin-left: ($n / 24) * 100%;
+            }
         }
     }
 

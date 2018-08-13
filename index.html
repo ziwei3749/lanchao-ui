@@ -32,27 +32,54 @@
         .box {
             margin: 20px;
         }
+
+        .demo {
+            height: 100px;
+            background: #ccc;
+            border: 1px solid #000
+        }
     </style>
 
 </head>
 
 <body>
     <div id="app">
-        <l-row gutter="20">
-            <l-col span="24" :ipad="{span:8}" :narrow-pc="{span:4}" :pc="{span:2}" :wide-pc="{span:1}">
+
+        <l-row>
+            <l-col span="24" :ipad="{span:12}" :narrow-pc="{span:8}">
+                <div class="demo"></div>
+            </l-col>
+            <l-col span="24" :ipad="{span:12}" :narrow-pc="{span:8}">
+                <div class="demo"></div>
+            </l-col>
+            <l-col span="24" :ipad="{span:12}" :narrow-pc="{span:8}">
+                <div class="demo"></div>
+            </l-col>
+            <l-col span="24" :ipad="{span:12}" :narrow-pc="{span:8}">
+                <div class="demo"></div>
+            </l-col>
+            <l-col span="24" :ipad="{span:12}" :narrow-pc="{span:8}">
+                <div class="demo"></div>
+            </l-col>
+            <l-col span="24" :ipad="{span:12}" :narrow-pc="{span:8}">
+                <div class="demo"></div>
+            </l-col>
+        </l-row>
+        <!-- <l-row gutter="20">
+            <l-col span="24" :ipad="{span:8}" :narrow-pc="{span:4}" :pc="{span:12}" :wide-pc="{span:1}">
                 1
             </l-col>
-            <l-col span="24" :ipad="{span:16}" :narrow-pc="{span:20}" :pc="{span:22}" :wide-pc="{span:23}">11
+            <l-col span="24" :ipad="{span:16}" :narrow-pc="{span:20}" :pc="{span:12}" :wide-pc="{span:23}">11
             </l-col>
         </l-row>
         <br>
-        <!-- <l-row :gutter="20">
+        <l-row :gutter="20">
             <l-col :span="8"></l-col>
             <l-col :span="8"></l-col>
             <l-col :span="8"></l-col>
         </l-row>
-        <br> -->
-        <!-- <l-row :gutter="20">
+        <br>
+        <l-row :gutter="20">
             <l-col :span="6"></l-col>
             <l-col :span="6"></l-col>
             <l-col :span="6"></l-col>
