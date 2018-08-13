@@ -35,12 +35,36 @@
         .box {
             margin: 20px;
         }
+
     </style>
 
 </head>
 
 <body>
     <div id="app">
+        <l-row>
+            <l-col :span="12"></l-col>
+            <l-col :span="12"></l-col>
+        </l-row>
+        <l-row>
+            <l-col :span="8"></l-col>
+            <l-col :span="8"></l-col>
+            <l-col :span="8"></l-col>
+        </l-row>
+        <l-row>
+            <l-col :span="6"></l-col>
+            <l-col :span="6"></l-col>
+            <l-col :span="6"></l-col>
+            <l-col :span="6"></l-col>
+        </l-row>
+
+        <l-row>
+            <l-col :span="1"></l-col>
+            <l-col :span="2"></l-col>
+        </l-row>
+
+
+
         <div>
             <l-button>
                 我爱
@@ -65,23 +89,23 @@
         <div class="box">
             <l-input v-model="username" placeholder="输入用户名">
                 <template slot="prepend">
-                       xxx 
+                    xxx
                 </template>
             </l-input>
             <p>{{username}}</p>
         </div>
 
         <div class="box">
-            <l-input value="王五" readonly placeholder="输入用户名" >
+            <l-input value="王五" readonly placeholder="输入用户名">
             </l-input>
         </div>
         <div class="box">
-            <l-input value="张三" placeholder="输入用户名" disabled :readonly="false" >
+            <l-input value="张三" placeholder="输入用户名" disabled :readonly="false">
             </l-input>
         </div>
 
         <div class="box">
-            <l-input value="老吕" placeholder="输入用户名"  error='姓名不能少于2个字'>
+            <l-input value="老吕" placeholder="输入用户名" error='姓名不能少于2个字'>
             </l-input>
         </div>
 
