@@ -6,7 +6,10 @@ import Col from "../src/col";
 Vue.config.productionTip = false;
 Vue.config.devtools = false;
 
-describe("Col", () => {
+
+
+describe( "Col", () => {
+
     it("存在.", () => {
         expect(Col).to.be.ok;
     });
