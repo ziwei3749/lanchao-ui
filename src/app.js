@@ -41,7 +41,7 @@ new Vue({
                 enableHtml: false,
                 autoClose: false,
                 autoCloseDelay: 1,
-                position: "middle",
+                position: "bottom",
                 closeButton: {
                     text: "关闭",
                     callback: (toast) => {

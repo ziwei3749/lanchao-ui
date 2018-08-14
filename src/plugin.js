@@ -16,7 +16,10 @@ export default {
             if (currentToast) {
                 currentToast.close();
             }
-            currentToast = createToast(Vue, message, options);
+            let onClose = () => {
+                currentToast = null;
+            };
+            currentToast = createToast(Vue, message, options, onClose);
         };
     }
 };
@@ -25,12 +28,13 @@ export default {
  * helpers
 
  */
-function createToast(Vue, message, options) {
+function createToast(Vue, message, options, onClose) {
     // 生成一个toast组件，然后生插入到body中
     let Constructor = Vue.extend(Toast);
     let toast = new Constructor({ propsData: options });
     toast.$slots.default = message; // 设置匿名插槽的内容，必须放到$mount前面
     toast.$mount();
+    toast.$on("close", onClose);
     document.body.appendChild(toast.$el);
     return toast;
 }
