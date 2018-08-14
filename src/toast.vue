@@ -1,6 +1,7 @@
 !<!-- toast -->
 <template>
     <div class="l-toast"
+         :class="toastClasses"
          ref="toast">
         <div class="message">
             <slot v-if="!enableHtml"></slot>
@@ -30,7 +31,11 @@
 export default {
     components: {},
 
-    computed: {},
+    computed: {
+        toastClasses() {
+            return `position-${this.position}`;
+        }
+    },
 
     props: {
         autoClose: {
@@ -53,6 +58,13 @@ export default {
         enableHtml: {
             type: Boolean,
             default: false
+        },
+        position: {
+            type: String,
+            default: "top",
+            validator(value) {
+                return ["top", "middle", "bottom"].indexOf(value) >= 0;
+            }
         }
     },
 
@@ -117,9 +129,8 @@ $toast-bg: rgba(0, 0, 0, 0.75);
     border-radius: 4px;
     box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.5);
     position: fixed;
-    top: 0;
     left: 50%;
-    transform: translateX(-50%);
+
     color: #fff;
     padding-left: 16px;
     .message {
@@ -136,6 +147,19 @@ $toast-bg: rgba(0, 0, 0, 0.75);
         height: $toast-min-height;
         line-height: $toast-min-height;
         flex-shrink: 0;
+    }
+    &.position-top {
+        top: 0;
+        transform: translateX(-50%);
+    }
+    &.position-bottom {
+        bottom: 0;
+        transform: translateX(-50%);
+    }
+    &.position-middle {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 }
 </style>

@@ -41,13 +41,14 @@ new Vue({
                 enableHtml: true,
                 autoClose: false,
                 autoCloseDelay: 1,
-                // closeButton: {
-                //     text: "关闭",
-                //     callback: (toast) => {
-                //         console.log( "用户的do something" );
-                //         console.log(toast)   //组件在callback时把实例交给用户
-                //     }
-                // }
+                position: "middle",
+                closeButton: {
+                    text: "关闭",
+                    callback: (toast) => {
+                        console.log( "用户的do something" );
+                        console.log(toast)   //组件在callback时把实例交给用户
+                    }
+                }
             });
         }
     }
