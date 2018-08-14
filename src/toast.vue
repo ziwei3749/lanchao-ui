@@ -1,7 +1,20 @@
 !<!-- toast -->
 <template>
-    <div class="l-toast">
-        <slot></slot>
+    <div class="l-toast"
+         ref="toast">
+        <div class="message">
+            <slot v-if="!enableHtml"></slot>
+            <div v-else
+                 v-html="$slots.default"></div>
+        </div>
+
+        <span class="line"
+              ref="line"></span>
+        <span v-if="closeButton"
+              class="close-btn"
+              @click="onClickClose">
+            {{closeButton.text}}
+        </span>
     </div>
 </template>
 
@@ -19,20 +32,79 @@ export default {
 
     computed: {},
 
+    props: {
+        autoClose: {
+            type: Boolean,
+            default: true
+        },
+        autoCloseDelay: {
+            type: Number,
+            default: 2
+        },
+        closeButton: {
+            type: Object,
+            default: () => {
+                return {
+                    text: "close",
+                    callback: undefined
+                };
+            }
+        },
+        enableHtml: {
+            type: Boolean,
+            default: false
+        }
+    },
+
     data() {
         return {};
     },
 
     created() {},
 
-    mounted() {},
+    mounted() {
+        this.updateStyles();
+        this.execAutoClose();
+    },
 
-    methods: {}
+    methods: {
+        updateStyles() {
+            // 用js获取dom的高度，因为父元素用min-height，我们拿不到高度
+            this.$nextTick(() => {
+                this.$refs.line.style.height =
+                    this.$refs.toast.getBoundingClientRect().height + "px";
+            });
+        },
+
+        execAutoClose() {
+            if (this.autoClose) {
+                setTimeout(() => {
+                    this.close();
+                }, this.autoCloseDelay * 1000);
+            }
+        },
+
+        close() {
+            this.$el.remove();
+            this.$destroy();
+        },
+        onClickClose() {
+            // 首先关闭
+            this.close();
+            // 其次执行用户的关闭逻辑，如果有的话
+            if (
+                this.closeButton.callback &&
+                typeof this.closeButton.callback === "function"
+            ) {
+                this.closeButton.callback(this); // 让callback可以得到toast实例，也可以不用
+            }
+        }
+    }
 };
 </script>
 <style lang='scss' scoped>
 $font-size: 14px;
-$toast-height: 40px;
+$toast-min-height: 40px;
 $toast-bg: rgba(0, 0, 0, 0.75);
 
 .l-toast {
@@ -40,7 +112,7 @@ $toast-bg: rgba(0, 0, 0, 0.75);
     align-items: center;
     font-size: $font-size;
     line-height: 1.8;
-    height: $toast-height;
+    min-height: $toast-min-height;
     background: $toast-bg;
     border-radius: 4px;
     box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.5);
@@ -49,6 +121,21 @@ $toast-bg: rgba(0, 0, 0, 0.75);
     left: 50%;
     transform: translateX(-50%);
     color: #fff;
-    padding: 0 16px;
+    padding-left: 16px;
+    .message {
+        padding: 8px 0;
+        width: 200px;
+    }
+    .line {
+        border-right: 1px solid rgba(102, 102, 102, 1);
+        height: 100%;
+        margin-left: 16px;
+    }
+    .close-btn {
+        padding: 0 16px;
+        height: $toast-min-height;
+        line-height: $toast-min-height;
+        flex-shrink: 0;
+    }
 }
 </style>

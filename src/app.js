@@ -37,7 +37,18 @@ new Vue({
     created() {},
     methods: {
         showToast() {
-            this.$toast('xxxxxxx测试');
+            this.$toast( "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", {
+                enableHtml: true,
+                autoClose: false,
+                autoCloseDelay: 1,
+                // closeButton: {
+                //     text: "关闭",
+                //     callback: (toast) => {
+                //         console.log( "用户的do something" );
+                //         console.log(toast)   //组件在callback时把实例交给用户
+                //     }
+                // }
+            });
         }
     }
 });

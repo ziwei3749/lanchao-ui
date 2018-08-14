@@ -8,11 +8,13 @@
 import Toast from "./toast";
 export default {
     install(Vue) {
-        Vue.prototype.$toast = message => {
+        Vue.prototype.$toast = (message, options) => {
             // 生成一个toast组件，然后生插入到body中
             let Constructor = Vue.extend(Toast);
-            let toast = new Constructor({});
-            toast.$slots.default = message;  // 设置匿名插槽的内容，必须放到$mount前面
+            let toast = new Constructor({
+                propsData: options
+            });
+            toast.$slots.default = message; // 设置匿名插槽的内容，必须放到$mount前面
             toast.$mount();
 
             document.body.appendChild(toast.$el);
