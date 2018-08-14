@@ -21,7 +21,8 @@ describe("Input", () => {
     // BDD 行为驱动测试  （行为描述，描述了input的一系列行为）
 
     it("存在.", () => {
-        expect(Input).to.be.ok; // 不是Undefined null 0 '' 就是ok
+        expect( Input ).to.be.ok; // 不是Undefined null 0 '' 就是ok
+        
     });
 
     describe("属性", () => {
@@ -32,7 +33,7 @@ describe("Input", () => {
             vm.$destroy();
         });
 
-        it("设置value.", () => {
+        it( "设置value.", () => {
             vm = new Constructor({
                 propsData: {
                     value: "111"
@@ -42,14 +43,13 @@ describe("Input", () => {
             expect(inputElement.value).to.equal("111");
         });
 
-        it("设置placeholder", () => {
+        it( "设置placeholder", () => {
             vm = new Constructor({
                 propsData: {
                     placeholder: "请输入用户名"
                 }
             }).$mount();
             const inputElement = vm.$el.querySelector("input");
-            console.log(inputElement.getAttribute("placeholder"));
             expect(inputElement.getAttribute("placeholder")).to.equal(
                 "请输入用户名"
             );
@@ -75,7 +75,8 @@ describe("Input", () => {
             expect(inputElement.hasAttribute("disabled")).to.equal(true);
         });
 
-        it("设置readonly", () => {
+        it( "设置readonly", () => {
+            
             vm = new Constructor({
                 propsData: {
                     readonly: true
