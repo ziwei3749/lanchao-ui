@@ -42,7 +42,6 @@ export default {
         // 布局组件包括： layout header content footer sider，一个5个组件
         let hasSilder = false
         this.$children.forEach(child => {
-            console.log(child.$options.name)
             if(child.$options.name === 'l-sider'){
                 hasSilder = true
             }
