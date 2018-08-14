@@ -6,18 +6,31 @@
  */
 
 import Toast from "./toast";
+
+let currentToast;
+
 export default {
     install(Vue) {
         Vue.prototype.$toast = (message, options) => {
-            // 生成一个toast组件，然后生插入到body中
-            let Constructor = Vue.extend(Toast);
-            let toast = new Constructor({
-                propsData: options
-            });
-            toast.$slots.default = message; // 设置匿名插槽的内容，必须放到$mount前面
-            toast.$mount();
-
-            document.body.appendChild(toast.$el);
+            // 存在就销毁当前的toast,防止用户多次点击的
+            if (currentToast) {
+                currentToast.close();
+            }
+            currentToast = createToast(Vue, message, options);
         };
     }
 };
+
+/**
+ * helpers
+
+ */
+function createToast(Vue, message, options) {
+    // 生成一个toast组件，然后生插入到body中
+    let Constructor = Vue.extend(Toast);
+    let toast = new Constructor({ propsData: options });
+    toast.$slots.default = message; // 设置匿名插槽的内容，必须放到$mount前面
+    toast.$mount();
+    document.body.appendChild(toast.$el);
+    return toast;
+}
