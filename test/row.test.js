@@ -27,10 +27,10 @@ describe("Row", () => {
             el: div
         });
         setTimeout(() => {
-            let row = vm.$el.querySelector(".row");
+            let row = vm.$el.querySelector(".l-row");
             expect(getComputedStyle(row).marginLeft).to.equal("-10px");
             expect(getComputedStyle(row).marginRight).to.equal("-10px");
-            let cols = vm.$el.querySelectorAll(".col");
+            let cols = vm.$el.querySelectorAll(".l-col");
             expect(getComputedStyle(cols[0]).paddingLeft).to.equal("10px");
             expect(getComputedStyle(cols[1]).paddingRight).to.equal("10px");
             // console.log( vm.$el.outerHTML );

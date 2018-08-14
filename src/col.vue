@@ -1,6 +1,6 @@
 !<!-- col -->
 <template>
-    <div class="col"
+    <div class="l-col"
          :style="colStyle"
          :class="colClass">
         <slot></slot>
@@ -85,7 +85,7 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-.col {
+.l-col {
     $class-prefix: col-;
     @for $n from 1 through 24 {
         &.#{$class-prefix}#{$n} {

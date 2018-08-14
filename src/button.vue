@@ -1,15 +1,15 @@
 <!-- button -->
 <template>
     <button class="l-button"
-            :class="`icon-${iconPosition}`"
+            :class="`l-icon-${iconPosition}`"
             @click="$emit('click')">
-        <l-icon class="icon loading"
+        <l-icon class="l-icon l-loading"
                 v-if="loading"
                 name="loading"></l-icon>
-        <l-icon class="icon"
+        <l-icon class="l-icon"
                 v-if="icon && loading !== true"
                 :name="icon"></l-icon>
-        <div class="content">
+        <div class="l-content">
             <slot />
         </div>
     </button>
@@ -86,25 +86,25 @@ export default {
         outline: none;
     }
 
-    > .icon {
+    > .l-icon {
         order: 1;
         margin-right: 0.3em;
     }
-    > .content {
+    > .l-content {
         order: 2;
     }
 
-    &.icon-right {
-        > .icon {
+    &.l-icon-right {
+        > .l-icon {
             order: 2;
             margin-right: 0;
             margin-left: 0.3em;
         }
-        > .content {
+        > .l-content {
             order: 1;
         }
     }
-    > .loading {
+    > .l-loading {
         animation: spin 2s infinite linear;
     }
 }

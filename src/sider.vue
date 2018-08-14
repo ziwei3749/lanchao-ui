@@ -1,6 +1,6 @@
 !<!-- sider -->
 <template>
-    <div class="sider"
+    <div class="l-sider"
          :style="siderStyle">
         <slot></slot>
         <l-button class="btn">close</l-button>
@@ -40,7 +40,7 @@ export default {
 };
 </script>
 <style lang='scss' scoped>
-.sider {
+.l-sider {
     display: flex;
     justify-content: center;
     align-items: center;

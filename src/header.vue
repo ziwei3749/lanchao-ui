@@ -1,6 +1,6 @@
 !<!-- header -->
 <template>
-    <div class="header"
+    <div class="l-header"
          :style="headerStyle">
         <slot></slot>
     </div>
@@ -39,7 +39,7 @@ export default {
 };
 </script>
 <style lang='scss' scoped>
-.header {
+.l-header {
     display: flex;
     justify-content: center;
     align-items: center;

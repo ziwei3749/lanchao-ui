@@ -1,6 +1,6 @@
 !<!--  -->
 <template>
-    <div class="row"
+    <div class="l-row"
          :class="rowClass"
          :style="rowStyle">
         <slot></slot>
@@ -48,7 +48,7 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-.row {
+.l-row {
     display: flex;
     flex-wrap: wrap;
     &.align-left {

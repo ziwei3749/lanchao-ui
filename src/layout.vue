@@ -1,6 +1,6 @@
 !<!-- layout -->
 <template>
-    <div class="layout"
+    <div class="l-layout"
          :style="layoutStyle">
         <slot></slot>
     </div>
@@ -54,7 +54,7 @@ export default {
 };
 </script>
 <style lang='scss' scoped>
-.layout {
+.l-layout {
     //如果layout也是子元素的话，flex-grow:1
     flex-grow: 1;
     display: flex;

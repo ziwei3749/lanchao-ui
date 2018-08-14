@@ -1,6 +1,6 @@
 !<!-- content -->
 <template>
-    <div class="content"
+    <div class="l-content"
          :style="contentStyle">
         <slot></slot>
     </div>
@@ -39,7 +39,7 @@ export default {
 };
 </script>
 <style lang='scss' scoped>
-.content {
+.l-content {
     flex-grow: 1;
     display: flex;
     justify-content: center;

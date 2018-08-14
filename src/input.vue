@@ -1,14 +1,14 @@
 <!-- input -->
 <template>
-    <div class="wrapper"
+    <div class="l-wrapper"
          :class="{'error' : error}">
-        <span class="prepend_text" v-if="$slots.prepend">
+        <span class="prepend_text"
+              v-if="$slots.prepend">
             <slot name="prepend">
             </slot>
         </span>
 
-        <input class="l-input__inner"
-               :type="type"
+        <input :type="type"
                :placeholder="placeholder"
                :value="value"
                :disabled="disabled"
@@ -65,8 +65,7 @@ export default {
 
     computed: {},
 
-    mounted() {
-    },
+    mounted() {},
 
     methods: {
         handleInput(e) {
@@ -96,7 +95,7 @@ $font-size: 12px;
 $box-shadow-color: rgba(0, 0, 0, 0.5);
 $red: #f1453d;
 
-.wrapper {
+.l-wrapper {
     display: inline-flex;
     align-items: center;
     font-size: $font-size;

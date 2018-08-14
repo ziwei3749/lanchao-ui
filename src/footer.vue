@@ -1,6 +1,6 @@
 !<!-- footer -->
 <template>
-    <div class="footer"
+    <div class="l-footer"
          :style="footerStyle">
         <slot></slot>
     </div>
@@ -39,7 +39,7 @@ export default {
 };
 </script>
 <style lang='scss' scoped>
-.footer {
+.l-footer {
     display: flex;
     justify-content: center;
     align-items: center;

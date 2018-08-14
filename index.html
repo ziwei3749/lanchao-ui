@@ -29,24 +29,12 @@
             font-size: var(--font-size)
         }
 
-        .box {
-            margin: 20px;
-        }
 
         .demo {
             height: 100px;
             background: #ccc;
             border: 1px solid #000
         }
-
-        /* .layout-demo {
-            height: 100px;
-            border: 1px solid #ccc;
-        } */
-
-        /* .content {
-            background: red;
-        } */
 
         .header {
             background: #ccc;
@@ -56,6 +44,10 @@
         .footer {
             background: green;
             height: 50px;
+        }
+
+        .content {
+            background: red;
         }
 
         .sider {
@@ -68,42 +60,50 @@
 
 <body>
     <div id="app">
-        <l-layout>
-            <l-header class="header">
-                header
-            </l-header>
-            <l-layout height="800px">
-                <l-sider>sider</l-sider>
-                <l-layout>
-                    <l-content>content</l-content>
-                    <l-footer>footer</l-footer>
+        <div>
+            <h2>布局组件</h2>
+            <l-layout>
+                <l-header class="header">
+                    header
+                </l-header>
+                <l-layout height="300px">
+                    <l-sider class="sider">sider</l-sider>
+                    <l-layout>
+                        <l-content class="content">content</l-content>
+                        <l-footer class="footer">footer</l-footer>
+                    </l-layout>
                 </l-layout>
+
             </l-layout>
-
-        </l-layout>
-
-        <l-row>
-            <l-col span="24" :ipad="{span:12}" :narrow-pc="{span:8}">
-                <div class="demo"></div>
-            </l-col>
-            <l-col span="24" :ipad="{span:11,offset:1}" :narrow-pc="{span:8}">
-                <div class="demo"></div>
-            </l-col>
-            <l-col span="24" :ipad="{span:12}" :narrow-pc="{span:8}">
-                <div class="demo"></div>
-            </l-col>
-            <l-col span="24" :ipad="{span:12}" :narrow-pc="{span:8}">
-                <div class="demo"></div>
-            </l-col>
-            <l-col span="24" :ipad="{span:12}" :narrow-pc="{span:8}">
-                <div class="demo"></div>
-            </l-col>
-            <l-col span="24" :ipad="{span:12}" :narrow-pc="{span:8}">
-                <div class="demo"></div>
-            </l-col>
-        </l-row>
+        </div>
 
         <div>
+            <h2>网格组件 、 栅格系统</h2>
+            <l-row gutter="20">
+                <l-col span="24" :ipad="{span:12}" :narrow-pc="{span:8}">
+                    <div class="demo"></div>
+                </l-col>
+                <l-col span="24" :ipad="{span:11,offset:1}" :narrow-pc="{span:8}">
+                    <div class="demo"></div>
+                </l-col>
+                <l-col span="24" :ipad="{span:12}" :narrow-pc="{span:8}">
+                    <div class="demo"></div>
+                </l-col>
+                <l-col span="24" :ipad="{span:12}" :narrow-pc="{span:8}">
+                    <div class="demo"></div>
+                </l-col>
+                <l-col span="24" :ipad="{span:12}" :narrow-pc="{span:8}">
+                    <div class="demo"></div>
+                </l-col>
+                <l-col span="24" :ipad="{span:12}" :narrow-pc="{span:8}">
+                    <div class="demo"></div>
+                </l-col>
+            </l-row>
+        </div>
+
+
+        <div>
+            <h2>Button组件</h2>
             <l-button>
                 我爱
             </l-button>
@@ -113,7 +113,7 @@
             <l-button icon="settings" icon-position="left" :loading="true">
                 我爱JavaScript
             </l-button>
-            <l-button icon="settings" icon-position="right" :loading="true">
+            <l-button icon="settings" icon-position="right">
                 我爱JavaScript
             </l-button>
             <l-button-group>
@@ -123,8 +123,8 @@
             </l-button-group>
         </div>
 
-        <br>
-        <div class="box">
+        <div>
+            <h2>input组件</h2>
             <l-input v-model="username" placeholder="输入用户名">
                 <template slot="prepend">
                     xxx
@@ -133,16 +133,16 @@
             <p>{{username}}</p>
         </div>
 
-        <div class="box">
+        <div>
             <l-input value="王五" readonly placeholder="输入用户名">
             </l-input>
         </div>
-        <div class="box">
+        <div>
             <l-input value="张三" placeholder="输入用户名" disabled :readonly="false">
             </l-input>
         </div>
 
-        <div class="box">
+        <div>
             <l-input value="老吕" placeholder="输入用户名" error='姓名不能少于2个字'>
             </l-input>
         </div>
