@@ -98,7 +98,7 @@ export default {
 
         close() {
             this.$el.remove();
-            this.$emit('close')
+            this.$emit("close");
             this.$destroy();
         },
         onClickClose() {
@@ -120,19 +120,39 @@ $font-size: 14px;
 $toast-min-height: 40px;
 $toast-bg: rgba(0, 0, 0, 0.75);
 
-@keyframes fade-in {
+@keyframes fade-in-bottom {
     0% {
         opacity: 0;
-        transform: translateY(100%)
+        transform: translate(-50%, 100%);
     }
     100% {
         opacity: 100%;
-        transform: translateY(0%)
+        transform: translate(-50%, 0%);
+    }
+}
+
+@keyframes fade-in-top {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -100%);
+    }
+    100% {
+        opacity: 100%;
+        transform: translate(-50%, 0%);
+    }
+}
+
+@keyframes fade-in-middle {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 100%;
     }
 }
 
 .l-toast {
-    animation: fade-in 1s;
+    
     display: flex;
     align-items: center;
     font-size: $font-size;
@@ -164,15 +184,18 @@ $toast-bg: rgba(0, 0, 0, 0.75);
     &.position-top {
         top: 0;
         transform: translateX(-50%);
+        animation: fade-in-top 1s;
     }
     &.position-bottom {
         bottom: 0;
         transform: translateX(-50%);
+        animation: fade-in-bottom 1s;
     }
     &.position-middle {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        animation: fade-in-middle 1s;
     }
 }
 </style>

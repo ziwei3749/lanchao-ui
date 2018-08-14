@@ -16,6 +16,8 @@ export default {
             if (currentToast) {
                 currentToast.close();
             }
+
+            // 用户点击了关闭的话，我们emit通知出来。因为用户点击了关闭，但currentToast还是有值的，需要设置为null，否则导致多一次close执行
             let onClose = () => {
                 currentToast = null;
             };
