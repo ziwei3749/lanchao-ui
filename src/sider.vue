@@ -1,21 +1,23 @@
 !<!-- sider -->
 <template>
-    <div class="sider" :style="siderStyle">
+    <div class="sider"
+         :style="siderStyle">
         <slot></slot>
+        <l-button class="btn">close</l-button>
     </div>
 
 </template>
 
 <script>
 export default {
-    name: 'l-sider',
+    name: "l-sider",
 
     components: {},
 
     computed: {
         siderStyle() {
             return {
-                width: this.width + 'px'
+                width: this.width
             };
         }
     },
@@ -39,7 +41,7 @@ export default {
 </script>
 <style lang='scss' scoped>
 .sider {
-        display: flex;
+    display: flex;
     justify-content: center;
     align-items: center;
 }

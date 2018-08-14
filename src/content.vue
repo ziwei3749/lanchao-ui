@@ -1,6 +1,7 @@
 !<!-- content -->
 <template>
-    <div class="content" :style="contentStyle">
+    <div class="content"
+         :style="contentStyle">
         <slot></slot>
     </div>
 
@@ -8,7 +9,7 @@
 
 <script>
 export default {
-    name: 'l-content',
+    name: "l-content",
 
     components: {},
 
@@ -40,7 +41,7 @@ export default {
 <style lang='scss' scoped>
 .content {
     flex-grow: 1;
-        display: flex;
+    display: flex;
     justify-content: center;
     align-items: center;
 }

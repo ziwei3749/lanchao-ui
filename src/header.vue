@@ -1,6 +1,7 @@
 !<!-- header -->
 <template>
-    <div class="header" :style="headerStyle">
+    <div class="header"
+         :style="headerStyle">
         <slot></slot>
     </div>
 
@@ -8,15 +9,15 @@
 
 <script>
 export default {
-    name: 'l-header',
+    name: "l-header",
 
     components: {},
 
     computed: {
-        headerStyle(){
+        headerStyle() {
             return {
-                height : this.height
-            }
+                height: this.height
+            };
         }
     },
 

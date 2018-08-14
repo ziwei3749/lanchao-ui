@@ -37,6 +37,9 @@ export default {
 
     mounted() {
         // 核心就是根据是否有sider组件来判断，自动检测flex-direction的值
+        // 可以自己设置宽、高，但意义不大，最高是自己加一个类名，自己写样式
+        // 前缀是用来防止有人手贱，写全局css样式的
+        // 布局组件包括： layout header content footer sider，一个5个组件
         let hasSilder = false
         this.$children.forEach(child => {
             console.log(child.$options.name)

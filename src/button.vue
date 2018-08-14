@@ -1,8 +1,14 @@
 <!-- button -->
 <template>
-    <button class="l-button" :class="`icon-${iconPosition}`" @click="$emit('click')">
-        <l-icon class="icon loading" v-if="loading" name="loading"></l-icon>
-        <l-icon class="icon" v-if="icon && loading !== true" :name="icon"></l-icon>
+    <button class="l-button"
+            :class="`icon-${iconPosition}`"
+            @click="$emit('click')">
+        <l-icon class="icon loading"
+                v-if="loading"
+                name="loading"></l-icon>
+        <l-icon class="icon"
+                v-if="icon && loading !== true"
+                :name="icon"></l-icon>
         <div class="content">
             <slot />
         </div>
@@ -14,7 +20,7 @@
 import Icon from "./icon.vue";
 
 export default {
-    name: 'l-button',
+    name: "l-button",
     props: {
         icon: {
             type: String
