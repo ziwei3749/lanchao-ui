@@ -120,7 +120,7 @@ $font-size: 14px;
 $toast-min-height: 40px;
 $toast-bg: rgba(0, 0, 0, 0.75);
 
-@keyframes fade-in-bottom {
+@keyframes slide-up {
     0% {
         opacity: 0;
         transform: translate(-50%, 100%);
@@ -131,7 +131,7 @@ $toast-bg: rgba(0, 0, 0, 0.75);
     }
 }
 
-@keyframes fade-in-top {
+@keyframes slide-down {
     0% {
         opacity: 0;
         transform: translate(-50%, -100%);
@@ -142,7 +142,7 @@ $toast-bg: rgba(0, 0, 0, 0.75);
     }
 }
 
-@keyframes fade-in-middle {
+@keyframes fade-in {
     0% {
         opacity: 0;
     }
@@ -151,8 +151,9 @@ $toast-bg: rgba(0, 0, 0, 0.75);
     }
 }
 
+$animation-duration: 0.4s;
+
 .l-toast {
-    
     display: flex;
     align-items: center;
     font-size: $font-size;
@@ -184,18 +185,22 @@ $toast-bg: rgba(0, 0, 0, 0.75);
     &.position-top {
         top: 0;
         transform: translateX(-50%);
-        animation: fade-in-top 1s;
+        animation: slide-down $animation-duration;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
     }
     &.position-bottom {
         bottom: 0;
         transform: translateX(-50%);
-        animation: fade-in-bottom 1s;
+        animation: slide-up $animation-duration;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
     }
     &.position-middle {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        animation: fade-in-middle 1s;
+        animation: fade-in $animation-duration;
     }
 }
 </style>
