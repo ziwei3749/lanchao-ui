@@ -38,12 +38,49 @@
             background: #ccc;
             border: 1px solid #000
         }
+
+        /* .layout-demo {
+            height: 100px;
+            border: 1px solid #ccc;
+        } */
+
+        .content {
+            background: red;
+        }
+
+        .header {
+            background: #ccc;
+            height: 100px;
+        }
+
+        .footer {
+            background: green;
+            height: 50px;
+        }
+
+        .silder {
+            width: 200px;
+            background: pink;
+        }
     </style>
 
 </head>
 
 <body>
     <div id="app">
+        <l-layout>
+            <l-header class="header">
+                header
+            </l-header>
+            <l-layout height="800px">
+                <l-sider>sider</l-sider>
+                <l-layout>
+                    <l-content>content</l-content>
+                    <l-footer>footer</l-footer>
+                </l-layout>
+            </l-layout>
+
+        </l-layout>
 
         <l-row>
             <l-col span="24" :ipad="{span:12}" :narrow-pc="{span:8}">
@@ -65,36 +102,6 @@
                 <div class="demo"></div>
             </l-col>
         </l-row>
-        <!-- <l-row gutter="20">
-            <l-col span="24" :ipad="{span:8}" :narrow-pc="{span:4}" :pc="{span:12}" :wide-pc="{span:1}">
-                1
-            </l-col>
-            <l-col span="24" :ipad="{span:16}" :narrow-pc="{span:20}" :pc="{span:12}" :wide-pc="{span:23}">11
-            </l-col>
-        </l-row>
-        <br>
-        <l-row :gutter="20">
-            <l-col :span="8"></l-col>
-            <l-col :span="8"></l-col>
-            <l-col :span="8"></l-col>
-        </l-row>
-        <br>
-        <l-row :gutter="20">
-            <l-col :span="6"></l-col>
-            <l-col :span="6"></l-col>
-            <l-col :span="6"></l-col>
-            <l-col :span="6"></l-col>
-        </l-row>
-        <br>
-        <l-row :gutter="20">
-            <l-col :span="2"></l-col>
-            <l-col :span="20" offset="2"></l-col>
-        </l-row>
-        <br>
-        <l-row :gutter="20">
-            <l-col :span="4"></l-col>
-            <l-col :span="20"></l-col>
-        </l-row> -->
 
         <div>
             <l-button>
