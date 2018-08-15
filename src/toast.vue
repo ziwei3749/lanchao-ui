@@ -3,16 +3,16 @@
     <div class="l-toast"
          :class="toastClasses"
          ref="toast">
-        <div class="message">
+        <div class="l-message">
             <slot v-if="!enableHtml"></slot>
             <div v-else
                  v-html="$slots.default"></div>
         </div>
 
-        <span class="line"
+        <span class="l-line"
               ref="line"></span>
         <span v-if="closeButton"
-              class="close-btn"
+              class="l-close-btn"
               @click="onClickClose">
             {{closeButton.text}}
         </span>
@@ -33,18 +33,18 @@ export default {
 
     computed: {
         toastClasses() {
-            return `position-${this.position}`;
+            return `l-position-${this.position}`;
         }
     },
 
     props: {
         autoClose: {
-            type: Boolean,
-            default: true
-        },
-        autoCloseDelay: {
-            type: Number,
-            default: 2
+            type: [Boolean, Number],
+            default: 2000,
+            validator(value) {
+                // autoClose不是false就是数字
+                return value === false || typeof value === "number";
+            }
         },
         closeButton: {
             type: Object,
@@ -92,7 +92,7 @@ export default {
             if (this.autoClose) {
                 setTimeout(() => {
                     this.close();
-                }, this.autoCloseDelay * 1000);
+                }, this.autoClose);
             }
         },
 
@@ -167,36 +167,36 @@ $animation-duration: 0.4s;
 
     color: #fff;
     padding-left: 16px;
-    .message {
+    .l-message {
         padding: 8px 0;
         width: 200px;
     }
-    .line {
+    .l-line {
         border-right: 1px solid rgba(102, 102, 102, 1);
         height: 100%;
         margin-left: 16px;
     }
-    .close-btn {
+    .l-close-btn {
         padding: 0 16px;
         height: $toast-min-height;
         line-height: $toast-min-height;
         flex-shrink: 0;
     }
-    &.position-top {
+    &.l-position-top {
         top: 0;
         transform: translateX(-50%);
         animation: slide-down $animation-duration;
         border-top-left-radius: 0;
         border-top-right-radius: 0;
     }
-    &.position-bottom {
+    &.l-position-bottom {
         bottom: 0;
         transform: translateX(-50%);
         animation: slide-up $animation-duration;
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
     }
-    &.position-middle {
+    &.l-position-middle {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);

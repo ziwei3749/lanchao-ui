@@ -40,7 +40,6 @@ new Vue({
             this.$toast( `啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊${Math.random()*100}`, {
                 enableHtml: false,
                 autoClose: false,
-                autoCloseDelay: 1,
                 position: "top",
                 closeButton: {
                     text: "关闭",
