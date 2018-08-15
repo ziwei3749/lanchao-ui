@@ -61,6 +61,27 @@
 <body>
     <div id="app">
         <div>
+            <h2>Tab组件</h2>
+            <l-tabs :selected.sync="selectedTab">
+                <l-tabs-head>
+                    <l-tabs-item name="woman">
+                        <l-icon name="settings"></l-icon>美女
+                    </l-tabs-item>
+                    <l-tabs-item name="finance" disabled>财经</l-tabs-item>
+                    <l-tabs-item name="sports">体育</l-tabs-item>
+                    <template slot="actions">
+                        <l-button>设置</l-button>
+                    </template>
+                </l-tabs-head>
+                <l-tabs-body>
+                    <l-tabs-pane name="woman">美女相关资讯</l-tabs-pane>
+                    <l-tabs-pane name="finance">财经相关资讯</l-tabs-pane>
+                    <l-tabs-pane name="sports">体育相关资讯</l-tabs-pane>
+                </l-tabs-body>
+
+            </l-tabs>
+        </div>
+        <div>
             <h2>Toast组件</h2>
             <l-button @click="showToast">showToast</l-button>
         </div>

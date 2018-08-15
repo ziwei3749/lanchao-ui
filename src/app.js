@@ -11,6 +11,12 @@ import Footer from "./footer.vue";
 import Content from "./content.vue";
 import Sider from "./sider.vue";
 import Toast from "./toast.vue";
+import Tabs from "./tabs.vue";
+import TabsHead from "./tabs-head.vue";
+import TabsBody from "./tabs-body.vue";
+import TabsItem from "./tabs-item.vue";
+import TabsPane from "./tabs-pane.vue";
+
 import plugin from "./plugin.js";
 
 Vue.component("l-button", Button);
@@ -25,6 +31,11 @@ Vue.component("l-footer", Footer);
 Vue.component("l-content", Content);
 Vue.component("l-sider", Sider);
 Vue.component("l-toast", Toast);
+Vue.component("l-tabs", Tabs);
+Vue.component("l-tabs-head", TabsHead);
+Vue.component("l-tabs-body", TabsBody);
+Vue.component("l-tabs-item", TabsItem);
+Vue.component("l-tabs-pane", TabsPane);
 
 Vue.use(plugin);
 
@@ -32,7 +43,9 @@ new Vue({
     el: "#app",
     data: {
         loading: false,
-        username: ""
+        username: "",
+        selectedTab: 'sports',
+        Bus: new Vue()
     },
     created() {},
     methods: {
@@ -49,6 +62,9 @@ new Vue({
                 //     }
                 // }
             });
+        },
+        handleSelected(e) {
+            // console.log(e)
         }
     }
 });
