@@ -28,7 +28,7 @@ describe("Toast", () => {
             });
         });
 
-        it(" 设置closeButton", () => {
+        it(" 设置closeButton", done => {
             // 这里我们比较关注，事件是否触发，不需要创建div
             const Constructor = Vue.extend(Toast);
             const callback = sinon.fake(); // 把假函数传递进去，来判断这个函数是否被调用过
@@ -43,8 +43,15 @@ describe("Toast", () => {
 
             const closeBtnElement = vm.$el.querySelector(".l-close-btn");
             expect(closeBtnElement.innerText.trim()).to.equal("关闭吧");
-            closeBtnElement.click();
-            expect(callback).to.have.been.called;
+
+            // 200ms后用户点击了click. 如果不设置200ms，单元测试有出错，因为click的时机问题
+            // mount --> click --> nextTick执行时，因为已经点击关闭btn了，所以style of undefined了
+            // 简单说就是click太快了
+            setTimeout(() => {
+                closeBtnElement.click();
+                expect(callback).to.have.been.called;
+                done();
+            }, 200);
         });
 
         it("设置 enableHtml", () => {
@@ -69,8 +76,10 @@ describe("Toast", () => {
                 propsData: {
                     position: "bottom"
                 }
-            } ).$mount();
-            expect(vm.$el.classList.contains('l-position-bottom')).to.equal(true)
+            }).$mount();
+            expect(vm.$el.classList.contains("l-position-bottom")).to.equal(
+                true
+            );
         });
     });
 });
