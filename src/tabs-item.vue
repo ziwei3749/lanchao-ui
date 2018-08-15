@@ -1,6 +1,8 @@
 <!-- tabs-item -->
 <template>
-    <div>
+    <div class="tabs-item"
+         :class="{'active':isActive}"
+         @click="xxx">
         <slot></slot>
     </div>
 </template>
@@ -11,7 +13,8 @@ export default {
 
     props: {
         name: {
-            type: String
+            type: String | Number,
+            required: true
         },
         disabled: {
             type: Boolean,
@@ -22,28 +25,34 @@ export default {
     computed: {},
 
     data() {
-        return {};
+        return {
+            isActive: false
+        };
     },
 
+    inject: ["eventBus"],
+
     created() {
-        console.log("items created");
+        this.eventBus.$on("update:selected", name => {
+            this.isActive = name === this.name;
+        });
     },
 
     mounted() {},
 
-    methods: {}
+    methods: {
+        xxx() {
+            this.eventBus.$emit("update:selected", this.name);
+        }
+    }
 };
 </script>
-<style lang='scss'>
+<style lang='scss' scoped>
 .tabs-item {
-    // display: inline-block;
-    // width: 200px;
-    // height: 50px;
-    // line-height: 50px;
-    // text-align: center;
-    // border-right: 1px solid #000;
-    // &.tabs-item-active {
-    //     color: red;
-    // }
+    padding: 0 2em;
+    flex-shrink: 0;
+    &.active {
+        color: red;
+    }
 }
 </style>

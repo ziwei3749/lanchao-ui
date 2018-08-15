@@ -1,6 +1,8 @@
 <!-- tabs-pane -->
 <template>
-    <div class="tabs-pane">
+    <div class="tabs-pane"
+         v-show="isActive"
+         :class="{'active':isActive}">
         <slot></slot>
     </div>
 </template>
@@ -18,17 +20,28 @@ export default {
     },
 
     data() {
-        return {};
+        return {
+            isActive: false
+        };
     },
 
-    created() {},
+    inject: ["eventBus"],
+
+    created() {
+        this.eventBus.$on("update:selected", name => {
+            this.isActive = name === this.name;
+        });
+    },
 
     mounted() {},
 
     methods: {}
 };
 </script>
-<style lang='scss'>
+<style lang='scss' scoped>
 .tabs-pane {
+    &.active {
+        color: red;
+    }
 }
 </style>

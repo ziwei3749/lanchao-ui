@@ -62,7 +62,7 @@
     <div id="app">
         <div>
             <h2>Tab组件</h2>
-            <l-tabs :selected.sync="selectedTab">
+            <l-tabs :selected.sync="selectedTab" @update:selected="handleSelected">
                 <l-tabs-head>
                     <l-tabs-item name="woman">
                         <l-icon name="settings"></l-icon>美女
