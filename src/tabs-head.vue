@@ -2,10 +2,8 @@
 <template>
   <div class="tabs-head">
     <slot></slot>
-    <transition name="fade">
-      <div class="line"
-           ref="line"></div>
-    </transition>
+    <div class="line"
+         ref="line"></div>
     <div class="actions-wrapper">
       <slot name="actions"></slot>
     </div>
@@ -22,21 +20,20 @@ export default {
     inject: ["eventBus"],
 
     data() {
-        return {};
+        return {
+        };
     },
 
-    created() {
+    mounted() {
         this.eventBus.$on("tab-click", (name, vm) => {
-            console.log(name);
+            let { width, left } = vm.$el.getClientRects()[0];
             // getClientRects  可以拿到矩形的一个位置信息
-            // this.$refs.line.style.left = vm.$el.getClientRects()[0].left
+            this.$refs.line.style.left = `${left}px`;
+            this.$refs.line.style.width = `${width}px`;
 
-            this.$refs.line.style.left = vm.$el.getClientRects()[0].left + "px";
-            console.log(vm.$el.getClientRects()[0].left);
+       
         });
     },
-
-    mounted() {},
 
     methods: {}
 };
@@ -55,14 +52,7 @@ $blue: blue;
         position: absolute;
         bottom: 0;
         border-bottom: 1px solid $blue;
-        width: 84px;
-        &.fade-enter-active,
-        &.fade-leave-active {
-            transition: opacity 0.5s;
-        }
-        &.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-            opacity: 0;
-        }
+        transition: all 0.5s;
     }
     > .actions-wrapper {
         margin-left: auto;
