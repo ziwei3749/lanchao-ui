@@ -64,10 +64,10 @@
             <h2>Tab组件</h2>
             <l-tabs :selected="selectedTab" @tab-click="handleSelected">
                 <l-tabs-head>
-                    <l-tabs-item name="woman">
+                    <l-tabs-item name="woman" disabled>
                         <l-icon name="settings"></l-icon>美女
                     </l-tabs-item>
-                    <l-tabs-item name="finance" disabled>财经</l-tabs-item>
+                    <l-tabs-item name="finance">财经</l-tabs-item>
                     <l-tabs-item name="sports">体育</l-tabs-item>
                     <template slot="actions">
                         <l-button>设置</l-button>

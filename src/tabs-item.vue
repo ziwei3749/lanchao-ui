@@ -1,8 +1,8 @@
 <!-- tabs-item -->
 <template>
     <div class="tabs-item"
-         :class="{'active':isActive}"
-         @click="xxx">
+         :class="[{'active':isActive},{'disabled': disabled}]"
+         @click="emitClick">
         <slot></slot>
     </div>
 </template>
@@ -41,7 +41,8 @@ export default {
     mounted() {},
 
     methods: {
-        xxx() {
+        emitClick() {
+            if (this.disabled) return;
             this.eventBus.$emit("tab-click", this.name, this);
         }
     }
@@ -49,6 +50,7 @@ export default {
 </script>
 <style lang='scss' scoped>
 $blue: blue;
+$disabled-text-color: #ccc;
 .tabs-item {
     display: flex;
     align-items: center;
@@ -59,6 +61,10 @@ $blue: blue;
     &.active {
         color: $blue;
         font-weight: bold;
+    }
+    &.disabled {
+        color: $disabled-text-color;
+        cursor: not-allowed;
     }
 }
 </style>
