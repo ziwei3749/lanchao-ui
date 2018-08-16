@@ -64,8 +64,8 @@ new Vue({
             });
         },
         handleSelected( e ) {
-            // console.log('触发了tabs')
-            // console.log(e)
+            console.log('触发了tabs')
+            console.log(e)
         }
     }
 });

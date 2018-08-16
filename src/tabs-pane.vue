@@ -28,7 +28,7 @@ export default {
     inject: ["eventBus"],
 
     created() {
-        this.eventBus.$on("update:selected", name => {
+        this.eventBus.$on("tab-click", name => {
             this.isActive = name === this.name;
         });
     },

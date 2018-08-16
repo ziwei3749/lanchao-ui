@@ -33,7 +33,7 @@ export default {
     inject: ["eventBus"],
 
     created() {
-        this.eventBus.$on("update:selected", name => {
+        this.eventBus.$on("tab-click", name => {
             this.isActive = name === this.name;
         });
     },
@@ -42,15 +42,20 @@ export default {
 
     methods: {
         xxx() {
-            this.eventBus.$emit("update:selected", this.name);
+            this.eventBus.$emit("tab-click", this.name);
         }
     }
 };
 </script>
 <style lang='scss' scoped>
 .tabs-item {
+    display: flex;
+    align-items: center;
     padding: 0 2em;
     flex-shrink: 0;
+    height: 100%;
+    cursor: pointer;
+    border: 1px solid #ccc;
     &.active {
         color: red;
     }

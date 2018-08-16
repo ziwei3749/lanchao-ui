@@ -40,14 +40,14 @@ export default {
     },
 
     created() {
-        // this.eventBus.$on("update:selected", val => {
-        //     this.$emit("update:selected", val);
-        // });
+        this.eventBus.$on("tab-click", val => {
+            this.$emit("tab-click", val);
+        });
     },
 
     mounted() {
         // 初始化时，用户传进来的默认值，tabs需要通知子孙
-        this.eventBus.$emit('update:selected',this.selected)
+        this.eventBus.$emit('tab-click',this.selected)
     },
 
     methods: {}
