@@ -16,6 +16,7 @@ import TabsHead from "./tabs-head.vue";
 import TabsBody from "./tabs-body.vue";
 import TabsItem from "./tabs-item.vue";
 import TabsPane from "./tabs-pane.vue";
+import Popover from "./popover.vue";
 
 import plugin from "./plugin.js";
 
@@ -36,6 +37,7 @@ Vue.component("l-tabs-head", TabsHead);
 Vue.component("l-tabs-body", TabsBody);
 Vue.component("l-tabs-item", TabsItem);
 Vue.component("l-tabs-pane", TabsPane);
+Vue.component("l-popover", Popover);
 
 Vue.use(plugin);
 
@@ -45,9 +47,12 @@ new Vue({
         loading: false,
         username: "",
         selectedTab: 'sports',
-        Bus: new Vue()
+        Bus: new Vue(),
+        val: '',
     },
-    created() {},
+    created() {
+        
+    },
     methods: {
         showToast() {
             this.$toast( `啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊${Math.random()*100}`, {
@@ -66,6 +71,9 @@ new Vue({
         handleSelected( e ) {
             // console.log('触发了tabs')
             // console.log(e)
+        },
+        clickBtn() {
+            
         }
     }
 });

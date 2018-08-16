@@ -60,6 +60,17 @@
 
 <body>
     <div id="app">
+        <div style="marginBottom: 200px">
+            <h2 style="marginBottom: 100px">Popover组件</h2>
+            <div>
+                <l-popover>
+                    <template slot="content">
+                        popover content
+                    </template>
+                    <button @click="clickBtn">button</button>
+                </l-popover>
+            </div>
+        </div>
         <div>
             <h2>Tab组件</h2>
             <l-tabs selected="finance" @tab-click="handleSelected">
