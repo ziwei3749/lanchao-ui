@@ -1,10 +1,10 @@
 <!-- tabs-header -->
 <template>
-  <div class="tabs-head">
+  <div class="l-tabs-head">
     <slot></slot>
-    <div class="line"
+    <div class="l-line"
          ref="line"></div>
-    <div class="actions-wrapper">
+    <div class="l-actions-wrapper">
       <slot name="actions"></slot>
     </div>
 
@@ -39,19 +39,19 @@ export default {
 $tab-height: 40px;
 $blue: blue;
 
-.tabs-head {
+.l-tabs-head {
     position: relative;
     display: flex;
     height: $tab-height;
     justify-content: flex-start;
     border-bottom: 1px solid #ccc;
-    > .line {
+    > .l-line {
         position: absolute;
         bottom: 0;
         border-bottom: 1px solid $blue;
         transition: all 0.5s;
     }
-    > .actions-wrapper {
+    > .l-actions-wrapper {
         margin-left: auto;
         line-height: $tab-height;
         padding: 0 1em;

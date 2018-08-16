@@ -1,8 +1,8 @@
 <!-- tabs-pane -->
 <template>
-    <div class="tabs-pane"
+    <div class="l-tabs-pane"
          v-show="isActive"
-         :class="{'active':isActive}">
+         :class="{'l-active':isActive}">
         <slot></slot>
     </div>
 </template>
@@ -39,9 +39,9 @@ export default {
 };
 </script>
 <style lang='scss' scoped>
-.tabs-pane {
+.l-tabs-pane {
     padding: 1em;
-    &.active {
+    &.l-active {
         
     }
 }

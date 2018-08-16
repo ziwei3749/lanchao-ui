@@ -41,9 +41,9 @@ describe("Tabs组件", () => {
         vm.$nextTick(() => {
             // 因为active类名是异步的，所以得用done()以及nextTick
             let currentItem = vm.$el.querySelector(
-                ".tabs-item[data-name='finance']"
+                ".l-tabs-item[data-name='finance']"
             );
-            expect(currentItem.classList.contains("active")).to.be.equal(true);
+            expect(currentItem.classList.contains("l-active")).to.be.equal(true);
             done();
         });
     });

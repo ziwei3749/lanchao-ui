@@ -1,6 +1,6 @@
 <!-- tabs-body -->
 <template>
-  <div class="tabs-body">
+  <div class="l-tabs-body">
       <slot></slot>
   </div>
 </template>
@@ -27,7 +27,7 @@ export default {
 
 </script>
 <style lang='scss' scoped>
-    .tabs-body {
+    .l-tabs-body {
 
     }
 </style>

@@ -1,7 +1,7 @@
 <!-- tabs-item -->
 <template>
-    <div class="tabs-item"
-         :class="[{'active':isActive},{'disabled': disabled}]"
+    <div class="l-tabs-item"
+         :class="[{'l-active':isActive},{'l-disabled': disabled}]"
          :data-name="name"
          @click="emitClick">
         <slot></slot>
@@ -56,18 +56,18 @@ export default {
 <style lang='scss' scoped>
 $blue: blue;
 $disabled-text-color: #ccc;
-.tabs-item {
+.l-tabs-item {
     display: flex;
     align-items: center;
     padding: 0 2em;
     flex-shrink: 0;
     height: 100%;
     cursor: pointer;
-    &.active {
+    &.l-active {
         color: $blue;
         font-weight: bold;
     }
-    &.disabled {
+    &.l-disabled {
         color: $disabled-text-color;
         cursor: not-allowed;
     }

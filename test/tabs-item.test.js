@@ -44,7 +44,7 @@ describe("tabs-item组件", () => {
                 disabled: true
             }
         }).$mount();
-        expect(vm.$el.classList.contains("disabled")).to.be.true;
+        expect(vm.$el.classList.contains("l-disabled")).to.be.true;
         // 测试设置disabled后，是否无法真的无法点击
         const callback = sinon.fake();
         vm.$on("click", callback);

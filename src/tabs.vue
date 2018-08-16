@@ -1,6 +1,6 @@
 <!-- tabs -->
 <template>
-    <div class="tabs">
+    <div class="l-tabs">
         <slot></slot>
     </div>
 </template>
@@ -79,6 +79,6 @@ export default {
 };
 </script>
 <style lang='scss' scoped>
-.tabs {
+.l-tabs {
 }
 </style>
