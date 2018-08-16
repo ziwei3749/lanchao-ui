@@ -46,14 +46,31 @@ export default {
     },
 
     mounted() {
+        if (this.$children.length === 0) {
+            if (console && console.warn) {
+                console.warn(
+                    "tabs的子组件应该是tabs-head和tabs-body，但是你没有写子组件"
+                );
+            }
+            return;
+        }
+
         // 初始化时，用户传进来的默认值，对应的tab-item需要通知子孙
         let selectedVm;
         let tabItems = this.$children[0].$children;
-        tabItems.forEach(child => {
-            if (child.name === this.selected) {
-                selectedVm = child;
+        this.$children.forEach(vm => {
+            if (vm.$options.name === "l-tabs-head") {
+                vm.$children.forEach(itemVm => {
+                    if (
+                        itemVm.name == this.selected &&
+                        itemVm.$options.name === "l-tabs-item"
+                    ) {
+                        selectedVm = itemVm;
+                    }
+                });
             }
         });
+
         // 初始化时，用户传进来的默认值，tabs需要通知子孙
         this.eventBus.$emit("tab-click", this.selected, selectedVm);
     },

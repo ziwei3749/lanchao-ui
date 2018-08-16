@@ -20,19 +20,16 @@ export default {
     inject: ["eventBus"],
 
     data() {
-        return {
-        };
+        return {};
     },
 
     mounted() {
-        this.eventBus.$on("tab-click", (name, vm) => {
-            let { width, left } = vm.$el.getClientRects()[0];
-            // getClientRects  可以拿到矩形的一个位置信息
-            this.$refs.line.style.left = `${left}px`;
-            this.$refs.line.style.width = `${width}px`;
-
-       
-        });
+            this.eventBus.$on("tab-click", (name, vm) => {
+                let { width, left } = vm.$el.getClientRects()[0];
+                // getClientRects  可以拿到矩形的一个位置信息
+                this.$refs.line.style.left = `${left}px`;
+                this.$refs.line.style.width = `${width}px`;
+            });
     },
 
     methods: {}

@@ -2,6 +2,7 @@
 <template>
     <div class="tabs-item"
          :class="[{'active':isActive},{'disabled': disabled}]"
+         :data-name="name"
          @click="emitClick">
         <slot></slot>
     </div>
@@ -33,9 +34,11 @@ export default {
     inject: ["eventBus"],
 
     created() {
-        this.eventBus.$on("tab-click", name => {
-            this.isActive = name === this.name;
-        });
+        if (this.eventBus) {
+            this.eventBus.$on("tab-click", name => {
+                this.isActive = name === this.name;
+            });
+        }
     },
 
     mounted() {},
@@ -43,7 +46,9 @@ export default {
     methods: {
         emitClick() {
             if (this.disabled) return;
-            this.eventBus.$emit("tab-click", this.name, this);
+            if (this.eventBus) {
+                this.eventBus.$emit("tab-click", this.name, this);
+            }
         }
     }
 };
