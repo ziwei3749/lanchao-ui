@@ -47,7 +47,7 @@ $blue: blue;
     display: flex;
     height: $tab-height;
     justify-content: flex-start;
-    border: 1px solid red;
+    border-bottom: 1px solid #ccc;
     > .line {
         position: absolute;
         bottom: 0;
@@ -56,6 +56,8 @@ $blue: blue;
     }
     > .actions-wrapper {
         margin-left: auto;
+        line-height: $tab-height;
+        padding: 0 1em;
     }
 }
 </style>
