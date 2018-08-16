@@ -42,12 +42,13 @@ export default {
 
     methods: {
         xxx() {
-            this.eventBus.$emit("tab-click", this.name);
+            this.eventBus.$emit("tab-click", this.name, this);
         }
     }
 };
 </script>
 <style lang='scss' scoped>
+$blue: blue;
 .tabs-item {
     display: flex;
     align-items: center;
@@ -55,9 +56,9 @@ export default {
     flex-shrink: 0;
     height: 100%;
     cursor: pointer;
-    border: 1px solid #ccc;
     &.active {
-        color: red;
+        color: $blue;
+        font-weight: bold;
     }
 }
 </style>

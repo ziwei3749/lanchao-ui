@@ -46,8 +46,16 @@ export default {
     },
 
     mounted() {
+        // 初始化时，用户传进来的默认值，对应的tab-item需要通知子孙
+        let selectedVm;
+        let tabItems = this.$children[0].$children;
+        tabItems.forEach(child => {
+            if (child.name === this.selected) {
+                selectedVm = child;
+            }
+        });
         // 初始化时，用户传进来的默认值，tabs需要通知子孙
-        this.eventBus.$emit('tab-click',this.selected)
+        this.eventBus.$emit("tab-click", this.selected, selectedVm);
     },
 
     methods: {}
