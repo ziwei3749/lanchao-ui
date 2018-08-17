@@ -1,5 +1,6 @@
 <template>
     <div class="l-popover"
+         ref="popover"
          @click="onClick">
         <div class="content-wrapper"
              :class="`position-${position}`"
@@ -19,8 +20,6 @@
 export default {
     components: {},
 
-    computed: {},
-
     props: {
         position: {
             type: String,
@@ -28,7 +27,20 @@ export default {
             validator(value) {
                 return ["top", "bottom", "left", "right"].indexOf(value) >= 0;
             }
+        },
+
+        trigger: {
+            type: String,
+            default: "click",
+            validator(value) {
+                return ["click", "hover"].indexOf(value) >= 0;
+            }
         }
+    },
+
+    computed: {
+        openEvent() {},
+        closeEvent() {}
     },
 
     data() {
@@ -39,7 +51,25 @@ export default {
 
     created() {},
 
-    mounted() {},
+    mounted() {
+        if (this.trigger === "click") {
+            this.$refs.popover.addEventListener("click", this.onClick);
+        } else {
+            this.$refs.popover.addEventListener("mouseenter", this.open);
+            this.$refs.popover.addEventListener("mouseleave", this.close);
+        }
+    },
+    destroyed() {
+        /**
+         *  因为这个click是js原生的，而不是vue的，所以销毁组件时，自己要主要删除事件
+         */
+        if (this.trigger === "click") {
+            this.$refs.popover.removeEventListener("click", this.onClick);
+        } else {
+            this.$refs.popover.removeEventListener("mouseenter", this.open);
+            this.$refs.popover.removeEventListener("mouseleave", this.close);
+        }
+    },
 
     methods: {
         positionContent() {
