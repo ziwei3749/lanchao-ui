@@ -51,7 +51,7 @@ new Vue({
         val: '',
     },
     created() {
-        
+        // console.log(this.val)
     },
     methods: {
         showToast() {
@@ -72,8 +72,8 @@ new Vue({
             // console.log('触发了tabs')
             // console.log(e)
         },
-        clickBtn() {
-            
+        yyy() {
+            console.log('yyy')
         }
     }
 });

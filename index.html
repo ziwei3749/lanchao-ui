@@ -60,18 +60,19 @@
 
 <body>
     <div id="app">
-        <div style="marginBottom: 200px">
-            <h2 style="marginBottom: 100px">Popover组件</h2>
-            <div>
-                <l-popover>
+        <div style="marginBottom: 20px; marginLeft: 30px">
+            <h2 style="marginBottom: 20px">Popover组件</h2>
+            <div style="overflow: hidden; border: 1px solid green; padding: 1205px" @click="yyy">
+                <l-popover @click="yyy">
                     <template slot="content">
                         popover content
                     </template>
-                    <button @click="clickBtn">button</button>
+                    <button>button</button>
                 </l-popover>
             </div>
+
         </div>
-        <div>
+        <!-- <div>
             <h2>Tab组件</h2>
             <l-tabs selected="finance" @tab-click="handleSelected">
                 <l-tabs-head>
@@ -181,7 +182,7 @@
         <div>
             <l-input value="老吕" placeholder="输入用户名" error='姓名不能少于2个字'>
             </l-input>
-        </div>
+        </div> -->
 
     </div>
 
