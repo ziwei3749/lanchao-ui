@@ -37,7 +37,22 @@ export default {
         }
     },
 
-    computed: {},
+    computed: {
+        openEvent() {
+            if (this.trigger === "click") {
+                return "click";
+            } else {
+                return "mouseenter";
+            }
+        },
+        closeEvent() {
+            if (this.trigger === "click") {
+                return "click";
+            } else {
+                return "mouseleave";
+            }
+        }
+    },
 
     data() {
         return {
@@ -52,7 +67,6 @@ export default {
             this.$refs.popover.addEventListener("click", this.onClick);
         } else {
             this.$refs.popover.addEventListener("mouseenter", this.open);
-            // 类似于一个函数防抖一样，200ms内如果没有移入content，才执行close。不立即执行
             this.$refs.popover.addEventListener("mouseleave", this.close);
         }
     },
@@ -69,7 +83,6 @@ export default {
     },
 
     methods: {
-
         positionContent() {
             /**
              * 把contentWrapper移走，这样来解决父元素无法设置overflow:hidden的问题
@@ -111,26 +124,12 @@ export default {
             contentWrapper.style.left = positionsMap[this.position].left + "px";
         },
 
-        onClickOtherDocument(e) {
+        onClickOtherDocument(event) {
             /**
-             * 如果点击的是popover就什么都不做
-             * 如果你点击的是content区域，就什么都不做。
+             * 如果你点击的是content区域，就什么都不做。 如果点击btn的话，会触发close，close里remove了document的监听，所有只会remove一次
              * 如果点击了other的document的区别，就close
              */
-            if (
-                this.$refs.popover &&
-                (this.$refs.popover === e.target ||
-                    this.$refs.popover.contains(e.target))
-            ) {
-                return;
-            }
-            if (
-                this.$refs.contentWrapper &&
-                (this.$refs.contentWrapper === e.target ||
-                    this.$refs.contentWrapper.contains(e.target))
-            ) {
-                return;
-            }
+            if (this.$refs.contentWrapper.contains(event.target)) return;
             this.close();
         },
 
@@ -193,12 +192,10 @@ $border-radius: 4px;
         margin-top: -10px;
         &::before {
             border-top-color: black;
-            border-bottom: none;
             top: 100%;
             left: 10px;
         }
         &::after {
-            border-bottom: none;
             border-top-color: #fff;
             top: calc(100% - 1px);
             left: 10px;
@@ -207,13 +204,11 @@ $border-radius: 4px;
     &.position-bottom {
         margin-top: 10px;
         &::before {
-            border-top: none;
             border-bottom-color: black;
             bottom: 100%;
             left: 10px;
         }
         &::after {
-            border-top: none;
             border-bottom-color: #fff;
             bottom: calc(100% - 1px);
             left: 10px;
@@ -222,14 +217,12 @@ $border-radius: 4px;
     &.position-right {
         margin-left: 10px;
         &::before {
-            border-left: none;
             border-right-color: black;
             right: 100%;
             top: 50%;
             transform: translateY(-50%);
         }
         &::after {
-            border-left: none;
             border-right-color: #fff;
             right: calc(100% - 1px);
             top: 50%;
@@ -240,14 +233,12 @@ $border-radius: 4px;
         transform: translateX(-100%);
         margin-left: -10px;
         &::before {
-            border-right: none;
             border-left-color: black;
             left: 100%;
             top: 50%;
             transform: translateY(-50%);
         }
         &::after {
-            border-right: none;
             border-left-color: #fff;
             left: calc(100% - 1px);
             top: 50%;
