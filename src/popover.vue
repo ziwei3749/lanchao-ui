@@ -57,31 +57,30 @@ export default {
                 height,
                 width
             } = triggerWrapper.getBoundingClientRect();
-
             let { height: height2 } = contentWrapper.getBoundingClientRect();
 
-            switch (this.position) {
-                case "top":
-                    contentWrapper.style.left = left + window.scrollX + "px";
-                    contentWrapper.style.top = top + window.scrollY + "px";
-                    break;
-                case "bottom":
-                    contentWrapper.style.left = left + window.scrollX + "px";
-                    contentWrapper.style.top =
-                        top + window.scrollY + height + "px";
-                    break;
-                case "right":
-                    contentWrapper.style.left =
-                        left + window.scrollX + width + "px";
-                    contentWrapper.style.top =
-                        top + window.scrollY - (height2 - height) / 2 + "px";
-                    break;
-                case "left":
-                    contentWrapper.style.left = left + window.scrollX + "px";
-                    contentWrapper.style.top =
-                        top + window.scrollY - (height2 - height) / 2 + "px";
-                    break;
-            }
+            // if嵌套  ==> switch case  ==> 表驱动编程
+            let positionsMap = {
+                top: {
+                    top: top + window.scrollY,
+                    left: left + window.scrollX
+                },
+                bottom: {
+                    top: top + window.scrollY + height,
+                    left: left + window.scrollX
+                },
+                right: {
+                    top: top + window.scrollY - (height2 - height) / 2,
+                    left: left + window.scrollX + width
+                },
+                left: {
+                    top: top + window.scrollY - (height2 - height) / 2,
+                    left: left + window.scrollX
+                }
+            };
+
+            contentWrapper.style.top = positionsMap[this.position].top + "px";
+            contentWrapper.style.left = positionsMap[this.position].left + "px";
         },
 
         onClickOtherDocument(event) {
