@@ -62,8 +62,33 @@
     <div id="app">
         <div style="margin-bottom: 20px; margin-left: 30px">
             <h2 style="margin-bottom: 20px">Popover组件</h2>
-            <div style="overflow:hidden; border: 1px solid green; padding: 15px" @click="yyy">
-                <l-popover @click="yyy">
+            <div style="overflow:hidden; border: 1px solid green; padding: 165px" @click="yyy">
+                <l-popover @click="yyy" position='top'>
+                    <template slot="content">
+                        asdsadasdasdasdadsadadaddsdasda
+                    </template>
+                    <l-button>button</l-button>
+                </l-popover>
+
+                <l-popover @click="yyy" position='bottom'>
+                    <template slot="content">
+                        asdsadasdasdasdadsadadaddsdasda
+                    </template>
+                    <l-button>button</l-button>
+                </l-popover>
+
+                <l-popover @click="yyy" position='left'>
+                    <template slot="content">
+                        asdsadasdasdasdadsadadaddsdasda
+                        asdsadasdasdasdadsadadaddsdasda
+                        asdsadasdasdasdadsadadaddsdasda
+                        asdsadasdasdasdadsadadaddsdasda
+                        asdsadasdasdasdadsadadaddsdasda
+                    </template>
+                    <l-button>button</l-button>
+                </l-popover>
+
+                <l-popover @click="yyy" position='right'>
                     <template slot="content">
                         asdsadasdasdasdadsadadaddsdasda
                     </template>

@@ -2,6 +2,7 @@
     <div class="l-popover"
          @click="onClick">
         <div class="content-wrapper"
+             :class="`position-${position}`"
              ref="contentWrapper"
              v-show="visible">
             <slot name="content"></slot>
@@ -20,6 +21,16 @@ export default {
 
     computed: {},
 
+    props: {
+        position: {
+            type: String,
+            defualt: "top",
+            validator(value) {
+                return ["top", "bottom", "left", "right"].indexOf(value) >= 0;
+            }
+        }
+    },
+
     data() {
         return {
             visible: false
@@ -36,13 +47,41 @@ export default {
              * 把contentWrapper移走，这样来解决父元素无法设置overflow:hidden的问题
              * 设置样式，需要获取到button的位置，所以套一个span
              */
-            document.body.appendChild(this.$refs.contentWrapper);
+            const { contentWrapper, triggerWrapper } = this.$refs;
+            document.body.appendChild(contentWrapper);
             const {
                 top,
-                left
-            } = this.$refs.triggerWrapper.getBoundingClientRect();
-            this.$refs.contentWrapper.style.left = left + window.scrollX + "px";
-            this.$refs.contentWrapper.style.top = top + window.scrollY + "px";
+                left,
+                bottom,
+                right,
+                height,
+                width
+            } = triggerWrapper.getBoundingClientRect();
+
+            let { height: height2 } = contentWrapper.getBoundingClientRect();
+
+            switch (this.position) {
+                case "top":
+                    contentWrapper.style.left = left + window.scrollX + "px";
+                    contentWrapper.style.top = top + window.scrollY + "px";
+                    break;
+                case "bottom":
+                    contentWrapper.style.left = left + window.scrollX + "px";
+                    contentWrapper.style.top =
+                        top + window.scrollY + height + "px";
+                    break;
+                case "right":
+                    contentWrapper.style.left =
+                        left + window.scrollX + width + "px";
+                    contentWrapper.style.top =
+                        top + window.scrollY - (height2 - height) / 2 + "px";
+                    break;
+                case "left":
+                    contentWrapper.style.left = left + window.scrollX + "px";
+                    contentWrapper.style.top =
+                        top + window.scrollY - (height2 - height) / 2 + "px";
+                    break;
+            }
         },
 
         onClickOtherDocument(event) {
@@ -95,13 +134,9 @@ $border-radius: 4px;
     border-radius: $border-radius;
     filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.5));
     background: #fff;
-    // box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
-    transform: translateY(-100%);
     padding: 0.5em 1em;
-    margin-top: -10px;
     max-width: 20em;
-    // 英文网站最好不要加这个
-    word-break: break-all;
+    word-break: break-all; // 英文网站最好不要加这个
     &::before,
     &::after {
         content: "";
@@ -110,16 +145,64 @@ $border-radius: 4px;
         height: 0px;
         border: 10px solid transparent;
         position: absolute;
-        left: 10px;
     }
-    &::before {
-        border-top-color: $border-color;
-
-        top: 100%;
+    &.position-top {
+        transform: translateY(-100%);
+        margin-top: -10px;
+        &::before {
+            border-top-color: black;
+            top: 100%;
+            left: 10px;
+        }
+        &::after {
+            border-top-color: #fff;
+            top: calc(100% - 1px);
+            left: 10px;
+        }
     }
-    &::after {
-        border-top-color: #fff;
-        top: calc(100% - 1px);
+    &.position-bottom {
+        margin-top: 10px;
+        &::before {
+            border-bottom-color: black;
+            bottom: 100%;
+            left: 10px;
+        }
+        &::after {
+            border-bottom-color: #fff;
+            bottom: calc(100% - 1px);
+            left: 10px;
+        }
+    }
+    &.position-right {
+        margin-left: 10px;
+        &::before {
+            border-right-color: black;
+            right: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        &::after {
+            border-right-color: #fff;
+            right: calc(100% - 1px);
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    }
+    &.position-left {
+        transform: translateX(-100%);
+        margin-left: -10px;
+        &::before {
+            border-left-color: black;
+            left: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        &::after {
+            border-left-color: #fff;
+            left: calc(100% - 1px);
+            top: 50%;
+            transform: translateY(-50%);
+        }
     }
 }
 </style>
