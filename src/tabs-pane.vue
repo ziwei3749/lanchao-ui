@@ -42,7 +42,6 @@ export default {
 .l-tabs-pane {
     padding: 1em;
     &.l-active {
-        
     }
 }
 </style>
