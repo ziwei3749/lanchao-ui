@@ -74,6 +74,6 @@ new Vue({
         },
         yyy() {
             console.log('yyy')
-        }
+        },
     }
 });

@@ -19,7 +19,7 @@ describe( "Button", () => {
             propsData: {
                 icon: "settings"
             }
-        }).$mount();
+        } ).$mount();
         const useElement = vm.$el.querySelector("use");
         expect(useElement.getAttribute("xlink:href")).to.equal("#i-settings");
         vm.$destroy();
@@ -49,7 +49,7 @@ describe( "Button", () => {
             propsData: {
                 icon: "settings"
             }
-        }).$mount(div);
+        } ).$mount( div );
         const icon = vm.$el.querySelector("svg");
         expect(getComputedStyle(icon).order).to.eq("1");
         vm.$el.remove();

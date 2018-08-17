@@ -11,7 +11,6 @@
               style="display: inline-block">
             <slot></slot>
         </span>
-
     </div>
 </template>
 
@@ -34,6 +33,11 @@ export default {
             validator(value) {
                 return ["click", "hover"].indexOf(value) >= 0;
             }
+        },
+
+        enableHtml: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -69,6 +73,7 @@ export default {
     },
 
     methods: {
+
 
         positionContent() {
             /**
