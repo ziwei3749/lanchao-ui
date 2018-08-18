@@ -30,7 +30,7 @@ describe("Popover", () => {
         buttonDom.click();
 
         const { contentWrapper } = vm.$refs.dom.$refs;
-        expect(contentWrapper.classList.contains("position-top")).to.equal(
+        expect(contentWrapper.classList.contains("l-position-top")).to.equal(
             true
         );
     } );

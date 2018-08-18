@@ -60,7 +60,27 @@
 
 <body>
     <div id="app">
-        <div style="margin-bottom: 20px; margin-left: 30px">
+        <div>
+            <h2>Collapse折叠面板</h2>
+            <div style="margin-left:100px ; width: 400px">
+                <l-collapse selected="1">
+                    <l-collapse-item title="一致性 Consistency" name="1">
+                        <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
+                        <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
+                    </l-collapse-item>
+                    <l-collapse-item title="反馈 Feedback" name="2">
+                        <div>控制反馈：通过界面样式和交互动效让用户可以清晰的感知自己的操作；</div>
+                        <div>页面反馈：操作后，通过页面元素的变化清晰地展现当前状态。</div>
+                    </l-collapse-item>
+                    <l-collapse-item title="效率 Efficiency" name="3">
+                        <div>简化流程：设计简洁直观的操作流程；</div>
+                        <div>清晰明确：语言表达清晰且表意明确，让用户快速理解进而作出决策；</div>
+                        <div>帮助用户识别：界面简单直白，让用户快速识别而非回忆，减少用户记忆负担。</div>
+                    </l-collapse-item>
+                </l-collapse>
+            </div>
+        </div>
+        <!-- <div style="margin-bottom: 20px; margin-left: 30px">
             <h2 style="margin-bottom: 20px">Popover组件</h2>
             <div style="overflow:hidden; border: 1px solid green; padding: 165px" @click="yyy">
                 <l-popover @click="yyy" position='top'>
@@ -125,7 +145,10 @@
             </div>
 
         </div>
-        <!-- <div>
+
+
+
+        <div>
             <h2>Tab组件</h2>
             <l-tabs selected="finance" @tab-click="handleSelected">
                 <l-tabs-head>
@@ -235,9 +258,9 @@
         <div>
             <l-input value="老吕" placeholder="输入用户名" error='姓名不能少于2个字'>
             </l-input>
-        </div> -->
+        </div>
 
-    </div>
+    </div> -->
 
 
     </div>

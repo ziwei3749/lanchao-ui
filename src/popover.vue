@@ -1,8 +1,8 @@
 <template>
     <div class="l-popover"
          ref="popover">
-        <div class="content-wrapper"
-             :class="`position-${position}`"
+        <div class="l-content-wrapper"
+             :class="`l-position-${position}`"
              ref="contentWrapper"
              v-show="visible">
             <slot name="content"></slot>
@@ -175,7 +175,7 @@ $border-radius: 4px;
     vertical-align: top;
 }
 
-.content-wrapper {
+.l-content-wrapper {
     position: absolute;
     border: 1px solid $border-color;
     border-radius: $border-radius;
@@ -193,7 +193,7 @@ $border-radius: 4px;
         border: 10px solid transparent;
         position: absolute;
     }
-    &.position-top {
+    &.l-position-top {
         transform: translateY(-100%);
         margin-top: -10px;
         &::before {
@@ -209,7 +209,7 @@ $border-radius: 4px;
             left: 10px;
         }
     }
-    &.position-bottom {
+    &.l-position-bottom {
         margin-top: 10px;
         &::before {
             border-top: none;
@@ -224,7 +224,7 @@ $border-radius: 4px;
             left: 10px;
         }
     }
-    &.position-right {
+    &.l-position-right {
         margin-left: 10px;
         &::before {
             border-left: none;
@@ -241,7 +241,7 @@ $border-radius: 4px;
             transform: translateY(-50%);
         }
     }
-    &.position-left {
+    &.l-position-left {
         transform: translateX(-100%);
         margin-left: -10px;
         &::before {
