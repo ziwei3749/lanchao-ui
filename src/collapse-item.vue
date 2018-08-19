@@ -7,9 +7,7 @@
             <div>{{title}}</div>
             <div>></div>
         </div>
-        <div>
 
-        </div>
         <div class="l-item-content"
              v-if="showItemContent">
             <slot></slot>
@@ -20,6 +18,8 @@
 
 <script>
 export default {
+    inject: ["eventBus"],
+
     components: {},
 
     computed: {},
@@ -37,17 +37,46 @@ export default {
 
     data() {
         return {
-            showItemContent: false
+            showItemContent: false,
+            single: false
         };
     },
 
-    created() {},
+    created() {
+        /**
+         * 监听父组件的通知，接受props的值,来判断当前的显示隐藏
+         */
+        this.initActiveItem();
+    },
 
     mounted() {},
 
     methods: {
+        initActiveItem() {
+            this.eventBus.$on("initActive", props => {
+                this.single = props.single;
+                console.log(props)
+                if (props.single) {
+                    this.showItemContent = props.active === this.name;
+                    this.closeOtherItem()
+                } else {
+                    this.showItemContent = props.active.includes(this.name);
+                }
+            });
+        },
+
+        closeOtherItem() {
+            
+            this.eventBus.$on("clickItem", vm => {
+                if (vm.name !== this.name) {
+                    this.showItemContent = false;
+                }
+            });
+        },
+
         triggerItemContent() {
             this.showItemContent = !this.showItemContent;
+            this.eventBus.$emit("clickItem", this);
         }
     }
 };
@@ -55,6 +84,14 @@ export default {
 <style lang='scss' scoped>
 $grey: #ddd;
 $border-radius: 4px;
+
+// .fade-enter-active, .fade-leave-active {
+//   transition: opacity .5s;
+// }
+// .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+//   opacity: 0;
+// }
+
 .l-collapse-item {
     border-radius: $border-radius;
     .l-item-title {

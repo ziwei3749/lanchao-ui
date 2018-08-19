@@ -79,5 +79,9 @@ new Vue({
         yyy() {
             console.log('yyy')
         },
+        changeHandle( e ) {
+            console.log('changeHandle')
+            console.log(e)
+        }
     }
 });
