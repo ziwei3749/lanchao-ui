@@ -53,7 +53,7 @@ new Vue({
         selectedTab: 'sports',
         Bus: new Vue(),
         val: '',
-        active: ['1','2'] 
+        selected: ['2'] 
     },
     created() {
         // console.log(this.val)
@@ -81,8 +81,8 @@ new Vue({
             console.log('yyy')
         },
         changeHandle( e ) {
-            console.log('changeHandle')
-            console.log(e)
+            // console.log( this.selected )
+            this.selected = e
         }
     }
 });

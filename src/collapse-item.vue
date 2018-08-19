@@ -2,14 +2,14 @@
 <template>
     <div class="l-collapse-item">
         <div class="l-item-title"
-             ref="LItemTitle"
-             @click="triggerItemContent">
+             :data-name="name"
+             @click="toggleItem">
             <div>{{title}}</div>
             <div>></div>
         </div>
 
         <div class="l-item-content"
-             v-if="showItemContent">
+             v-if="showItem">
             <slot></slot>
         </div>
 
@@ -37,46 +37,29 @@ export default {
 
     data() {
         return {
-            showItemContent: false,
+            showItem: false,
             single: false
         };
     },
 
-    created() {
-        /**
-         * 监听父组件的通知，接受props的值,来判断当前的显示隐藏
-         */
-        this.initActiveItem();
+    mounted() {
+        // 子组件的显示隐藏，只在这一个地方会进行设置
+        this.eventBus.$on("update:selected", selected => {
+            if (selected.includes(this.name)) {
+                this.showItem = true;
+            } else {
+                this.showItem = false;
+            }
+        });
     },
 
-    mounted() {},
-
     methods: {
-        initActiveItem() {
-            this.eventBus.$on("initActive", props => {
-                this.single = props.single;
-                console.log(props)
-                if (props.single) {
-                    this.showItemContent = props.active === this.name;
-                    this.closeOtherItem()
-                } else {
-                    this.showItemContent = props.active.includes(this.name);
-                }
-            });
-        },
-
-        closeOtherItem() {
-            
-            this.eventBus.$on("clickItem", vm => {
-                if (vm.name !== this.name) {
-                    this.showItemContent = false;
-                }
-            });
-        },
-
-        triggerItemContent() {
-            this.showItemContent = !this.showItemContent;
-            this.eventBus.$emit("clickItem", this);
+        toggleItem() {
+            if (this.showItem) {
+                this.eventBus.$emit("update:removeSelected", this.name);
+            } else {
+                this.eventBus.$emit("update:addSelected", this.name);
+            }
         }
     }
 };
@@ -84,13 +67,6 @@ export default {
 <style lang='scss' scoped>
 $grey: #ddd;
 $border-radius: 4px;
-
-// .fade-enter-active, .fade-leave-active {
-//   transition: opacity .5s;
-// }
-// .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-//   opacity: 0;
-// }
 
 .l-collapse-item {
     border-radius: $border-radius;
