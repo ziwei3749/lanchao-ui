@@ -97,7 +97,7 @@ $border-radius: 4px;
     .l-item-title {
         display: flex;
         justify-content: space-between;
-        border-top: 5px solid $grey;
+        border-top: 1px solid $grey;
         min-height: 32px;
         padding: 0 8px;
         display: flex;

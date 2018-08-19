@@ -53,6 +53,7 @@ new Vue({
         selectedTab: 'sports',
         Bus: new Vue(),
         val: '',
+        active: ['1','2'] 
     },
     created() {
         // console.log(this.val)

@@ -58,7 +58,7 @@ export default {
             this.eventBus.$on("clickItem", currentVm => {
                 if (this.single) {
                     let name = currentVm.showItemContent ? currentVm.name : "";
-                    this.$emit("change", name);
+                    this.$emit("update:active", name);
                 } else {
                     this.activeItemArray = this.$children
                         .filter(vm => {
@@ -67,7 +67,7 @@ export default {
                         .map(vm => {
                             return vm.name;
                         });
-                    this.$emit("change", this.activeItemArray);
+                    this.$emit("update:active", this.activeItemArray);
                 }
             });
         }
@@ -79,8 +79,8 @@ $grey: #ddd;
 $border-radius: 4px;
 .l-collapse {
     border-radius: $border-radius;
-    border-left: 5px solid $grey;
-    border-right: 5px solid $grey;
-    border-bottom: 5px solid $grey;
+    border-left: 1px solid $grey;
+    border-right: 1px solid $grey;
+    border-bottom: 1px solid $grey;
 }
 </style>
