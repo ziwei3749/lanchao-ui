@@ -64,4 +64,4 @@ typings/
 .idea
 .cache
 dist/
-
+docs/.vuepress/dist/

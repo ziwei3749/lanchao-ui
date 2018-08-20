@@ -7,12 +7,12 @@
                   icon="thumbs-up">icon右侧按钮</l-button>
         <l-button :loading="true">加载按钮</l-button>
         <l-button disabled>disabled按钮</l-button>
-
     </div>
 </template>
 
 <script>
 import Button from "../../../src/button";
+
 export default {
     components: {
         "l-button": Button
@@ -21,8 +21,7 @@ export default {
     computed: {},
 
     data() {
-        return {}
-
+        return {};
     },
 
     created() {},

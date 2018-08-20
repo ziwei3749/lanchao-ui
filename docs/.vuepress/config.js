@@ -1,4 +1,5 @@
 module.exports = {
+    base: '/lanchao-ui/',
     title: "lanchao-ui",
     description: "一个好用的UI框架",
     themeConfig: {
@@ -18,7 +19,13 @@ module.exports = {
             {
                 title: "组件",
                 children: [
-                   '/components/button'
+                   '/components/button',
+                   '/components/grid',
+                   '/components/input',
+                   '/components/layout',
+                   '/components/popover',
+                   '/components/tabs',
+                   '/components/toast',
                 ]
             }
         ]

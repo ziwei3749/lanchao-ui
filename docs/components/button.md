@@ -6,8 +6,9 @@ sidebarDepth: 2
 # 按钮
 
 使用方法
-
-<button-demos>111</button-demos>
+<ClientOnly>
+    <button-demos>111</button-demos>
+</ClientOnly>
 
 ```vue
 <l-button>默认按钮</l-button>
