@@ -6,8 +6,10 @@
   "scripts": {
     "start": "npx parcel index.html --no-cache",
     "dev-test": "npx parcel watch test/* --no-cache & karma start",
-    "build" :"npx parcel build index.js --no-cache --no-minify",
-    "test": "npx parcel build test/* --no-cache --no-minify && karma start --single-run"
+    "build": "npx parcel build index.js --no-cache --no-minify",
+    "test": "npx parcel build test/* --no-cache --no-minify && karma start --single-run",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
   },
   "repository": {
     "type": "git",
@@ -46,8 +48,10 @@
     "mocha": "^5.2.0",
     "node-sass": "^4.9.2",
     "parcel-bundler": "^1.9.7",
+    "sass-loader": "^7.1.0",
     "sinon": "^6.1.4",
     "sinon-chai": "^3.2.0",
-    "vue-template-compiler": "^2.5.17"
+    "vue-template-compiler": "^2.5.17",
+    "vuepress": "^0.14.2"
   }
 }
