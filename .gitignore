@@ -65,3 +65,4 @@ typings/
 .cache
 dist/
 docs/.vuepress/dist/
+.DS_Store
