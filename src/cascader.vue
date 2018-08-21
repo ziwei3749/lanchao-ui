@@ -7,38 +7,16 @@
         </div>
         <div class="l-popover"
              v-show="popoverVisible">
-            <div class="level1">
-                <div v-for="item1 in source"
-                     :key="item1.name"
-                     @click="selectedItem1 = item1; selectedItem2=null">
-                    <div>{{item1.name}}</div>
-                </div>
-            </div>
-
-            <div class="level2">
-                <div v-for="item2 in level2Items"
-                     @click="selectedItem2 = item2"
-                     :key="item2.name">
-                    <div>{{item2.name}}</div>
-                </div>
-            </div>
-
-            <div class="level3">
-                <div v-for="item3 in level3Items"
-                     :key="item3.name">
-                    <div>{{item3.name}}</div>
-                </div>
-            </div>
-
+            <CascaderItems :items="source"></CascaderItems>
         </div>
     </div>
 </template>
 
 <script>
-import CascaderItem from "./cascader-item.vue";
+import CascaderItems from "./cascader-items.vue";
 export default {
     components: {
-        "cascader-item": CascaderItem
+        CascaderItems
     },
 
     props: {
