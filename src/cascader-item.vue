@@ -1,12 +1,14 @@
 <!-- cascader-item -->
 <template>
-    <div class="l-cascader-item" >
+    <div class="l-cascader-item">
         <div>{{sourceItem.name}}</div>
-        <cascader-item v-for="item in sourceItem.children"
-                        v-if="sourceItem.children"
-                       :key="item.name"
-                       :sourceItem="item">
-        </cascader-item>
+        <div v-if="sourceItem.children">
+            <cascader-item v-for="item in sourceItem.children"
+                           :key="item.name"
+                           :sourceItem="item">
+            </cascader-item>
+        </div>
+
     </div>
 </template>
 
@@ -23,11 +25,7 @@ export default {
     components: {},
 
     computed: {
-        // sourceItemhasChild(){
-        //     return this.sourceItem.children.filter(item => {
-        //         return item.children
-        //     })
-        // }
+ 
     },
 
     data() {
@@ -37,7 +35,6 @@ export default {
     created() {},
 
     mounted() {
-        console.log(this.sourceItem)
     },
 
     methods: {}

@@ -58,7 +58,6 @@ describe("Collapse", () => {
         setTimeout(() => {
             vm.$el.querySelector('[data-name="2"]').click();
             setTimeout( () => {
-                console.log(vm.$el)
                 expect(vm.$el.querySelector("#content-1")).to.not.exist;
                 expect(vm.$el.querySelector("#content-2")).to.exist;
                 done();
