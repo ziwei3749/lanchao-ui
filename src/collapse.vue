@@ -42,9 +42,9 @@ export default {
         this.eventBus.$emit("update:selected",this.selected) // 初始化通知子组件，默认状态
 
         this.eventBus.$on("update:addSelected", name => {
-            console.log(`add:${name}`)
+            // console.log(`add:${name}`)
             let selectedCopy = JSON.parse(JSON.stringify(this.selected));
-            console.log("selectedCopy",selectedCopy)
+            // console.log("selectedCopy",selectedCopy)
              if(this.single){
                 selectedCopy = [name]
             }else{
@@ -54,7 +54,7 @@ export default {
             this.$emit("update:selected", selectedCopy);  // 通知父组件数据变化
         });
         this.eventBus.$on("update:removeSelected", name => {
-            console.log(`remove:${name}`)
+            // console.log(`remove:${name}`)
             let selectedCopy = JSON.parse(JSON.stringify(this.selected));
             let index = selectedCopy.indexOf(name);
             selectedCopy.splice(index, 1);

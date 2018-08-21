@@ -1,31 +1,45 @@
 <!-- cascader -->
 <template>
-  <div class="l-cascader">
-
-  </div>
+    <div class="l-cascader">
+        <div class="trigger">
+            <slot></slot>
+        </div>
+        <div class="popover">
+            <div v-for="sourceItem in source"
+                 :key="sourceItem.name">
+                <cascader-item :sourceItem="sourceItem"></cascader-item>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
+import CascaderItem from "./cascader-item.vue";
 export default {
-  components: {},
+    components: {
+        "cascader-item": CascaderItem
+    },
 
-  computed: {},
+    props: {
+        source: {
+            type: Array
+        }
+    },
 
-  data () {
-    return {
-    }
-  },
+    computed: {},
 
-  created () {},
+    data() {
+        return {};
+    },
 
-  mounted () {},
+    created() {},
 
-  methods: {}
-}
+    mounted() {},
 
+    methods: {}
+};
 </script>
 <style lang='scss' scoped>
-    .l-cascader {
-        
-    }
+.l-cascader {
+}
 </style>
