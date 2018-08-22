@@ -6,7 +6,7 @@
       <div v-for="item in items"
            :key="item.name"
            class="label"
-           @click="updateSelected(item)">
+           @click="clickSelected(item)">
         <span>{{item.name}}</span>
         <l-icon v-if="item.children"
                 name="right"
@@ -53,6 +53,7 @@ export default {
 
   computed: {
     rightItems() {
+      console.log(1);
       let currentSelected = this.selected[this.level];
       return currentSelected && currentSelected.children
         ? currentSelected.children
@@ -69,9 +70,19 @@ export default {
   mounted() {},
 
   methods: {
-    updateSelected(item) {
+    clickSelected(item) {
+      // 改变selected，并把selected的备份 emit。
       const copy = JSON.parse(JSON.stringify(this.selected));
       copy[this.level] = item;
+      /**
+       * 精髓： copy.splice(this.level + 1);
+       * 这里根据当前的level，截取selected数组
+       * 由于截取之后selected数组的变化，比如selected：['福建',undefined,undefined]
+       * 那么this.selected[1]就是undefined，所以其rightItems就是null，就不会显示。
+       *
+       * 通过改变数据selected，直接控制了ui的变化
+       */
+      copy.splice(this.level + 1);
       this.$emit("update:selected", copy);
     },
 
