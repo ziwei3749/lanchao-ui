@@ -52,7 +52,6 @@ export default {
 
   computed: {
     rightItems() {
-      console.log(1);
       let currentSelected = this.selected[this.level];
       return currentSelected && currentSelected.children
         ? currentSelected.children
@@ -99,6 +98,8 @@ export default {
   .left {
     height: 100%;
     padding: 0.3em 0;
+    overflow: auto;
+    -webkit-overflow-scrolling: auto;
     .label {
       padding: 0.3em 1em;
       display: flex;
@@ -112,6 +113,8 @@ export default {
   .right {
     height: 100%;
     border-left: 1px solid $border-color-light;
+    overflow: auto;
+    -webkit-overflow-scrolling: auto;
   }
 }
 </style>

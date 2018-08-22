@@ -1,24 +1,26 @@
 <!-- cascader -->
 <template>
-    <div class="l-cascader">
-        <div class="l-trigger"
-             @click="togglePopover">
-            <!-- <slot></slot> -->
-            {{result || '&nbsp;'}}   
-            <!-- 一开始如果没有，否则会导致css有一些问题,所以用&nbsp;占位 -->
-        </div>
-        <div class="l-popover-wrapper"
-             v-show="popoverVisible">
-            <l-cascader-items :items="source"
-                           class="popover"
-                           :popoverHeight="popoverHeight"
-                           :style="{height: popoverHeight}"
-                           :selected="selected"
-                           @update:selected="onUpdateSelected">
-            </l-cascader-items>
-        </div>
+  <div class="l-cascader">
+    <div class="l-trigger"
+         @click="togglePopover">
+      <!-- <slot></slot> -->
+      {{result || '&nbsp;'}}
+      <!-- 一开始如果没有，否则会导致css有一些问题,所以用&nbsp;占位 -->
     </div>
+    <div class="l-popover-wrapper"
+         v-show="popoverVisible">
+      <l-cascader-items :items="source"
+                        class="popover"
+                        :popoverHeight="popoverHeight"
+                        :style="{height: popoverHeight}"
+                        :selected="selected"
+                        @update:selected="onUpdateSelected">
+      </l-cascader-items>
+    </div>
+  </div>
 </template>
+
+
 
 <script>
 import CascaderItems from "./cascader-items.vue";
