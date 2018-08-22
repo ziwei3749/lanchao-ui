@@ -88,6 +88,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "var.scss";
+$height: $input-height;
 
 .l-wrapper {
   display: inline-flex;

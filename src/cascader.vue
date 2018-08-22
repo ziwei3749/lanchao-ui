@@ -3,7 +3,9 @@
     <div class="l-cascader">
         <div class="l-trigger"
              @click="togglePopover">
-            <slot></slot>
+            <!-- <slot></slot> -->
+            {{result || '&nbsp;'}}   
+            <!-- 一开始如果没有，否则会导致css有一些问题,所以用&nbsp;占位 -->
         </div>
         <div class="l-popover-wrapper"
              v-show="popoverVisible">
@@ -38,7 +40,11 @@ export default {
     }
   },
 
-  computed: {},
+  computed: {
+    result() {
+      return this.selected.map(v => v.name).join("/");
+    }
+  },
 
   data() {
     return {
@@ -65,11 +71,16 @@ export default {
 .l-cascader {
   position: relative;
   .l-trigger {
-    border: 1px solid #000;
-    height: 32px;
-    width: 100px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 1em;
+    border: 1px solid $border-color;
+    height: $input-height;
+    min-width: 10em;
+    border-radius: $border-radius;
   }
   .l-popover-wrapper {
+    margin-top: 8px;
     position: absolute;
     background: #fff;
     top: 100%;

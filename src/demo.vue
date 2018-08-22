@@ -3,9 +3,9 @@
   <div>
     <div style="margin-left:100px">
       <h2>Cascader级联选择器</h2>
-      <p>selected:{{selected && selected[0] && selected[0].name || 'null'}}</p>
-      <p>selected:{{selected && selected[1] && selected[1].name || 'null'}}</p>
-      <p>selected:{{selected && selected[2] && selected[2].name || 'null'}}</p>
+      <p>0:{{selected && selected[0] && selected[0].name || 'null'}}</p>
+      <p>1:{{selected && selected[1] && selected[1].name || 'null'}}</p>
+      <p>2:{{selected && selected[2] && selected[2].name || 'null'}}</p>
       <div>
         <l-cascader :source="source"
                     :selected="selected"

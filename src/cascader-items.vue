@@ -1,7 +1,6 @@
 <!-- cascader-item -->
 <template>
   <div class="l-cascader-items">
-    level: {{level}}
     <div class="left">
       <div v-for="item in items"
            :key="item.name"
