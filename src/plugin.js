@@ -10,20 +10,20 @@ import Toast from "./toast";
 let currentToast;
 
 export default {
-    install(Vue) {
-        Vue.prototype.$toast = (message, options) => {
-            // 存在就销毁当前的toast,防止用户多次点击的
-            if (currentToast) {
-                currentToast.close();
-            }
+  install(Vue) {
+    Vue.prototype.$toast = (message, options) => {
+      // 存在就销毁当前的toast,防止用户多次点击的
+      if (currentToast) {
+        currentToast.close();
+      }
 
-            // 用户点击了关闭的话，我们emit通知出来。因为用户点击了关闭，但currentToast还是有值的，需要设置为null，否则导致多一次close执行
-            let onClose = () => {
-                currentToast = null;
-            };
-            currentToast = createToast(Vue, message, options, onClose);
-        };
-    }
+      // 用户点击了关闭的话，我们emit通知出来。因为用户点击了关闭，但currentToast还是有值的，需要设置为null，否则导致多一次close执行
+      let onClose = () => {
+        currentToast = null;
+      };
+      currentToast = createToast(Vue, message, options, onClose);
+    };
+  }
 };
 
 /**
@@ -31,12 +31,12 @@ export default {
 
  */
 function createToast(Vue, message, options, onClose) {
-    // 生成一个toast组件，然后生插入到body中
-    let Constructor = Vue.extend(Toast);
-    let toast = new Constructor({ propsData: options });
-    toast.$slots.default = message; // 设置匿名插槽的内容，必须放到$mount前面
-    toast.$mount();
-    toast.$on("close", onClose);
-    document.body.appendChild(toast.$el);
-    return toast;
+  // 生成一个toast组件，然后生插入到body中
+  let Constructor = Vue.extend(Toast);
+  let toast = new Constructor({ propsData: options });
+  toast.$slots.default = message; // 设置匿名插槽的内容，必须放到$mount前面
+  toast.$mount();
+  toast.$on("close", onClose);
+  document.body.appendChild(toast.$el);
+  return toast;
 }

@@ -9,39 +9,39 @@
 
 <script>
 export default {
-    name: "l-footer",
+  name: "l-footer",
 
-    components: {},
+  components: {},
 
-    computed: {
-        footerStyle() {
-            return {
-                height: this.height
-            };
-        }
-    },
+  computed: {
+    footerStyle() {
+      return {
+        height: this.height
+      };
+    }
+  },
 
-    props: {
-        height: {
-            type: String
-        }
-    },
+  props: {
+    height: {
+      type: String
+    }
+  },
 
-    data() {
-        return {};
-    },
+  data() {
+    return {};
+  },
 
-    created() {},
+  created() {},
 
-    mounted() {},
+  mounted() {},
 
-    methods: {}
+  methods: {}
 };
 </script>
 <style lang='scss' scoped>
 .l-footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

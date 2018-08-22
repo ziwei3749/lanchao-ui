@@ -10,66 +10,66 @@
 
 <script>
 export default {
-    components: {},
+  components: {},
 
-    props: {
-        name: {
-            type: String | Number,
-            required: true
-        },
-        disabled: {
-            type: Boolean,
-            default: false
-        }
+  props: {
+    name: {
+      type: String | Number,
+      required: true
     },
-
-    computed: {},
-
-    data() {
-        return {
-            isActive: false
-        };
-    },
-
-    inject: ["eventBus"],
-
-    created() {
-        if (this.eventBus) {
-            this.eventBus.$on("tab-click", name => {
-                this.isActive = name === this.name;
-            });
-        }
-    },
-
-    mounted() {},
-
-    methods: {
-        emitClick() {
-            if (this.disabled) return;
-            if (this.eventBus) {
-                this.eventBus.$emit("tab-click", this.name, this);
-            }
-        }
+    disabled: {
+      type: Boolean,
+      default: false
     }
+  },
+
+  computed: {},
+
+  data() {
+    return {
+      isActive: false
+    };
+  },
+
+  inject: ["eventBus"],
+
+  created() {
+    if (this.eventBus) {
+      this.eventBus.$on("tab-click", name => {
+        this.isActive = name === this.name;
+      });
+    }
+  },
+
+  mounted() {},
+
+  methods: {
+    emitClick() {
+      if (this.disabled) return;
+      if (this.eventBus) {
+        this.eventBus.$emit("tab-click", this.name, this);
+      }
+    }
+  }
 };
 </script>
 <style lang='scss' scoped>
 $blue: blue;
 $disabled-text-color: #ccc;
 .l-tabs-item {
-    display: flex;
-    align-items: center;
-    padding: 0 2em;
-    flex-shrink: 0;
-    height: 100%;
-    cursor: pointer;
-    &.l-active {
-        color: $blue;
-        font-weight: bold;
-    }
-    &.l-disabled {
-        color: $disabled-text-color;
-        cursor: not-allowed;
-    }
+  display: flex;
+  align-items: center;
+  padding: 0 2em;
+  flex-shrink: 0;
+  height: 100%;
+  cursor: pointer;
+  &.l-active {
+    color: $blue;
+    font-weight: bold;
+  }
+  &.l-disabled {
+    color: $disabled-text-color;
+    cursor: not-allowed;
+  }
 }
 </style>

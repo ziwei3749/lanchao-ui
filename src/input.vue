@@ -30,112 +30,112 @@
 <script>
 import Icon from "./icon";
 export default {
-    name: "l-input",
-    props: {
-        type: {
-            type: String,
-            default: "text"
-        },
-        placeholder: {
-            type: String,
-            default: "请输入内容"
-        },
-        value: {
-            type: String
-        },
-        disabled: {
-            type: Boolean,
-            default: false
-        },
-        readonly: {
-            type: Boolean,
-            default: false
-        },
-        error: {
-            type: String
-        }
+  name: "l-input",
+  props: {
+    type: {
+      type: String,
+      default: "text"
     },
-    data() {
-        return {};
+    placeholder: {
+      type: String,
+      default: "请输入内容"
     },
-
-    components: {
-        "l-icon": Icon
+    value: {
+      type: String
     },
-
-    computed: {},
-
-    mounted() {},
-
-    methods: {
-        handleInput(e) {
-            this.$emit("input", e.target.value);
-        },
-
-        handleFocus(e) {
-            this.$emit("focus", e.target.value);
-        },
-
-        handleChange(e) {
-            this.$emit("change", e.target.value);
-        },
-
-        handleBlur(e) {
-            this.$emit("blur", e.target.value);
-        }
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    readonly: {
+      type: Boolean,
+      default: false
+    },
+    error: {
+      type: String
     }
+  },
+  data() {
+    return {};
+  },
+
+  components: {
+    "l-icon": Icon
+  },
+
+  computed: {},
+
+  mounted() {},
+
+  methods: {
+    handleInput(e) {
+      this.$emit("input", e.target.value);
+    },
+
+    handleFocus(e) {
+      this.$emit("focus", e.target.value);
+    },
+
+    handleChange(e) {
+      this.$emit("change", e.target.value);
+    },
+
+    handleBlur(e) {
+      this.$emit("blur", e.target.value);
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
-@import 'var.scss';
+@import "var.scss";
 
 .l-wrapper {
-    display: inline-flex;
-    align-items: center;
-    font-size: $font-size;
-    > :not(:last-child) {
-        margin-right: 0.5em;
-    }
-    // 这个是复合input的做法，但是样式还没写好
-    > .prepend_text {
-        color: red;
-        width: 100px;
-        height: $height;
-        border: 1px solid #ccc;
-    }
+  display: inline-flex;
+  align-items: center;
+  font-size: $font-size;
+  > :not(:last-child) {
+    margin-right: 0.5em;
+  }
+  // 这个是复合input的做法，但是样式还没写好
+  > .prepend_text {
+    color: red;
+    width: 100px;
+    height: $height;
+    border: 1px solid #ccc;
+  }
 
-    &.error {
-        > input {
-            border-color: $red;
-        }
-        .icon-error {
-            fill: $red;
-        }
-        .errorMessage {
-            color: $red;
-        }
-    }
-
+  &.error {
     > input {
-        height: $height;
-        border: 1px solid $border-color;
-        border-radius: $border-radius;
-        padding: 0 8px;
-        font-size: inherit;
-        &:hover {
-            border-color: $border-color-hover;
-        }
-        &:focus {
-            outline: none;
-            border: 1px solid #000;
-        }
-        &[disabled],
-        &[readonly] {
-            cursor: not-allowed;
-            background-color: #f5f7fa;
-            border-color: #e4e7ed;
-            color: #c0c4cc;
-        }
+      border-color: $red;
     }
+    .icon-error {
+      fill: $red;
+    }
+    .errorMessage {
+      color: $red;
+    }
+  }
+
+  > input {
+    height: $height;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    padding: 0 8px;
+    font-size: inherit;
+    &:hover {
+      border-color: $border-color-hover;
+    }
+    &:focus {
+      outline: none;
+      border: 1px solid #000;
+    }
+    &[disabled],
+    &[readonly] {
+      cursor: not-allowed;
+      background-color: #f5f7fa;
+      border-color: #e4e7ed;
+      color: #c0c4cc;
+    }
+  }
 }
 </style>

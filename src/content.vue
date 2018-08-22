@@ -9,40 +9,40 @@
 
 <script>
 export default {
-    name: "l-content",
+  name: "l-content",
 
-    components: {},
+  components: {},
 
-    computed: {
-        contentStyle() {
-            return {
-                height: this.height
-            };
-        }
-    },
+  computed: {
+    contentStyle() {
+      return {
+        height: this.height
+      };
+    }
+  },
 
-    props: {
-        height: {
-            type: String
-        }
-    },
+  props: {
+    height: {
+      type: String
+    }
+  },
 
-    data() {
-        return {};
-    },
+  data() {
+    return {};
+  },
 
-    created() {},
+  created() {},
 
-    mounted() {},
+  mounted() {},
 
-    methods: {}
+  methods: {}
 };
 </script>
 <style lang='scss' scoped>
 .l-content {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

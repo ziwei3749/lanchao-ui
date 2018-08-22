@@ -9,39 +9,39 @@
 
 <script>
 export default {
-    components: {},
+  components: {},
 
-    computed: {},
+  computed: {},
 
-    props: {
-        name: {
-            type: String
-        }
-    },
+  props: {
+    name: {
+      type: String
+    }
+  },
 
-    data() {
-        return {
-            isActive: false
-        };
-    },
+  data() {
+    return {
+      isActive: false
+    };
+  },
 
-    inject: ["eventBus"],
+  inject: ["eventBus"],
 
-    created() {
-        this.eventBus.$on("tab-click", name => {
-            this.isActive = name === this.name;
-        });
-    },
+  created() {
+    this.eventBus.$on("tab-click", name => {
+      this.isActive = name === this.name;
+    });
+  },
 
-    mounted() {},
+  mounted() {},
 
-    methods: {}
+  methods: {}
 };
 </script>
 <style lang='scss' scoped>
 .l-tabs-pane {
-    padding: 1em;
-    &.l-active {
-    }
+  padding: 1em;
+  &.l-active {
+  }
 }
 </style>

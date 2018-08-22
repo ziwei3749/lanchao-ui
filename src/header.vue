@@ -9,39 +9,39 @@
 
 <script>
 export default {
-    name: "l-header",
+  name: "l-header",
 
-    components: {},
+  components: {},
 
-    computed: {
-        headerStyle() {
-            return {
-                height: this.height
-            };
-        }
-    },
+  computed: {
+    headerStyle() {
+      return {
+        height: this.height
+      };
+    }
+  },
 
-    props: {
-        height: {
-            type: String
-        }
-    },
+  props: {
+    height: {
+      type: String
+    }
+  },
 
-    data() {
-        return {};
-    },
+  data() {
+    return {};
+  },
 
-    created() {},
+  created() {},
 
-    mounted() {},
+  mounted() {},
 
-    methods: {}
+  methods: {}
 };
 </script>
 <style lang='scss' scoped>
 .l-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

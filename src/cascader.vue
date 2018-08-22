@@ -19,58 +19,58 @@
 <script>
 import CascaderItems from "./cascader-items.vue";
 export default {
-    components: {
-        CascaderItems
+  components: {
+    CascaderItems
+  },
+
+  props: {
+    source: {
+      type: Array
     },
-
-    props: {
-        source: {
-            type: Array
-        },
-        popoverHeight: {
-            type: String
-        }
-    },
-
-    computed: {},
-
-    data() {
-        return {
-            popoverVisible: true
-        };
-    },
-
-    created() {},
-
-    mounted() {},
-
-    methods: {
-        togglePopover() {
-            this.popoverVisible = !this.popoverVisible;
-        }
+    popoverHeight: {
+      type: String
     }
+  },
+
+  computed: {},
+
+  data() {
+    return {
+      popoverVisible: true
+    };
+  },
+
+  created() {},
+
+  mounted() {},
+
+  methods: {
+    togglePopover() {
+      this.popoverVisible = !this.popoverVisible;
+    }
+  }
 };
 </script>
 <style lang='scss' scoped>
-@import 'var.scss';
+@import "var.scss";
 .l-cascader {
-    position: relative;
-    .l-trigger {
-        border: 1px solid #000;
-        height: 32px;
-        width: 100px;
+  position: relative;
+  .l-trigger {
+    border: 1px solid #000;
+    height: 32px;
+    width: 100px;
+  }
+  .l-popover-wrapper {
+    position: absolute;
+    background: #fff;
+    top: 100%;
+    left: 0;
+    display: flex;
+    @extend .box-shadow;
+    .level1 {
+      display: flex;
+      flex-direction: column;
     }
-    .l-popover-wrapper {
-        position: absolute;
-        background: #fff;
-        top: 100%;
-        left: 0;
-        display: flex;
-        @extend .box-shadow ;
-        .level1 {
-            display: flex;
-            flex-direction: column;
-        }
-    }
+  }
 }
 </style>

@@ -6,34 +6,32 @@
 </template>
 
 <script>
-import './svg.js'
+import "./svg.js";
 export default {
-    props: {
-        name: {
-            type: String,
-            required: true
-        }
-    },
+  props: {
+    name: {
+      type: String,
+      required: true
+    }
+  },
 
-    data() {
-        return {};
-    },
+  data() {
+    return {};
+  },
 
-    components: {},
+  components: {},
 
-    computed: {},
+  computed: {},
 
-    mounted() {},
+  mounted() {},
 
-    methods: {}
+  methods: {}
 };
 </script>
 <style lang="scss" scoped>
-
 .l-icon {
-    width: 1em;
-    height: 1em;
-    vertical-align: -0.15em;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
 }
-
 </style>

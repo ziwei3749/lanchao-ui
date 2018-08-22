@@ -11,23 +11,20 @@ export default {
 
   computed: {},
 
-  data () {
-    return {
-    }
+  data() {
+    return {};
   },
 
-  inject: ['eventBus'],
+  inject: ["eventBus"],
 
-  created () {},
+  created() {},
 
-  mounted () {},
+  mounted() {},
 
   methods: {}
-}
-
+};
 </script>
 <style lang='scss' scoped>
-    .l-tabs-body {
-
-    }
+.l-tabs-body {
+}
 </style>

@@ -48,95 +48,73 @@ Vue.component("l-cascader", Cascader);
 Vue.use(plugin);
 
 new Vue({
-    el: "#app",
-    data: {
-        loading: false,
-        username: "",
-        selectedTab: "sports",
-        Bus: new Vue(),
-        val: "",
-        selected: ["2"],
-        source: [
-            {
-                name: "浙江",
-                children: [
-                    {
-                        name: "杭州",
-                        children: [
-                            { name: "上城" },
-                            { name: "下城" },
-                            { name: "江干" }
-                        ]
-                    },
-                    {
-                        name: "嘉兴",
-                        children: [
-                            { name: "南湖" },
-                            { name: "秀洲" },
-                            { name: "嘉善" }
-                        ]
-                    }
-                ]
-            },
-            {
-                name: "福建",
-                children: [
-                    {
-                        name: "福州",
-                        children: [
-                            { name: "鼓楼" },
-                            { name: "台江" },
-                            { name: "仓山" }
-                        ]
-                    }
-                ]
-            },
-            {
-                name: "安徽",
-                children: [
-                    {
-                        name: "合肥",
-                        children: [
-                            { name: "瑶海" },
-                            { name: "庐阳" },
-                            { name: "仓山" }
-                        ]
-                    }
-                ]
-            }
+  el: "#app",
+  data: {
+    loading: false,
+    username: "",
+    selectedTab: "sports",
+    Bus: new Vue(),
+    val: "",
+    selected: ["2"],
+    source: [
+      {
+        name: "浙江",
+        children: [
+          {
+            name: "杭州",
+            children: [{ name: "上城" }, { name: "下城" }, { name: "江干" }]
+          },
+          {
+            name: "嘉兴",
+            children: [{ name: "南湖" }, { name: "秀洲" }, { name: "嘉善" }]
+          }
         ]
+      },
+      {
+        name: "福建",
+        children: [
+          {
+            name: "福州",
+            children: [{ name: "鼓楼" }, { name: "台江" }, { name: "仓山" }]
+          }
+        ]
+      },
+      {
+        name: "安徽",
+        children: [
+          {
+            name: "合肥",
+            children: [{ name: "瑶海" }, { name: "庐阳" }, { name: "仓山" }]
+          }
+        ]
+      }
+    ]
+  },
+  created() {
+    // console.log(this.val)
+  },
+  methods: {
+    showToast() {
+      this.$toast(`啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊${Math.random() * 100}`, {
+        enableHtml: false,
+        autoClose: false,
+        position: "top"
+        // closeButton: {
+        //     text: "关闭",
+        //     callback: (toast) => {
+        //         console.log( "用户的do something" );
+        //         console.log(toast)   //组件在callback时把实例交给用户
+        //     }
+        // }
+      });
     },
-    created() {
-        // console.log(this.val)
+    handleSelected() {},
+    yyy() {
+      console.log("yyy");
     },
-    methods: {
-        showToast() {
-            this.$toast(
-                `啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊${Math.random() * 100}`,
-                {
-                    enableHtml: false,
-                    autoClose: false,
-                    position: "top"
-                    // closeButton: {
-                    //     text: "关闭",
-                    //     callback: (toast) => {
-                    //         console.log( "用户的do something" );
-                    //         console.log(toast)   //组件在callback时把实例交给用户
-                    //     }
-                    // }
-                }
-            );
-        },
-        handleSelected(e) {
-            // console.log('触发了tabs')
-            // console.log(e)
-        },
-        yyy() {
-            console.log("yyy");
-        },
-        changeHandle(e) {
-            // console.log( this.selected )
-            this.selected = e;
-        }
+    changeHandle(e) {
+      // console.log( this.selected )
+      this.selected = e;
     }
+  }
 });

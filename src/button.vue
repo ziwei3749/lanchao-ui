@@ -20,93 +20,93 @@
 import Icon from "./icon.vue";
 
 export default {
-    name: "l-button",
-    props: {
-        icon: {
-            type: String
-        },
-        iconPosition: {
-            type: String,
-            default: "left",
-            validator(value) {
-                // 属性检查器
-                return value === "left" || value === "right";
-            }
-        },
-        loading: {
-            type: Boolean,
-            default: false
-        }
+  name: "l-button",
+  props: {
+    icon: {
+      type: String
     },
-
-    data() {
-        return {};
+    iconPosition: {
+      type: String,
+      default: "left",
+      validator(value) {
+        // 属性检查器
+        return value === "left" || value === "right";
+      }
     },
+    loading: {
+      type: Boolean,
+      default: false
+    }
+  },
 
-    components: {
-        "l-icon": Icon
-    },
+  data() {
+    return {};
+  },
 
-    computed: {},
+  components: {
+    "l-icon": Icon
+  },
 
-    mounted() {},
+  computed: {},
 
-    methods: {}
+  mounted() {},
+
+  methods: {}
 };
 </script>
 <style lang="scss" scoped>
-@import 'var.scss';
+@import "var.scss";
 @keyframes spin {
-    to {
-        transform: rotate(0deg);
-    }
-    from {
-        transform: rotate(360deg);
-    }
+  to {
+    transform: rotate(0deg);
+  }
+  from {
+    transform: rotate(360deg);
+  }
 }
 .l-button {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    vertical-align: middle;
-    height: $button-height;
-    font-size: $font-size;
-    padding: 0 1em;
-    border-radius: $border-radius;
-    border: 1px solid $border-color;
-    background: $button-bg;
-    &:hover {
-        border-color: $border-color-hover;
-    }
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+  height: $button-height;
+  font-size: $font-size;
+  padding: 0 1em;
+  border-radius: $border-radius;
+  border: 1px solid $border-color;
+  background: $button-bg;
+  &:hover {
+    border-color: $border-color-hover;
+  }
 
-    &:active {
-        background-color: $button-active-bg;
-    }
+  &:active {
+    background-color: $button-active-bg;
+  }
 
-    &:focus {
-        outline: none;
-    }
+  &:focus {
+    outline: none;
+  }
 
+  > .l-icon {
+    order: 1;
+    margin-right: 0.3em;
+  }
+  > .l-content {
+    order: 2;
+  }
+
+  &.l-icon-right {
     > .l-icon {
-        order: 1;
-        margin-right: 0.3em;
+      order: 2;
+      margin-right: 0;
+      margin-left: 0.3em;
     }
     > .l-content {
-        order: 2;
+      order: 1;
     }
-
-    &.l-icon-right {
-        > .l-icon {
-            order: 2;
-            margin-right: 0;
-            margin-left: 0.3em;
-        }
-        > .l-content {
-            order: 1;
-        }
-    }
-    > .l-loading {
-        animation: spin 2s infinite linear;
-    }
+  }
+  > .l-loading {
+    animation: spin 2s infinite linear;
+  }
 }
 </style>

@@ -10,39 +10,39 @@
 
 <script>
 export default {
-    name: "l-sider",
+  name: "l-sider",
 
-    components: {},
+  components: {},
 
-    computed: {
-        siderStyle() {
-            return {
-                width: this.width
-            };
-        }
-    },
+  computed: {
+    siderStyle() {
+      return {
+        width: this.width
+      };
+    }
+  },
 
-    props: {
-        width: {
-            type: [String, Number]
-        }
-    },
+  props: {
+    width: {
+      type: [String, Number]
+    }
+  },
 
-    data() {
-        return {};
-    },
+  data() {
+    return {};
+  },
 
-    created() {},
+  created() {},
 
-    mounted() {},
+  mounted() {},
 
-    methods: {}
+  methods: {}
 };
 </script>
 <style lang='scss' scoped>
 .l-sider {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

@@ -24,61 +24,61 @@
 
 <script>
 export default {
-    name: "CascaderItems",
+  name: "CascaderItems",
 
-    props: {
-        items: {
-            type: Array
-        },
-        popoverHeight: {
-            type: String
-        }
+  props: {
+    items: {
+      type: Array
     },
+    popoverHeight: {
+      type: String
+    }
+  },
 
-    components: {},
+  components: {},
 
-    computed: {
-        rightItems() {
-            return this.leftSelected && this.leftSelected.children
-                ? this.leftSelected.children
-                : null;
-        }
-    },
+  computed: {
+    rightItems() {
+      return this.leftSelected && this.leftSelected.children
+        ? this.leftSelected.children
+        : null;
+    }
+  },
 
-    data() {
-        return {
-            leftSelected: null
-        };
-    },
+  data() {
+    return {
+      leftSelected: null
+    };
+  },
 
-    created() {},
+  created() {},
 
-    mounted() {},
+  mounted() {},
 
-    methods: {}
+  methods: {}
 };
 </script>
 <style lang='scss'>
-@import 'var.scss';
+@import "var.scss";
 .l-cascader-items {
-    height: 200px;
-    display: flex;
-    .left {
-        height: 100%;
-        padding: .3em 0;
-        .label {
-            padding: .3em 1em;
-            display: flex;
-            align-items: center;
-            .icon {
-                margin-left: 1em;
-                transform: scale(.5)
-            }
-        }
+  height: 200px;
+  display: flex;
+  .left {
+    height: 100%;
+    padding: 0.3em 0;
+    .label {
+      padding: 0.3em 1em;
+      display: flex;
+      align-items: center;
+      .icon {
+        margin-left: 1em;
+        transform: scale(0.5);
+      }
     }
-    .right {
-        height: 100%;
-        border-left: 1px solid $border-color;
-    }
+  }
+  .right {
+    height: 100%;
+    border-left: 1px solid $border-color;
+  }
 }
 </style>
