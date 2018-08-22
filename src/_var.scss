@@ -1,13 +1,12 @@
 // input
 $border-color-hover: #666;
 $border-color: #999;
+$border-color-light: red;
 $border-radius: 4px;
 $box-shadow-color: rgba(0, 0, 0, 0.5);
 $font-size: 14px;
 $height: 32px;
 $red: #f1453d;
-
-
 // button
 $border-color-hover: #666;
 $border-color: #999;
@@ -17,3 +16,11 @@ $button-bg: white;
 $button-height: 32px;
 $color: #333;
 $font-size: 14px;
+.box-shadow {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.15)
+}
+
+@mixin box-shadow2 {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.15)
+}
+

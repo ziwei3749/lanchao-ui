@@ -5,9 +5,13 @@
              @click="togglePopover">
             <slot></slot>
         </div>
-        <div class="l-popover"
+        <div class="l-popover-wrapper"
              v-show="popoverVisible">
-            <CascaderItems :items="source"></CascaderItems>
+            <CascaderItems :items="source"
+                           class="popover"
+                           :popoverHeight="popoverHeight"
+                           :style="{height: popoverHeight}">
+            </CascaderItems>
         </div>
     </div>
 </template>
@@ -22,25 +26,17 @@ export default {
     props: {
         source: {
             type: Array
-        }
-    },
-
-    computed: {
-        level2Items() {
-            return this.selectedItem1 ? this.selectedItem1.children : [];
         },
-
-        level3Items() {
-            return this.selectedItem2 ? this.selectedItem2.children : [];
+        popoverHeight: {
+            type: String
         }
     },
+
+    computed: {},
 
     data() {
         return {
-            popoverVisible: false,
-            selectedItem1: null,
-            selectedItem2: null,
-            selectedItem3: null
+            popoverVisible: true
         };
     },
 
@@ -56,17 +52,21 @@ export default {
 };
 </script>
 <style lang='scss' scoped>
+@import 'var.scss';
 .l-cascader {
+    position: relative;
     .l-trigger {
-        border: 1px solid red;
+        border: 1px solid #000;
         height: 32px;
         width: 100px;
     }
-    .l-popover {
+    .l-popover-wrapper {
+        position: absolute;
+        background: #fff;
+        top: 100%;
+        left: 0;
         display: flex;
-        border: 1px solid #ccc;
-        width: 480px;
-        height: 200px;
+        @extend .box-shadow ;
         .level1 {
             display: flex;
             flex-direction: column;
