@@ -1,15 +1,18 @@
 <!-- demo -->
 <template>
-    <div>
-        <div style="margin-left:100px">
-            <h2>Cascader级联选择器</h2>
-            <div>
-                <l-cascader :source="source"
-                            popover-height="400px">
-                </l-cascader>
-            </div>
-        </div>
+  <div>
+    <div style="margin-left:100px">
+      <h2>Cascader级联选择器</h2>
+      selected:{{selected}}
+      <div>
+        <l-cascader :source="source"
+                    :selected="selected"
+                    popover-height="200px"
+                    @update:selected="selected = $event">
+        </l-cascader>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -23,6 +26,7 @@ export default {
 
   data() {
     return {
+      selected: [],
       source: [
         {
           name: "浙江",
@@ -67,4 +71,17 @@ export default {
 };
 </script>
 <style lang='scss'>
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --font-size: 14px;
+}
+
+body {
+  font-size: var(--font-size);
+}
 </style>

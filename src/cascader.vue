@@ -7,11 +7,13 @@
         </div>
         <div class="l-popover-wrapper"
              v-show="popoverVisible">
-            <CascaderItems :items="source"
+            <l-cascader-items :items="source"
                            class="popover"
                            :popoverHeight="popoverHeight"
-                           :style="{height: popoverHeight}">
-            </CascaderItems>
+                           :style="{height: popoverHeight}"
+                           :selected="selected"
+                           @update:selected="onUpdateSelected">
+            </l-cascader-items>
         </div>
     </div>
 </template>
@@ -20,7 +22,7 @@
 import CascaderItems from "./cascader-items.vue";
 export default {
   components: {
-    CascaderItems
+    "l-cascader-items": CascaderItems
   },
 
   props: {
@@ -29,6 +31,10 @@ export default {
     },
     popoverHeight: {
       type: String
+    },
+    selected: {
+      type: Array,
+      default: () => []
     }
   },
 
@@ -47,6 +53,9 @@ export default {
   methods: {
     togglePopover() {
       this.popoverVisible = !this.popoverVisible;
+    },
+    onUpdateSelected(currentSelected) {
+      this.$emit("update:selected", currentSelected);
     }
   }
 };
