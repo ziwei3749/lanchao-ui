@@ -7,7 +7,7 @@
            class="label"
            @click="clickSelected(item)">
         <span>{{item.name}}</span>
-        <l-icon v-if="item.children"
+        <l-icon v-if="item.children && selected.some(v=>v.name === item.name)"
                 name="right"
                 class="icon">
         </l-icon>
@@ -52,10 +52,17 @@ export default {
 
   computed: {
     rightItems() {
-      let currentSelected = this.selected[this.level];
-      return currentSelected && currentSelected.children
-        ? currentSelected.children
-        : null;
+      /**
+       * 根据items(也就是source) / selected / level计算属性 rightItems的显示
+       */
+      if (this.selected[this.level]) {
+        let selected = this.items.filter(
+          item => item.name === this.selected[this.level].name
+        )[0];
+        if (selected && selected.children && selected.children.length > 0) {
+          return selected.children;
+        }
+      }
     }
   },
 

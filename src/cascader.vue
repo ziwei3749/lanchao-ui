@@ -65,8 +65,11 @@ export default {
     togglePopover() {
       this.popoverVisible = !this.popoverVisible;
     },
+
     onUpdateSelected(currentSelected) {
-      console.log("用户选中了某一项"); // 有一个缺陷，重新点击北京，反复触发ajax
+      console.log(currentSelected);
+      // 有一个缺陷，重新点击北京，反复触发ajax
+
       let lastItem = currentSelected[currentSelected.length - 1];
 
       let simplest = (children, id) => {
@@ -119,7 +122,10 @@ export default {
 
         let copy = JSON.parse(JSON.stringify(this.source));
         let toUpdate = complex(copy, lastItem.id);
-        toUpdate.children = result;
+        if (result.length > 0) {
+          // 并不是每次点击都要挂一个children的，如果result的结果是空数组，就不挂children属性了
+          toUpdate.children = result;
+        }
         this.$emit("update:source", copy);
       };
       this.loadData(lastItem, updateSource);

@@ -8,7 +8,6 @@
       <p>2:{{selected && selected[2] && selected[2].name || 'null'}}</p>
       <div>
         <l-cascader :source.sync="source"
-                    @update:source="yyy"
                     :selected.sync="selected"
                     popover-height="200px"
                     :load-data="loadData">
@@ -90,14 +89,12 @@ export default {
     loadData(item, updateSource) {
       let id = item.id;
       ajax(id).then(result => {
-        console.log(result);
         updateSource(result);
       });
     },
 
     xxx() {
       ajax(this.selected[0].id).then(result => {
-        console.log(result);
         let lastLevelSelected = this.source.filter(
           item => item.id === this.selected[0].id
         )[0];
