@@ -12,6 +12,11 @@
                     popover-height="200px"
                     :load-data="loadData">
         </l-cascader>
+              <l-cascader :source.sync="source"
+                    :selected.sync="selected"
+                    popover-height="200px"
+                    :load-data="loadData">
+        </l-cascader>
       </div>
     </div>
   </div>

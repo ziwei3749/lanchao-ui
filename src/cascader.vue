@@ -1,6 +1,7 @@
 <!-- cascader -->
 <template>
   <div class="l-cascader"
+       v-click-outside="close"
        ref="cascader">
     <div class="l-trigger"
          @click="togglePopover">
@@ -26,6 +27,21 @@
 
 <script>
 import CascaderItems from "./cascader-items.vue";
+
+// 这个写法，让监听器只有一个，每次监听就把所有符合条件的fn都执行一遍
+let callback = [];
+document.addEventListener("click", e => {
+  callback.forEach(item => {
+    if (item.el === e.target || item.el.contains(e.target)) {
+      console.log("inside");
+      return;
+    } else {
+      console.log("outside");
+      item.callback();
+    }
+  });
+});
+
 export default {
   components: {
     "l-cascader-items": CascaderItems
@@ -63,32 +79,40 @@ export default {
 
   mounted() {},
 
-  methods: {
-    onClickOtherDocument(e) {
-      console.log("onClickOtherDocument");
-      if (
-        this.$refs.cascader === e.target ||
-        this.$refs.cascader.contains(e.target)
-      ) {
-        // 点击组件区域，就return
-        return;
+  directives: {
+    "click-outside": {
+      bind(el, binding) {
+        callback.push({ el, callback: binding.value });
       }
+    }
+  },
 
-      this.close();
-    },
+  methods: {
+    // onClickOtherDocument(e) {
+    //   console.log("onClickOtherDocument");
+    //   if (
+    //     this.$refs.cascader === e.target ||
+    //     this.$refs.cascader.contains(e.target)
+    //   ) {
+    //     // 点击组件区域，就return
+    //     return;
+    //   }
+
+    //   this.close();
+    // },
 
     open() {
       this.popoverVisible = true;
-      this.$nextTick(() => {
-        // 添加nextTick在第一次点击btn时，不会触发事件
-        document.addEventListener("click", this.onClickOtherDocument);
-      });
+      // this.$nextTick(() => {
+      //   // 添加nextTick在第一次点击btn时，不会触发事件
+      //   document.addEventListener("click", this.onClickOtherDocument);
+      // });
     },
 
     close() {
-      console.log("remove了");
+      // console.log("remove了");
       this.popoverVisible = false;
-      document.removeEventListener("click", this.onClickOtherDocument);
+      // document.removeEventListener("click", this.onClickOtherDocument);
     },
 
     togglePopover() {
