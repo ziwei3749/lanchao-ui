@@ -14,6 +14,7 @@
                         :popoverHeight="popoverHeight"
                         :style="{height: popoverHeight}"
                         :selected="selected"
+                        :load-data="loadData"
                         @update:selected="onUpdateSelected">
       </l-cascader-items>
     </div>
@@ -128,7 +129,11 @@ export default {
         }
         this.$emit("update:source", copy);
       };
-      this.loadData(lastItem, updateSource);
+      if (!lastItem.isLeaf) {
+        // 不是叶子，才需要加载数据
+        this.loadData && this.loadData(lastItem, updateSource);
+      }
+
       this.$emit("update:selected", currentSelected);
     }
   }

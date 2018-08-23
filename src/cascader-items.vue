@@ -1,25 +1,28 @@
 <!-- cascader-item -->
 <template>
   <div class="l-cascader-items">
-    <div class="left">
+    <div class="l-left">
       <div v-for="item in items"
            :key="item.name"
-           class="label"
+           class="l-label"
+           :class="{'active' : selected.some(v => v.name === item.name)}"
            @click="clickSelected(item)">
-        <span>{{item.name}}</span>
-        <l-icon v-if="item.children && selected.some(v=>v.name === item.name)"
+        <span class="l-name">{{item.name}}</span>
+        <!-- 动态加载的话，根据后台数据是否isLeaf字段判断是否显示箭头  / 非动态加载的，根据childre能判断-->
+        <l-icon v-if="rightArrowVisible(item)"
                 name="right"
-                class="icon">
+                class="l-icon">
         </l-icon>
       </div>
     </div>
-    <div class="right"
+    <div class="l-right"
          v-if="rightItems">
       <l-cascader-items :items="rightItems"
                         :popoverHeight="popoverHeight"
                         :style="{height: popoverHeight}"
                         :selected="selected"
                         :level="level+1"
+                        :load-data="loadData"
                         @update:selected="onUpdateSelected">
       </l-cascader-items>
     </div>
@@ -45,6 +48,9 @@ export default {
     level: {
       type: Number,
       default: 0
+    },
+    loadData: {
+      type: Function
     }
   },
 
@@ -93,6 +99,10 @@ export default {
 
     onUpdateSelected(currentSelected) {
       this.$emit("update:selected", currentSelected);
+    },
+    rightArrowVisible(item) {
+      // 是否是动态加载模式？ 是的话就根基isLeaf判断 ，不是的话就看children
+      return this.loadData ? !item.isLeaf : item.children;
     }
   }
 };
@@ -102,23 +112,36 @@ export default {
 .l-cascader-items {
   height: 200px;
   display: flex;
-  .left {
+  .l-left {
     height: 100%;
+    min-width: 120px;
     padding: 0.3em 0;
     overflow: auto;
     -webkit-overflow-scrolling: auto;
-    .label {
-      padding: 0.3em 1em;
+    .l-label {
+      padding: 0.5em 1em;
       display: flex;
       align-items: center;
-      .icon {
-        margin-left: 1em;
+      justify-content: space-between;
+      cursor: pointer;
+      &:hover {
+        background: $grey;
+      }
+      &.active {
+        background: $grey;
+      }
+      > .l-name {
+        margin-right: 1em;
+        user-select: none;
+      }
+      > .l-icon {
         transform: scale(0.5);
       }
     }
   }
-  .right {
+  .l-right {
     height: 100%;
+    min-width: 120px;
     border-left: 1px solid $border-color-light;
     overflow: auto;
     -webkit-overflow-scrolling: auto;

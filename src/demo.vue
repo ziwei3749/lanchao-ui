@@ -22,9 +22,18 @@ import lCascader from "./cascader";
 import db from "./db.js";
 
 function ajax(parent_id) {
+  console.log("ajax");
   return new Promise(resolve => {
     setTimeout(() => {
       let result = db.filter(v => v.parent_id === parent_id);
+      result.forEach(node => {
+        node.isLeaf = true / false;
+        if (db.filter(item => item.parent_id === node.id).length > 0) {
+          node.isLeaf = false;
+        } else {
+          node.isLeaf = true;
+        }
+      });
       resolve(result);
     }, 300);
   });
