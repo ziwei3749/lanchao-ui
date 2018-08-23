@@ -1,18 +1,18 @@
 <!-- button -->
 <template>
-    <button class="l-button"
-            :class="`l-icon-${iconPosition}`"
-            @click="$emit('click')">
-        <l-icon class="l-icon l-loading"
-                v-if="loading"
-                name="loading"></l-icon>
-        <l-icon class="l-icon"
-                v-if="icon && loading !== true"
-                :name="icon"></l-icon>
-        <div class="l-content">
-            <slot />
-        </div>
-    </button>
+  <button class="l-button"
+          :class="`l-icon-${iconPosition}`"
+          @click="$emit('click')">
+    <l-icon class="l-icon l-loading"
+            v-if="loading"
+            name="loading"></l-icon>
+    <l-icon class="l-icon"
+            v-if="icon && loading !== true"
+            :name="icon"></l-icon>
+    <div class="l-content">
+      <slot />
+    </div>
+  </button>
 </template>
 
 <script>
