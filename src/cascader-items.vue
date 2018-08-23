@@ -9,10 +9,20 @@
            @click="clickSelected(item)">
         <span class="l-name">{{item.name}}</span>
         <!-- 动态加载的话，根据后台数据是否isLeaf字段判断是否显示箭头  / 非动态加载的，根据childre能判断-->
-        <l-icon v-if="rightArrowVisible(item)"
-                name="right"
-                class="l-icon">
-        </l-icon>
+        <div class="l-icons">
+          <template v-if="loadingItem && item.name === loadingItem.name">
+            <l-icon name="loading"
+                    class="icon-loading"></l-icon>
+          </template>
+          <template v-else>
+            <l-icon v-if="rightArrowVisible(item)"
+                    name="right"
+                    class="icon-right-arrow">
+            </l-icon>
+          </template>
+
+        </div>
+
       </div>
     </div>
     <div class="l-right"
@@ -23,6 +33,7 @@
                         :selected="selected"
                         :level="level+1"
                         :load-data="loadData"
+                        :loading-item="loadingItem"
                         @update:selected="onUpdateSelected">
       </l-cascader-items>
     </div>
@@ -51,6 +62,9 @@ export default {
     },
     loadData: {
       type: Function
+    },
+    loadingItem: {
+      type: Object
     }
   },
 
@@ -73,7 +87,9 @@ export default {
   },
 
   data() {
-    return {};
+    return {
+      loadingVisible: true
+    };
   },
 
   created() {},
@@ -82,6 +98,8 @@ export default {
 
   methods: {
     clickSelected(item) {
+      console.log("开始加载...");
+
       // 改变selected，并把selected的备份 emit。
       const copy = JSON.parse(JSON.stringify(this.selected));
       copy[this.level] = item;
@@ -109,6 +127,7 @@ export default {
 </script>
 <style lang='scss'>
 @import "var.scss";
+
 .l-cascader-items {
   height: 200px;
   display: flex;
@@ -135,8 +154,13 @@ export default {
         margin-right: 1em;
         user-select: none;
       }
-      > .l-icon {
-        transform: scale(0.5);
+      > .l-icons {
+        .icon-right-arrow {
+          transform: scale(0.5);
+        }
+        .icon-loading {
+          animation: spin 2s infinite linear;
+        }
       }
     }
   }

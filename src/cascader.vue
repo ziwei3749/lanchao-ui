@@ -17,8 +17,10 @@
                         :style="{height: popoverHeight}"
                         :selected="selected"
                         :load-data="loadData"
+                        :loading-item="loadingItem"
                         @update:selected="onUpdateSelected">
       </l-cascader-items>
+      
     </div>
   </div>
 </template>
@@ -71,7 +73,9 @@ export default {
 
   data() {
     return {
-      popoverVisible: false
+      popoverVisible: false,
+      loadingVisible: false,
+      loadingItem: null
     };
   },
 
@@ -88,31 +92,12 @@ export default {
   },
 
   methods: {
-    // onClickOtherDocument(e) {
-    //   console.log("onClickOtherDocument");
-    //   if (
-    //     this.$refs.cascader === e.target ||
-    //     this.$refs.cascader.contains(e.target)
-    //   ) {
-    //     // 点击组件区域，就return
-    //     return;
-    //   }
-
-    //   this.close();
-    // },
-
     open() {
       this.popoverVisible = true;
-      // this.$nextTick(() => {
-      //   // 添加nextTick在第一次点击btn时，不会触发事件
-      //   document.addEventListener("click", this.onClickOtherDocument);
-      // });
     },
 
     close() {
-      // console.log("remove了");
       this.popoverVisible = false;
-      // document.removeEventListener("click", this.onClickOtherDocument);
     },
 
     togglePopover() {
@@ -132,7 +117,6 @@ export default {
     onUpdateSelected(currentSelected) {
       console.log(currentSelected);
       // 有一个缺陷，重新点击北京，反复触发ajax
-
       let lastItem = currentSelected[currentSelected.length - 1];
 
       let simplest = (children, id) => {
@@ -171,6 +155,8 @@ export default {
       };
 
       let updateSource = result => {
+        console.log("加载结束，拿到数据...");
+        this.loadingItem = null;
         /**
          * 注意1： 需要深拷贝
          * 注意2： 需要递归搜索，深度优先或者广度优先。
@@ -191,9 +177,10 @@ export default {
         }
         this.$emit("update:source", copy);
       };
-      if (!lastItem.isLeaf) {
+      if (!lastItem.isLeaf && this.loadData) {
         // 不是叶子，才需要加载数据
-        this.loadData && this.loadData(lastItem, updateSource);
+        this.loadData(lastItem, updateSource);
+        this.loadingItem = lastItem;
       }
 
       this.$emit("update:selected", currentSelected);
@@ -218,6 +205,7 @@ export default {
   .l-popover-wrapper {
     margin-top: 8px;
     position: absolute;
+    z-index: 1;
     background: #fff;
     top: 100%;
     left: 0;

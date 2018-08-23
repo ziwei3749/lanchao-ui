@@ -56,14 +56,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "var.scss";
-@keyframes spin {
-  to {
-    transform: rotate(0deg);
-  }
-  from {
-    transform: rotate(360deg);
-  }
-}
+
 .l-button {
   display: inline-flex;
   justify-content: center;
