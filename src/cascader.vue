@@ -1,6 +1,7 @@
 <!-- cascader -->
 <template>
-  <div class="l-cascader">
+  <div class="l-cascader"
+       ref="cascader">
     <div class="l-trigger"
          @click="togglePopover">
       <!-- <slot></slot> -->
@@ -54,7 +55,7 @@ export default {
 
   data() {
     return {
-      popoverVisible: true
+      popoverVisible: false
     };
   },
 
@@ -63,8 +64,45 @@ export default {
   mounted() {},
 
   methods: {
+    onClickOtherDocument(e) {
+      console.log("onClickOtherDocument");
+      if (
+        this.$refs.cascader === e.target ||
+        this.$refs.cascader.contains(e.target)
+      ) {
+        // 点击组件区域，就return
+        return;
+      }
+
+      this.close();
+    },
+
+    open() {
+      this.popoverVisible = true;
+      this.$nextTick(() => {
+        // 添加nextTick在第一次点击btn时，不会触发事件
+        document.addEventListener("click", this.onClickOtherDocument);
+      });
+    },
+
+    close() {
+      console.log("remove了");
+      this.popoverVisible = false;
+      document.removeEventListener("click", this.onClickOtherDocument);
+    },
+
     togglePopover() {
-      this.popoverVisible = !this.popoverVisible;
+      /**
+       * 思路：
+       * 1.原生event记得自己主动取消事件绑定
+       * 2.不能用阻止冒泡。就是点击docuemnt判断点击的区域，来决定做什么逻辑
+       */
+
+      if (this.popoverVisible) {
+        this.close();
+      } else {
+        this.open();
+      }
     },
 
     onUpdateSelected(currentSelected) {
@@ -143,6 +181,7 @@ export default {
 @import "var.scss";
 .l-cascader {
   position: relative;
+  display: inline-block;
   .l-trigger {
     display: inline-flex;
     align-items: center;
