@@ -39,6 +39,9 @@ export default {
     selected: {
       type: Array,
       default: () => []
+    },
+    loadData: {
+      type: Function
     }
   },
 
@@ -63,6 +66,63 @@ export default {
       this.popoverVisible = !this.popoverVisible;
     },
     onUpdateSelected(currentSelected) {
+      console.log("用户选中了某一项"); // 有一个缺陷，重新点击北京，反复触发ajax
+      let lastItem = currentSelected[currentSelected.length - 1];
+
+      let simplest = (children, id) => {
+        return children.filter(item => item.id === id)[0];
+      };
+
+      let complex = (children, id) => {
+        let noChildren = [];
+        let hasChildren = [];
+        children.forEach(item => {
+          if (item.children) {
+            hasChildren.push(item);
+          } else {
+            noChildren.push(item);
+          }
+        });
+
+        let found = simplest(noChildren, id);
+        if (found) {
+          return found;
+        } else {
+          // 有孩子的，想当没孩子一样找一遍，如果他们的孩子还有孩子，就递归
+          found = simplest(hasChildren, id);
+          if (found) {
+            return found;
+          } else {
+            for (let i = 0; i < hasChildren.length; i++) {
+              found = complex(hasChildren[i].children, id);
+              if (found) {
+                return found;
+              }
+            }
+            return undefined;
+          }
+        }
+      };
+
+      let updateSource = result => {
+        /**
+         * 注意1： 需要深拷贝
+         * 注意2： 需要递归搜索，深度优先或者广度优先。
+         */
+        // let toUpdate = complex(this.source, lastItem.id);
+        // console.log(toUpdate);
+        // this.$set(toUpdate, "children", result);
+
+        /**
+         * 这里拷贝了之后，出现了bug，数据不是响应式的，没法即时更新！！！！！！！！！！！！！！！！！！！！！！！！
+         */
+
+        let copy = JSON.parse(JSON.stringify(this.source));
+        let toUpdate = complex(copy, lastItem.id);
+        toUpdate.children = result;
+        this.$emit("update:source", copy);
+      };
+      this.loadData(lastItem, updateSource);
       this.$emit("update:selected", currentSelected);
     }
   }

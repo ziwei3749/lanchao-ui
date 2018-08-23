@@ -7,10 +7,11 @@
       <p>1:{{selected && selected[1] && selected[1].name || 'null'}}</p>
       <p>2:{{selected && selected[2] && selected[2].name || 'null'}}</p>
       <div>
-        <l-cascader :source="source"
-                    :selected="selected"
+        <l-cascader :source.sync="source"
+                    @update:source="yyy"
+                    :selected.sync="selected"
                     popover-height="200px"
-                    @update:selected="selected = $event">
+                    :load-data="loadData">
         </l-cascader>
       </div>
     </div>
@@ -20,11 +21,15 @@
 <script>
 import lCascader from "./cascader";
 import db from "./db.js";
-function ajax(parent_id = 0) {
-  return db.filter(v => v.parent_id === parent_id);
-}
 
-console.log(ajax());
+function ajax(parent_id) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      let result = db.filter(v => v.parent_id === parent_id);
+      resolve(result);
+    }, 300);
+  });
+}
 
 export default {
   components: {
@@ -36,7 +41,7 @@ export default {
   data() {
     return {
       selected: [],
-      source: ajax()
+      source: []
       // source: [
       //   {
       //     name: "浙江",
@@ -73,11 +78,33 @@ export default {
     };
   },
 
-  created() {},
+  created() {
+    ajax(0).then(data => {
+      this.source = data;
+    });
+  },
 
   mounted() {},
 
-  methods: {}
+  methods: {
+    loadData(item, updateSource) {
+      let id = item.id;
+      ajax(id).then(result => {
+        console.log(result);
+        updateSource(result);
+      });
+    },
+
+    xxx() {
+      ajax(this.selected[0].id).then(result => {
+        console.log(result);
+        let lastLevelSelected = this.source.filter(
+          item => item.id === this.selected[0].id
+        )[0];
+        this.$set(lastLevelSelected, "children", result);
+      });
+    }
+  }
 };
 </script>
 <style lang='scss'>
