@@ -52,7 +52,6 @@ export default {
     created() {},
 
     mounted() {
-      console.log(this.position)
         if (this.trigger === "click") {
             this.$refs.popover.addEventListener("click", this.onClick);
         } else {
