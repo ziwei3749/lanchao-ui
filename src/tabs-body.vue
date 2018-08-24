@@ -1,7 +1,7 @@
 <!-- tabs-body -->
 <template>
   <div class="l-tabs-body">
-      <slot></slot>
+    <slot></slot>
   </div>
 </template>
 
