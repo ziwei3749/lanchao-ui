@@ -5,7 +5,7 @@
  * 2 Vue是用户传给我们的，而不是我们自己引的，更可靠
  */
 
-import Toast from "./toast";
+import Toast from "./toast.vue";
 
 let currentToast;
 
@@ -32,11 +32,17 @@ export default {
  */
 function createToast(Vue, message, options, onClose) {
   // 生成一个toast组件，然后生插入到body中
+
   let Constructor = Vue.extend(Toast);
   let toast = new Constructor({ propsData: options });
-  toast.$slots.default = message; // 设置匿名插槽的内容，必须放到$mount前面
   toast.$mount();
+  toast.$slots.default = message; // 设置匿名插槽的内容，必须放到$mount前面
+  console.log("toast1");
+  console.log(toast);
+
+  console.log("toast2");
   toast.$on("close", onClose);
   document.body.appendChild(toast.$el);
+
   return toast;
 }

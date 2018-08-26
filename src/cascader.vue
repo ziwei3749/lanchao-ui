@@ -35,10 +35,8 @@ let callback = [];
 document.addEventListener("click", e => {
   callback.forEach(item => {
     if (item.el === e.target || item.el.contains(e.target)) {
-      console.log("inside");
       return;
     } else {
-      console.log("outside");
       item.callback();
     }
   });

@@ -51,6 +51,7 @@ Vue.use(plugin);
 
 Vue.config.productionTip = false;
 
+console.log(document.querySelector("#app"));
 new Vue({
   render: h => h(Demo)
 }).$mount("#app");

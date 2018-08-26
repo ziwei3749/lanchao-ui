@@ -75,6 +75,7 @@ export default {
   created() {},
 
   mounted() {
+    console.log(this.$slots.default);
     this.updateStyles();
     this.execAutoClose();
   },
