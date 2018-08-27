@@ -1,7 +1,7 @@
 <!-- button-demos -->
 <template>
     <div>
-        <l-button>默认按钮</l-button>
+        <l-button :loading="true">加载按钮</l-button>
     </div>
 </template>
 
@@ -26,10 +26,5 @@ export default {
     methods: {}
 };
 </script>
-<style lang='scss'>
-    .demo {
-        border-radius: 4px;
-        padding: 1.2em 1.6em;
-        border-left: 1px solid rgba(100, 100, 100, 0.1)
-    }
+<style lang='scss' scoped>
 </style>

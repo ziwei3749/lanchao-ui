@@ -1,7 +1,9 @@
 <!-- button-demos -->
 <template>
     <div>
-        <l-button disabled>disabled按钮</l-button>
+        <l-button icon="settings">icon左侧按钮</l-button>
+        <l-button iconPosition="right"
+                  icon="thumbs-up">icon右侧按钮</l-button>
     </div>
 </template>
 
@@ -26,5 +28,6 @@ export default {
     methods: {}
 };
 </script>
-<style lang='scss'>
+<style lang='scss' scoped>
+  
 </style>

@@ -3,7 +3,6 @@
     <div class="l-sider"
          :style="siderStyle">
         <slot></slot>
-        <l-button class="btn">close</l-button>
     </div>
 
 </template>

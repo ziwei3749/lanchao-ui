@@ -2,15 +2,40 @@
 <template>
 
     <div id="app">
-      <div>
+        <div>
+            <l-tabs selected="finance"
+                    @tab-click="handleSelected">
+                <l-tabs-head>
+                    <l-tabs-item name="woman">
+                        <l-icon name="settings"></l-icon>美女
+                    </l-tabs-item>
+                    <l-tabs-item name="finance">财经</l-tabs-item>
+                    <l-tabs-item name="sports">体育</l-tabs-item>
+                    <template slot="actions">
+                        <l-button>设置</l-button>
+                    </template>
+                </l-tabs-head>
+                <l-tabs-body>
+                    <l-tabs-pane name="woman">美女相关资讯</l-tabs-pane>
+                    <l-tabs-pane name="finance">财经相关资讯</l-tabs-pane>
+                    <l-tabs-pane name="sports">体育相关资讯</l-tabs-pane>
+                </l-tabs-body>
+
+            </l-tabs>
+        </div>
+        <div>
             <h2>Toast组件</h2>
             <l-button @click="showToast">showToast</l-button>
         </div>
         <div>
             <h2>网格组件 、 栅格系统</h2>
             <l-row gutter="20">
-                <l-col span="12"></l-col>
-                <l-col span="12"></l-col>
+                <l-col span="12">
+                    <div class="demo"></div>
+                </l-col>
+                <l-col span="12">
+                    <div class="demo"></div>
+                </l-col>
             </l-row>
             <l-row gutter="20">
                 <l-col span="24"
@@ -267,6 +292,9 @@ export default {
         autoClose: false,
         position: "top"
       });
+    },
+    handleSelected(e) {
+      console.log(e);
     }
   }
 };

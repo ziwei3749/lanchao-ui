@@ -1,7 +1,7 @@
 <!-- button-demos -->
 <template>
     <div>
-        <l-button :loading="true">加载按钮</l-button>
+        <l-button>默认按钮</l-button>
     </div>
 </template>
 
@@ -26,5 +26,6 @@ export default {
     methods: {}
 };
 </script>
-<style lang='scss'>
+<style lang='scss' scoped>
+  
 </style>

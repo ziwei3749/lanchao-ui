@@ -51,6 +51,7 @@ export default {
 .l-row {
   display: flex;
   flex-wrap: wrap;
+  box-sizing: border-box;
   &.align-left {
     justify-content: flex-start;
   }

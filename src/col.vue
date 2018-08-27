@@ -86,6 +86,7 @@ export default {
 </script>
 <style scoped lang="scss">
 .l-col {
+  box-sizing: border-box;
   $class-prefix: col-;
   @for $n from 1 through 24 {
     &.#{$class-prefix}#{$n} {
