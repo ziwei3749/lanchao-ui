@@ -14,6 +14,7 @@ sidebarDepth: 2
 <ClientOnly>
 <button-demo1 />
 </ClientOnly>
+
 ```vue
 <l-button>默认按钮</l-button>
 <l-button icon="settings">icon默认按钮</l-button>

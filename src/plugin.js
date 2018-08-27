@@ -30,12 +30,11 @@ export default {
  * helpers
 
  */
-function createToast(Vue, message, options, onClose) {
+function createToast(Vue, message, options = {}, onClose) {
   // 生成一个toast组件，然后生插入到body中
   options.message = message;
   let Constructor = Vue.extend(Toast);
-  let toast = new Constructor({ propsData: options });
-  toast.$mount();
+  let toast = new Constructor({ propsData: options }).$mount();
   toast.$on("close", onClose);
   document.body.appendChild(toast.$el);
 

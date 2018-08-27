@@ -98,14 +98,14 @@ new Vue({
       this.$toast(`啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊${Math.random() * 100}`, {
         enableHtml: false,
         autoClose: false,
-        position: "top"
-        // closeButton: {
-        //     text: "关闭",
-        //     callback: (toast) => {
-        //         console.log( "用户的do something" );
-        //         console.log(toast)   //组件在callback时把实例交给用户
-        //     }
-        // }
+        position: "top",
+        closeButton: {
+          text: "关闭",
+          callback: toast => {
+            console.log("用户的do something");
+            console.log(toast); //组件在callback时把实例交给用户
+          }
+        }
       });
     },
     handleSelected() {},

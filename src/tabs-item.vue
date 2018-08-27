@@ -10,6 +10,8 @@
 
 <script>
 export default {
+  name: "l-tabs-item",
+
   components: {},
 
   props: {
@@ -54,7 +56,7 @@ export default {
 };
 </script>
 <style lang='scss' scoped>
-$blue: blue;
+$blue: #409eff;
 $disabled-text-color: #ccc;
 .l-tabs-item {
   display: flex;
@@ -65,7 +67,7 @@ $disabled-text-color: #ccc;
   cursor: pointer;
   &.l-active {
     color: $blue;
-    font-weight: bold;
+    font-weight: 700;
   }
   &.l-disabled {
     color: $disabled-text-color;

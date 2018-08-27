@@ -9,6 +9,8 @@
 
 <script>
 export default {
+  name: "l-tabs-pane",
+
   components: {},
 
   computed: {},
@@ -29,7 +31,6 @@ export default {
 
   created() {
     this.eventBus.$on("tab-click", name => {
-      console.log("tabs-pene收到");
       this.isActive = name === this.name;
     });
   },

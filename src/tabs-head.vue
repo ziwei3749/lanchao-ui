@@ -1,6 +1,6 @@
 <!-- tabs-header -->
 <template>
-  <div class="l-tabs-head">
+  <div class="l-tabs-head" ref="head">
     <slot></slot>
     <div class="l-line"
          ref="line"></div>
@@ -13,6 +13,8 @@
 
 <script>
 export default {
+  name: "l-tabs-head",
+
   components: {},
 
   computed: {},
@@ -25,19 +27,24 @@ export default {
 
   mounted() {
     this.eventBus.$on("tab-click", (name, vm) => {
-      let { width, left } = vm.$el.getClientRects()[0];
-      // getClientRects  可以拿到矩形的一个位置信息
-      this.$refs.line.style.left = `${left}px`;
-      this.$refs.line.style.width = `${width}px`;
+      this.updateLinePosition(vm);
     });
   },
 
-  methods: {}
+  methods: {
+    updateLinePosition(selectedVm) {
+      // 因为line是相对head定位的，所以要求差值
+      let { width, left } = selectedVm.$el.getBoundingClientRect();
+      let { left: left2 } = this.$refs.head.getBoundingClientRect();
+      this.$refs.line.style.width = `${width}px`;
+      this.$refs.line.style.left = `${left - left2}px`;
+    }
+  }
 };
 </script>
 <style lang='scss' scoped>
 $tab-height: 40px;
-$blue: blue;
+$blue: #409eff;
 
 .l-tabs-head {
   position: relative;
@@ -48,7 +55,7 @@ $blue: blue;
   > .l-line {
     position: absolute;
     bottom: 0;
-    border-bottom: 1px solid $blue;
+    border-bottom: 2px solid $blue;
     transition: all 0.5s;
   }
   > .l-actions-wrapper {

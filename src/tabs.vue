@@ -8,6 +8,8 @@
 <script>
 import Vue from "vue";
 export default {
+  name: "l-tabs",
+
   components: {},
 
   computed: {},
@@ -48,6 +50,7 @@ export default {
   mounted() {
     this.checkChildren();
     // 初始化时，用户传进来的默认值，对应的tab-item需要通知子孙
+
     this.$children.forEach(vm => {
       if (vm.$options.name === "l-tabs-head") {
         vm.$children.forEach(itemVm => {

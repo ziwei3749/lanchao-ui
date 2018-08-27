@@ -7,6 +7,8 @@
 
 <script>
 export default {
+  name: "l-tabs-body",
+
   components: {},
 
   computed: {},
