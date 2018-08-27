@@ -1,7 +1,7 @@
 <!-- button -->
 <template>
   <button class="l-button"
-          :class="`l-icon-${iconPosition}`"
+          :class="iconClasses"
           @click="$emit('click')">
     <l-icon class="l-icon l-loading"
             v-if="loading"
@@ -36,6 +36,10 @@ export default {
     loading: {
       type: Boolean,
       default: false
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -47,7 +51,15 @@ export default {
     "l-icon": Icon
   },
 
-  computed: {},
+  computed: {
+    iconClasses() {
+      let classesArray = [`l-icon-${this.iconPosition}`];
+      if (this.disabled) {
+        classesArray.push(`l-icon-disabled`);
+      }
+      return classesArray;
+    }
+  },
 
   mounted() {},
 
@@ -97,6 +109,13 @@ export default {
     > .l-content {
       order: 1;
     }
+  }
+  &.l-icon-disabled {
+    color: #c0c4cc;
+    cursor: not-allowed;
+    background-image: none;
+    background-color: #fff;
+    border-color: #ebeef5;
   }
   > .l-loading {
     animation: spin 2s infinite linear;

@@ -4,9 +4,7 @@
          :class="toastClasses"
          ref="toast">
         <div class="l-message">
-            <slot v-if="!enableHtml"></slot>
-            <div v-else
-                 v-html="$slots.default"></div>
+            <div>{{message}}</div>
         </div>
 
         <span class="l-line"
@@ -55,9 +53,8 @@ export default {
         };
       }
     },
-    enableHtml: {
-      type: Boolean,
-      default: false
+    message: {
+      type: String
     },
     position: {
       type: String,
@@ -75,7 +72,6 @@ export default {
   created() {},
 
   mounted() {
-    console.log(this.$slots.default);
     this.updateStyles();
     this.execAutoClose();
   },

@@ -263,9 +263,7 @@ export default {
       //     //     }
       //     // }
       //   });
-      console.log(this.$toast);
       this.$toast(`啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊`, {
-        enableHtml: false,
         autoClose: false,
         position: "top"
       });

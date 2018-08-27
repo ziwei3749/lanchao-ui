@@ -32,15 +32,10 @@ export default {
  */
 function createToast(Vue, message, options, onClose) {
   // 生成一个toast组件，然后生插入到body中
-
+  options.message = message;
   let Constructor = Vue.extend(Toast);
   let toast = new Constructor({ propsData: options });
   toast.$mount();
-  toast.$slots.default = message; // 设置匿名插槽的内容，必须放到$mount前面
-  console.log("toast1");
-  console.log(toast);
-
-  console.log("toast2");
   toast.$on("close", onClose);
   document.body.appendChild(toast.$el);
 

@@ -31,6 +31,16 @@ describe("Button", () => {
     });
     const useWrapper = wrapper.find("use");
     expect(useWrapper.attributes().href).to.equal("#i-loading");
+  } );
+  
+
+  it("可以设置disabled.", () => {
+    const wrapper = mount(Button, {
+      propsData: {
+        disabled: true
+      }
+    } );
+    expect( wrapper.classes() ).contains( 'l-icon-disabled' );
   });
 
   it("icon 默认的 order 是 1", () => {

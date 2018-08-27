@@ -59,20 +59,20 @@ describe("Toast", () => {
             }, 200);
         });
 
-        it("设置 enableHtml", () => {
+        it("设置 message", () => {
           const Constructor = Vue.extend(Toast);
           const vm = new Constructor({
               propsData: {
-                  enableHtml: true
+                  message: '测试Message'
               }
           });
-          vm.$slots.default = "<strong id='test'>test enableHtml</strong>";
+    
           vm.$mount();
 
-          let strongDom = vm.$el.querySelector("#test");
+          let messageDom = vm.$el.querySelector(".l-message");
 
           // expect(strongDom).to.be.ok
-          expect(strongDom).to.exist;
+          expect(messageDom.innerText).to.equal('测试Message');
         });
 
         it("设置position", () => {
