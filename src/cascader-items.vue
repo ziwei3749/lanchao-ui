@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import Icon from "./icon";
 export default {
   name: "l-cascader-items",
 
@@ -68,19 +69,21 @@ export default {
     }
   },
 
-  components: {},
+  components: {
+    "l-icon": Icon
+  },
 
   computed: {
     rightItems() {
-      /**
-       * 根据items(也就是source) / selected / level计算属性 rightItems的显示
-       */
-      if (this.selected[this.level]) {
-        let selected = this.items.filter(
-          item => item.name === this.selected[this.level].name
-        )[0];
-        if (selected && selected.children && selected.children.length > 0) {
-          return selected.children;
+      // 根据items(也就是source) / selected / level计算属性 rightItems的显示
+      let selectedItem = this.selected[this.level];
+      if (selectedItem) {
+        if (
+          selectedItem &&
+          selectedItem.children &&
+          selectedItem.children.length > 0
+        ) {
+          return selectedItem.children;
         }
       }
     }
@@ -98,13 +101,13 @@ export default {
 
   methods: {
     clickSelected(item) {
-      console.log("开始加载...");
       // 如果用户点击的item，是之前已经点击过的item，那么就return掉，不再发起ajax请求
       if (this.selected.map(item => item.name).includes(item.name)) return;
 
-      // 改变selected，并把selected的备份 emit。
-      const copy = JSON.parse(JSON.stringify(this.selected));
-      copy[this.level] = item;
+      const selectedCopy = JSON.parse(JSON.stringify(this.selected));
+      selectedCopy[this.level] = item;
+      selectedCopy.splice(this.level + 1);
+      this.$emit("update:selected", selectedCopy);
       /**
        * 精髓： copy.splice(this.level + 1);
        * 这里根据当前的level，截取selected数组
@@ -113,8 +116,6 @@ export default {
        *
        * 通过改变数据selected，直接控制了ui的变化
        */
-      copy.splice(this.level + 1);
-      this.$emit("update:selected", copy);
     },
 
     onUpdateSelected(currentSelected) {

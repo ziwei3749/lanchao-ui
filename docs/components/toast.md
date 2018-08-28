@@ -1,5 +1,5 @@
 ---
-title: Toast
+title: Toast - 提示框
 sidebarDepth: 2
 ---
 
@@ -22,7 +22,7 @@ Vue.use(plugin);
 </script>
 ```
 
-## 设置关闭按钮文本和事件
+## 设置关闭按钮
 
 <toast-demo2></toast-demo2>
 

@@ -5,8 +5,8 @@ module.exports = {
     themeConfig: {
         nav: [
             { text: "主页", link: "/" },
-            { text: "文档", link: "/guide/" },
-            { text: "交流", link: "https://google.com" }
+            { text: "实现", link: "/guide/cascader" },
+            { text: "交流", link: "https://github.com/ziwei3749/lanchao-ui/issues" }
         ],
         sidebar: [
             {
@@ -24,7 +24,15 @@ module.exports = {
                     "/components/layout",
                     "/components/popover",
                     "/components/tabs",
-                    "/components/toast"
+                    "/components/toast",
+                    "/components/cascader",
+                ]
+            },
+            {
+                title: "实现",
+                collapsable: false,
+                children: [
+                    "/guide/cascader",
                 ]
             }
         ]
