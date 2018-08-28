@@ -4,8 +4,8 @@
   var script = (function() {
     var scripts = document.getElementsByTagName("script");
     return scripts[scripts.length - 1];
-  } )();
-  if(!script) return
+  })();
+  if (!script) return;
   var shouldInjectCss = script.getAttribute("data-injectcss");
   var ready = function(fn) {
     if (document.addEventListener) {

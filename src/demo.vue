@@ -2,165 +2,6 @@
 <template>
 
     <div id="app">
-        <div>
-            <l-tabs selected="finance"
-                    @tab-click="handleSelected">
-                <l-tabs-head>
-                    <l-tabs-item name="woman">
-                        <l-icon name="settings"></l-icon>美女
-                    </l-tabs-item>
-                    <l-tabs-item name="finance">财经</l-tabs-item>
-                    <l-tabs-item name="sports">体育</l-tabs-item>
-                    <template slot="actions">
-                        <l-button>设置</l-button>
-                    </template>
-                </l-tabs-head>
-                <l-tabs-body>
-                    <l-tabs-pane name="woman">美女相关资讯</l-tabs-pane>
-                    <l-tabs-pane name="finance">财经相关资讯</l-tabs-pane>
-                    <l-tabs-pane name="sports">体育相关资讯</l-tabs-pane>
-                </l-tabs-body>
-
-            </l-tabs>
-        </div>
-        <div>
-            <h2>Toast组件</h2>
-            <l-button @click="showToast">showToast</l-button>
-        </div>
-        <div>
-            <h2>网格组件 、 栅格系统</h2>
-            <l-row gutter="20">
-                <l-col span="12">
-                    <div class="demo"></div>
-                </l-col>
-                <l-col span="12">
-                    <div class="demo"></div>
-                </l-col>
-            </l-row>
-            <l-row gutter="20">
-                <l-col span="24"
-                       :ipad="{span:12}"
-                       :narrow-pc="{span:8}">
-                    <div class="demo"></div>
-                </l-col>
-                <l-col span="24"
-                       :ipad="{span:11,offset:1}"
-                       :narrow-pc="{span:8}">
-                    <div class="demo"></div>
-                </l-col>
-                <l-col span="24"
-                       :ipad="{span:12}"
-                       :narrow-pc="{span:8}">
-                    <div class="demo"></div>
-                </l-col>
-                <l-col span="24"
-                       :ipad="{span:12}"
-                       :narrow-pc="{span:8}">
-                    <div class="demo"></div>
-                </l-col>
-                <l-col span="24"
-                       :ipad="{span:12}"
-                       :narrow-pc="{span:8}">
-                    <div class="demo"></div>
-                </l-col>
-                <l-col span="24"
-                       :ipad="{span:12}"
-                       :narrow-pc="{span:8}">
-                    <div class="demo"></div>
-                </l-col>
-            </l-row>
-        </div>
-        <div>
-            <h2>Button组件</h2>
-            <l-button>
-                我爱
-            </l-button>
-            <l-button icon="settings">
-                我爱
-            </l-button>
-            <l-button icon="settings"
-                      icon-position="left"
-                      :loading="true">
-                我爱JavaScript
-            </l-button>
-            <l-button icon="settings"
-                      icon-position="right">
-                我爱JavaScript
-            </l-button>
-            <l-button-group>
-                <l-button icon="left">上一页</l-button>
-                <l-button>更多</l-button>
-                <l-button icon="right"
-                          icon-position="right">下一页</l-button>
-            </l-button-group>
-        </div>
-        <div style="margin-bottom: 20px; margin-left: 30px">
-            <h2 style="margin-bottom: 20px">Popover组件</h2>
-            <div style="overflow:hidden; border: 1px solid green; padding: 15px">
-                <l-popover>
-                    <template slot="content">
-                        asdsadasdasdasdadsadadaddsdasda
-                    </template>
-                    <l-button>button</l-button>
-                </l-popover>
-
-                <l-popover position='bottom'>
-                    <template slot="content">
-                        asdsadasdasdasdadsadadaddsdasda
-                    </template>
-                    <l-button>button</l-button>
-                </l-popover>
-
-                <l-popover position='left'>
-                    <template slot="content">
-                        asdsadasdasdasdadsadadaddsdasda asdsadasdasdasdadsadadaddsdasda asdsadasdasdasdadsadadaddsdasda asdsadasdasdasdadsadadaddsdasda asdsadasdasdasdadsadadaddsdasda
-                    </template>
-                    <l-button>button</l-button>
-                </l-popover>
-
-                <l-popover position='right'>
-                    <template slot="content">
-                        asdsadasdasdasdadsadadaddsdasda
-                    </template>
-                    <l-button>button</l-button>
-                </l-popover>
-            </div>
-
-            <div style="overflow:hidden; border: 1px solid green; padding: 15px">
-                <l-popover position='top'
-                           trigger="hover">
-                    <template slot="content">
-                        asdsadasdasdasdadsadadaddsdasda
-                    </template>
-                    <l-button>button</l-button>
-                </l-popover>
-
-                <l-popover position='bottom'
-                           trigger="hover">
-                    <template slot="content">
-                        asdsadasdasdasdadsadadaddsdasda
-                    </template>
-                    <l-button>button</l-button>
-                </l-popover>
-
-                <l-popover position='left'
-                           trigger="hover">
-                    <template slot="content">
-                        asdsadasdasdasdadsadadaddsdasda asdsadasdasdasdadsadadaddsdasda asdsadasdasdasdadsadadaddsdasda asdsadasdasdasdadsadadaddsdasda asdsadasdasdasdadsadadaddsdasda
-                    </template>
-                    <l-button>button</l-button>
-                </l-popover>
-
-                <l-popover position='right'
-                           trigger="hover">
-                    <template slot="content">
-                        asdsadasdasdasdadsadadaddsdasda
-                    </template>
-                    <l-button>button</l-button>
-                </l-popover>
-            </div>
-
-        </div>
         <div style="margin-left:100px">
             <h2>Cascader级联选择器</h2>
             <p>0:{{selected && selected[0] && selected[0].name || 'null'}}</p>
@@ -169,13 +10,30 @@
             <div>
                 <l-cascader :source.sync="source"
                             :selected.sync="selected"
+                            @update:selected="fn"
                             popover-height="200px"
                             :load-data="loadData">
                 </l-cascader>
-
             </div>
 
         </div>
+
+
+        <!-- <div style="margin-left:100px">
+            <h2>Cascader级联选择器2</h2>
+            <p>0:{{selected && selected[0] && selected[0].name || 'null'}}</p>
+            <p>1:{{selected && selected[1] && selected[1].name || 'null'}}</p>
+            <p>2:{{selected && selected[2] && selected[2].name || 'null'}}</p>
+            <div>
+                <l-cascader :source.sync="source"
+                            :selected.sync="selected"
+                            @update:selected="fn"
+                            popover-height="200px"
+                            :load-data="loadData">
+                </l-cascader>
+            </div>
+
+        </div> -->
     </div>
 </template>
 
@@ -212,39 +70,39 @@ export default {
     return {
       selected: [],
       source: []
-      // source: [
-      //   {
-      //     name: "浙江",
-      //     children: [
-      //       {
-      //         name: "杭州",
-      //         children: [{ name: "上城" }, { name: "下城" }, { name: "江干" }]
-      //       },
-      //       {
-      //         name: "嘉兴",
-      //         children: [{ name: "南湖" }, { name: "秀洲" }, { name: "嘉善" }]
-      //       }
-      //     ]
-      //   },
-      //   {
-      //     name: "福建",
-      //     children: [
-      //       {
-      //         name: "福州",
-      //         children: [{ name: "鼓楼" }, { name: "台江" }, { name: "仓山" }]
-      //       }
-      //     ]
-      //   },
-      //   {
-      //     name: "安徽",
-      //     children: [
-      //       {
-      //         name: "合肥",
-      //         children: [{ name: "瑶海" }, { name: "庐阳" }, { name: "仓山" }]
-      //       }
-      //     ]
-      //   }
-      // ]
+      //   source: [
+      //     {
+      //       name: "浙江",
+      //       children: [
+      //         {
+      //           name: "杭州",
+      //           children: [{ name: "上城" }, { name: "下城" }, { name: "江干" }]
+      //         },
+      //         {
+      //           name: "嘉兴",
+      //           children: [{ name: "南湖" }, { name: "秀洲" }, { name: "嘉善" }]
+      //         }
+      //       ]
+      //     },
+      //     {
+      //       name: "福建",
+      //       children: [
+      //         {
+      //           name: "福州",
+      //           children: [{ name: "鼓楼" }, { name: "台江" }, { name: "仓山" }]
+      //         }
+      //       ]
+      //     },
+      //     {
+      //       name: "安徽",
+      //       children: [
+      //         {
+      //           name: "合肥",
+      //           children: [{ name: "瑶海" }, { name: "庐阳" }, { name: "仓山" }]
+      //         }
+      //       ]
+      //     }
+      //   ]
     };
   },
 
@@ -294,6 +152,10 @@ export default {
       });
     },
     handleSelected(e) {
+      console.log(e);
+    },
+    fn(e) {
+      console.log("fn");
       console.log(e);
     }
   }

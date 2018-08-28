@@ -99,6 +99,8 @@ export default {
   methods: {
     clickSelected(item) {
       console.log("开始加载...");
+      // 如果用户点击的item，是之前已经点击过的item，那么就return掉，不再发起ajax请求
+      if (this.selected.map(item => item.name).includes(item.name)) return;
 
       // 改变selected，并把selected的备份 emit。
       const copy = JSON.parse(JSON.stringify(this.selected));

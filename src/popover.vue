@@ -60,10 +60,11 @@ export default {
       this.$refs.popover.addEventListener("mouseleave", this.close);
     }
   },
-  destroyed() {
+  beforeDestroy() {
     /**
      *  因为这个click是js原生的，而不是vue的，所以销毁组件时，自己要主要删除事件
      */
+    console.log(this.$refs.popover);
     if (this.trigger === "click") {
       this.$refs.popover.removeEventListener("click", this.onClick);
     } else {

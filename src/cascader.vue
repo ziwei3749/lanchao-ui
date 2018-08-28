@@ -5,7 +5,6 @@
        ref="cascader">
     <div class="l-trigger"
          @click="togglePopover">
-      <!-- <slot></slot> -->
       {{result || '&nbsp;'}}
       <!-- 一开始如果没有，否则会导致css有一些问题,所以用&nbsp;占位 -->
     </div>
@@ -20,7 +19,7 @@
                         :loading-item="loadingItem"
                         @update:selected="onUpdateSelected">
       </l-cascader-items>
-      
+
     </div>
   </div>
 </template>
@@ -113,46 +112,29 @@ export default {
     },
 
     onUpdateSelected(currentSelected) {
+      // 这个方法的核心，就是找到一个用户点击的item，给它的children挂上data
+      // 因为组件不清楚有几层业务数据，所以只能递归寻找item
       console.log(currentSelected);
       // 有一个缺陷，重新点击北京，反复触发ajax
       let lastItem = currentSelected[currentSelected.length - 1];
 
-      let simplest = (children, id) => {
-        return children.filter(item => item.id === id)[0];
-      };
-
-      let complex = (children, id) => {
-        let noChildren = [];
-        let hasChildren = [];
-        children.forEach(item => {
-          if (item.children) {
-            hasChildren.push(item);
-          } else {
-            noChildren.push(item);
-          }
-        });
-
-        let found = simplest(noChildren, id);
-        if (found) {
-          return found;
-        } else {
-          // 有孩子的，想当没孩子一样找一遍，如果他们的孩子还有孩子，就递归
-          found = simplest(hasChildren, id);
-          if (found) {
-            return found;
-          } else {
-            for (let i = 0; i < hasChildren.length; i++) {
-              found = complex(hasChildren[i].children, id);
-              if (found) {
-                return found;
-              }
+      let complex = (source, id) => {
+        let targetItem = source.filter(item => item.id === id)[0];
+        if (targetItem) return targetItem;
+        else {
+          for (let i = 0; i < source.length; i++) {
+            let hasChildren =
+              source[i].children && source[i].children.length > 0;
+            if (hasChildren) {
+              targetItem = complex(source[i].children, id);
+              if (targetItem) return targetItem;
             }
-            return undefined;
           }
+          return undefined;
         }
       };
 
-      let updateSource = result => {
+      let updateSource = data => {
         console.log("加载结束，拿到数据...");
         this.loadingItem = null;
         /**
@@ -168,10 +150,11 @@ export default {
          */
 
         let copy = JSON.parse(JSON.stringify(this.source));
-        let toUpdate = complex(copy, lastItem.id);
-        if (result.length > 0) {
+        // 根据source和当前id，找到哪一项需要加children，渲染children
+        let toUpdateItem = complex(copy, lastItem.id);
+        if (data.length > 0) {
           // 并不是每次点击都要挂一个children的，如果result的结果是空数组，就不挂children属性了
-          toUpdate.children = result;
+          toUpdateItem.children = data;
         }
         this.$emit("update:source", copy);
       };
