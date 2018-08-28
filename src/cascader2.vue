@@ -1,23 +1,36 @@
 <!-- cascader2 -->
 <template>
-  <div class="cascader2">
-      <div class="trigger">
-
-      </div>
-      <div class="popover">
-          <cascader-items2></cascader-items2>
-      </div>
-  </div>
+    <div class="cascader2">
+        <div class="trigger">
+            {{selectedResult}}
+        </div>
+        <div class="popover">
+            <cascaderItemTest :items="source"
+                              :selected="selected"
+                              :level="0"
+                              @update:selected="onUpdateSelected">
+            </cascaderItemTest>
+        </div>
+    </div>
 </template>
 
 <script>
-import cascaderItem from "cascader-items2.vue";
 export default {
-  components: {
-    "cascader-items2": cascaderItem
+  computed: {
+    selectedResult() {
+      return this.selected.map(item => item.name).join("/");
+    }
   },
 
-  computed: {},
+  props: {
+    source: {
+      type: Array
+    },
+
+    selected: {
+      type: Array
+    }
+  },
 
   data() {
     return {};
@@ -27,7 +40,14 @@ export default {
 
   mounted() {},
 
-  methods: {}
+  methods: {
+    onUpdateSelected(selectedCopy) {
+      console.log(selectedCopy);
+      // 改变source
+
+      this.$emit("update:selected", selectedCopy);
+    }
+  }
 };
 </script>
 <style lang='scss'>

@@ -103,7 +103,6 @@ export default {
        * 1.原生event记得自己主动取消事件绑定
        * 2.不能用阻止冒泡。就是点击docuemnt判断点击的区域，来决定做什么逻辑
        */
-
       if (this.popoverVisible) {
         this.close();
       } else {
@@ -112,51 +111,12 @@ export default {
     },
 
     onUpdateSelected(currentSelected) {
-      // 这个方法的核心，就是找到一个用户点击的item，给它的children挂上data
-      // 因为组件不清楚有几层业务数据，所以只能递归寻找item
-      console.log(currentSelected);
-      // 有一个缺陷，重新点击北京，反复触发ajax
       let lastItem = currentSelected[currentSelected.length - 1];
-
-      let complex = (source, id) => {
-        let targetItem = source.filter(item => item.id === id)[0];
-        if (targetItem) return targetItem;
-        else {
-          for (let i = 0; i < source.length; i++) {
-            let hasChildren =
-              source[i].children && source[i].children.length > 0;
-            if (hasChildren) {
-              targetItem = complex(source[i].children, id);
-              if (targetItem) return targetItem;
-            }
-          }
-          return undefined;
-        }
-      };
 
       let updateSource = data => {
         console.log("加载结束，拿到数据...");
         this.loadingItem = null;
-        /**
-         * 注意1： 需要深拷贝
-         * 注意2： 需要递归搜索，深度优先或者广度优先。
-         */
-        // let toUpdate = complex(this.source, lastItem.id);
-        // console.log(toUpdate);
-        // this.$set(toUpdate, "children", result);
-
-        /**
-         * 这里拷贝了之后，出现了bug，数据不是响应式的，没法即时更新！！！！！！！！！！！！！！！！！！！！！！！！
-         */
-
-        let copy = JSON.parse(JSON.stringify(this.source));
-        // 根据source和当前id，找到哪一项需要加children，渲染children
-        let toUpdateItem = complex(copy, lastItem.id);
-        if (data.length > 0) {
-          // 并不是每次点击都要挂一个children的，如果result的结果是空数组，就不挂children属性了
-          toUpdateItem.children = data;
-        }
-        this.$emit("update:source", copy);
+        this.$set(lastItem, "children", data);
       };
       if (!lastItem.isLeaf && this.loadData) {
         // 不是叶子，才需要加载数据

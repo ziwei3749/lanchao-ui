@@ -47,6 +47,14 @@ Vue.component("l-tabs-pane", TabsPane);
 Vue.component("l-tabs", Tabs);
 Vue.component("l-toast", Toast);
 
+/**
+ * test
+ */
+import cascaderTest from "./cascader2.vue";
+import cascaderItemTest from "./cascader-items2.vue";
+Vue.component("cascaderTest", cascaderTest);
+Vue.component("cascaderItemTest", cascaderItemTest);
+
 Vue.use(plugin);
 
 Vue.config.productionTip = false;
