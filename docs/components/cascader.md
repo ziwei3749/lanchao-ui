@@ -9,7 +9,10 @@ sidebarDepth: 2
 
 ## 基础用法
 
+<ClientOnly>
 <cascader-demo1 />
+</ClientOnly>
+
 
 ```vue
 <l-cascader :source.sync="source"

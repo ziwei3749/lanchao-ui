@@ -1,23 +1,39 @@
 <!-- demo -->
 <template>
 
-    <div id="app">
-        <div style="margin-left:100px">
-            <h2>Cascader级联选择器</h2>
-            <p>0:{{selected && selected[0] && selected[0].name || 'null'}}</p>
-            <p>1:{{selected && selected[1] && selected[1].name || 'null'}}</p>
-            <p>2:{{selected && selected[2] && selected[2].name || 'null'}}</p>
-            <div>
-                <l-cascader :source.sync="source"
-                            :selected.sync="selected"
-                            @update:selected="fn"
-                            popover-height="200px"
-                            :load-data="loadData">
-                </l-cascader>
-            </div>
+  <div id="app">
+    <div style="margin-left:100px">
+      <h2>Cascader级联选择器</h2>
+      <p>0:{{selected && selected[0] && selected[0].name || 'null'}}</p>
+      <p>1:{{selected && selected[1] && selected[1].name || 'null'}}</p>
+      <p>2:{{selected && selected[2] && selected[2].name || 'null'}}</p>
+      <div>
+        <l-cascader :source.sync="source"
+                    :selected.sync="selected"
+                    @update:selected="fn"
+                    @update:source="fn2"
+                    popover-height="200px"
+                    :load-data="loadData">
+        </l-cascader>
 
-        </div>
+      </div>
+      <p>0:{{selected1 && selected1[0] && selected1[0].name || 'null'}}</p>
+      <p>1:{{selected1 && selected1[1] && selected1[1].name || 'null'}}</p>
+      <p>2:{{selected1 && selected1[2] && selected1[2].name || 'null'}}</p>
+      <l-cascader :source.sync="source1"
+                  v-model="selected1"
+                  @update:selected="fn"
+                  @update:source="fn2"
+                  popover-height="200px">
+      </l-cascader>
+
     </div>
+     <div style="margin-left:100px">
+      <h2>轮播图选择器</h2>
+
+
+    </div>
+  </div>
 </template>
 
 <script>
@@ -25,7 +41,6 @@ import lCascader from "./cascader";
 import db from "./db.js";
 
 function ajax(parent_id) {
-  console.log("ajax");
   return new Promise(resolve => {
     setTimeout(() => {
       let result = db.filter(v => v.parent_id === parent_id);
@@ -51,41 +66,42 @@ export default {
 
   data() {
     return {
+      selected1: [],
       selected: [],
-      source: []
-      //   source: [
-      //     {
-      //       name: "浙江",
-      //       children: [
-      //         {
-      //           name: "杭州",
-      //           children: [{ name: "上城" }, { name: "下城" }, { name: "江干" }]
-      //         },
-      //         {
-      //           name: "嘉兴",
-      //           children: [{ name: "南湖" }, { name: "秀洲" }, { name: "嘉善" }]
-      //         }
-      //       ]
-      //     },
-      //     {
-      //       name: "福建",
-      //       children: [
-      //         {
-      //           name: "福州",
-      //           children: [{ name: "鼓楼" }, { name: "台江" }, { name: "仓山" }]
-      //         }
-      //       ]
-      //     },
-      //     {
-      //       name: "安徽",
-      //       children: [
-      //         {
-      //           name: "合肥",
-      //           children: [{ name: "瑶海" }, { name: "庐阳" }, { name: "仓山" }]
-      //         }
-      //       ]
-      //     }
-      //   ]
+      source: [],
+      source1: [
+        {
+          name: "浙江",
+          children: [
+            {
+              name: "杭州",
+              children: [{ name: "上城" }, { name: "下城" }, { name: "江干" }]
+            },
+            {
+              name: "嘉兴",
+              children: [{ name: "南湖" }, { name: "秀洲" }, { name: "嘉善" }]
+            }
+          ]
+        },
+        {
+          name: "福建",
+          children: [
+            {
+              name: "福州",
+              children: [{ name: "鼓楼" }, { name: "台江" }, { name: "仓山" }]
+            }
+          ]
+        },
+        {
+          name: "安徽",
+          children: [
+            {
+              name: "合肥",
+              children: [{ name: "瑶海" }, { name: "庐阳" }, { name: "仓山" }]
+            }
+          ]
+        }
+      ]
     };
   },
 
@@ -134,12 +150,16 @@ export default {
         position: "top"
       });
     },
-    handleSelected(e) {
-      console.log(e);
+    handleSelected() {
+      // console.log(e);
     },
-    fn(e) {
-      console.log("fn");
-      console.log(e);
+    fn() {
+      // console.log("fn");
+      // console.log(e);
+    },
+    fn2() {
+      // console.log("fn2");
+      // console.log(e);
     }
   }
 };

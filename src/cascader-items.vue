@@ -6,7 +6,7 @@
            :key="item.name"
            class="l-label"
            :class="{'active' : selected.some(v => v.name === item.name)}"
-           @click="clickSelected(item)">
+           @click="updateSelected(item)">
         <span class="l-name">{{item.name}}</span>
         <!-- 动态加载的话，根据后台数据是否isLeaf字段判断是否显示箭头  / 非动态加载的，根据childre能判断-->
         <div class="l-icons">
@@ -100,13 +100,15 @@ export default {
   mounted() {},
 
   methods: {
-    clickSelected(item) {
+    updateSelected(item) {
       // 如果用户点击的item，是之前已经点击过的item，那么就return掉，不再发起ajax请求
       if (this.selected.map(item => item.name).includes(item.name)) return;
 
       const selectedCopy = JSON.parse(JSON.stringify(this.selected));
+      // 因为是先深拷贝，后赋值，所以这个item实际上并没有被深拷贝，反倒方便了之后我们寻找lastItem  是一个hack
       selectedCopy[this.level] = item;
       selectedCopy.splice(this.level + 1);
+
       this.$emit("update:selected", selectedCopy);
       /**
        * 精髓： copy.splice(this.level + 1);
@@ -118,8 +120,8 @@ export default {
        */
     },
 
-    onUpdateSelected(currentSelected) {
-      this.$emit("update:selected", currentSelected);
+    onUpdateSelected(selectedCopy) {
+      this.$emit("update:selected", selectedCopy);
     },
     rightArrowVisible(item) {
       // 是否是动态加载模式？ 是的话就根基isLeaf判断 ，不是的话就看children

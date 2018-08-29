@@ -11,7 +11,10 @@
 
 ## 组件预览
 
+<ClientOnly>
 <cascader-demo1></cascader-demo1>
+</ClientOnly>
+
 
 首先预览一下cascader级联组件的样式
 
