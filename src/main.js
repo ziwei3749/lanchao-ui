@@ -22,6 +22,8 @@ import TabsHead from "./tabs-head.vue";
 import TabsItem from "./tabs-item.vue";
 import TabsPane from "./tabs-pane.vue";
 import Toast from "./toast.vue";
+import Slides from "./slides.vue";
+import SlidesItem from "./slides-item.vue";
 
 import plugin from "./plugin.js";
 
@@ -46,6 +48,8 @@ Vue.component("l-tabs-item", TabsItem);
 Vue.component("l-tabs-pane", TabsPane);
 Vue.component("l-tabs", Tabs);
 Vue.component("l-toast", Toast);
+Vue.component("l-slides", Slides);
+Vue.component("l-slides-item", SlidesItem);
 
 Vue.use(plugin);
 
