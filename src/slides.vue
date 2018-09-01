@@ -143,6 +143,7 @@ export default {
     },
 
     onMouseEnter() {
+      console.log("onMouseEnter");
       this.pause();
     },
 
@@ -161,21 +162,18 @@ export default {
       this.slideItems.forEach(vm => {
         let reverse =
           this.selectedIndex > this.lastSelectedIndex ? false : true;
-        if (this.timeId) {
-          if (
-            this.lastSelectedIndex === this.slideItems.length - 1 &&
-            this.selectedIndex === 0
-          ) {
-            reverse = false;
-          }
-          if (
-            this.selectedIndex === this.slideItems.length - 1 &&
-            this.lastSelectedIndex === 0
-          ) {
-            reverse = true;
-          }
+        if (
+          this.lastSelectedIndex === this.slideItems.length - 1 &&
+          this.selectedIndex === 0
+        ) {
+          reverse = false;
         }
-
+        if (
+          this.selectedIndex === this.slideItems.length - 1 &&
+          this.lastSelectedIndex === 0
+        ) {
+          reverse = true;
+        }
         vm.reverse = reverse;
         this.$nextTick(() => {
           // 确保reverse生效后，再去修改selected
