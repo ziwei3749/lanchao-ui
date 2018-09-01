@@ -4,13 +4,13 @@
     <div>
       <!-- <h2>轮播图slide</h2> -->
       <l-slides class='wrapper' :selected.sync="selected">
-        <l-slides-item :name="1">
+        <l-slides-item name="fist">
           <div class="box">1</div>
         </l-slides-item>
-        <l-slides-item :name="2">
+        <l-slides-item name="second">
           <div class="box">2</div>
         </l-slides-item>
-        <l-slides-item :name="3">
+        <l-slides-item name="third">
           <div class="box">3</div>
         </l-slides-item>
       </l-slides>
@@ -26,7 +26,7 @@ export default {
 
   data() {
     return {
-      selected: 2
+      selected: "third"
     };
   },
 

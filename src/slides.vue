@@ -7,11 +7,12 @@
         <slot></slot>
       </div>
     </div>
-    <div>
-      <!-- {{childrenLength}} -->
-      <span v-for="index in childrenLength"
-            :key="index">
-        {{index}}
+    <div class="l-dots">
+      <span v-for="n in childrenLength"
+            :key="n"
+            :class="{active: selectedIndex === n-1}"
+            @click="clickDots(n-1)">
+        {{n-1}}
       </span>
     </div>
   </div>
@@ -23,7 +24,7 @@ export default {
 
   props: {
     selected: {
-      type: Number
+      type: String | Number
     },
     autoPlay: {
       type: Boolean,
@@ -33,11 +34,19 @@ export default {
 
   components: {},
 
-  computed: {},
+  computed: {
+    selectedIndex() {
+      return this.names.indexOf(this.selected) || 0;
+    },
+    names() {
+      return this.$children.map(vm => vm.name);
+    }
+  },
 
   data() {
     return {
-      childrenLength: 0
+      childrenLength: 0,
+      lastSelectedIndex: undefined
     };
   },
 
@@ -50,28 +59,34 @@ export default {
   },
 
   updated() {
+    console.log(this.lastSelectedIndex);
+    console.log(this.selectedIndex);
     this.updateChildren();
   },
 
   methods: {
+    clickDots(index) {
+      // 更新之前，保存旧的值index
+      this.lastSelectedIndex = this.selectedIndex;
+      this.$emit("update:selected", this.names[index]);
+    },
+
     playAutomatically() {
-      const names = this.$children.map(vm => vm.name);
-      let index = names.indexOf(this.getSelected());
+      let index = this.names.indexOf(this.getSelected());
 
       let run = () => {
         let newIndex = index - 1;
         if (newIndex === -1) {
-          console.log("ha");
-          newIndex = names.length - 1;
+          newIndex = this.names.length - 1;
         }
-        if (newIndex === names.length) {
+        if (newIndex === this.names.length) {
           newIndex = 0;
         }
-        this.$emit("update:selected", names[newIndex]);
+        this.clickDots(newIndex);
         setTimeout(run, 3000);
       };
 
-      setTimeout(run, 3000);
+      // setTimeout(run, 3000);
     },
 
     getSelected() {
@@ -82,15 +97,11 @@ export default {
     updateChildren() {
       let selected = this.getSelected();
       this.$children.forEach(vm => {
-        vm.selected = selected;
-        const names = this.$children.map(vm => vm.name);
-        let newIndex = names.indexOf(selected);
-        let oldIndex = names.indexOf(vm.name);
-        if (newIndex > oldIndex) {
-          vm.reverse = false;
-        } else {
-          vm.reverse = true;
-        }
+        vm.reverse = this.selectedIndex > this.lastSelectedIndex ? false : true;
+        this.$nextTick(() => {
+          // 确保reverse生效后，再去修改selected
+          vm.selected = selected;
+        });
       });
     }
   }
@@ -104,6 +115,13 @@ export default {
     overflow: hidden;
     .l-slides-wrapper {
       position: relative;
+    }
+  }
+  .l-dots {
+    > span {
+      &.active {
+        color: red;
+      }
     }
   }
 }
