@@ -13,12 +13,14 @@
       </div>
     </div>
     <div class="l-dots">
+      <span @click="select(selectedIndex -1)"><l-icon name="left"></l-icon></span>
       <span v-for="n in childrenLength"
             :key="n"
             :class="{active: selectedIndex === n-1}"
             @click="select(n-1)">
         {{n}}
       </span>
+      <span @click="select(selectedIndex + 1)"><l-icon name="right"></l-icon></span>
     </div>
   </div>
 </template>
@@ -46,7 +48,11 @@ export default {
       return index === -1 ? 0 : index;
     },
     names() {
-      return this.$children.map(vm => vm.name);
+      // names是所有name为l-slide-item的names集合
+      return this.slideItems.map(vm => vm.name);
+    },
+    slideItems() {
+      return this.$children.filter(vm => vm.$options.name === "l-slides-item");
     }
   },
 
@@ -65,7 +71,7 @@ export default {
   mounted() {
     this.updateChildren();
     this.playAutomatically();
-    this.childrenLength = this.$children.length;
+    this.childrenLength = this.slideItems.length;
   },
 
   updated() {
@@ -151,18 +157,19 @@ export default {
 
     updateChildren() {
       let selected = this.getSelected();
-      this.$children.forEach(vm => {
+
+      this.slideItems.forEach(vm => {
         let reverse =
           this.selectedIndex > this.lastSelectedIndex ? false : true;
         if (this.timeId) {
           if (
-            this.lastSelectedIndex === this.$children.length - 1 &&
+            this.lastSelectedIndex === this.slideItems.length - 1 &&
             this.selectedIndex === 0
           ) {
             reverse = false;
           }
           if (
-            this.selectedIndex === this.$children.length - 1 &&
+            this.selectedIndex === this.slideItems.length - 1 &&
             this.lastSelectedIndex === 0
           ) {
             reverse = true;
