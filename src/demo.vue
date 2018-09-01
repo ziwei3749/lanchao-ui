@@ -26,7 +26,7 @@ export default {
 
   data() {
     return {
-      selected: "third"
+      selected: undefined
     };
   },
 

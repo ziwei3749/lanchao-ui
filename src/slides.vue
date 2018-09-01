@@ -2,7 +2,10 @@
 <template>
   <div class="l-slides"
        @mouseenter="onMouseEnter"
-       @mouseleave="onMouseLeave">
+       @mouseleave="onMouseLeave"
+       @touchstart="onTouchStart"
+       @touchmove="onTouchMove"
+       @touchend="onTouchEnd">
     <div class="l-slides-window"
          ref="window">
       <div class="l-slides-wrapper">
@@ -13,8 +16,8 @@
       <span v-for="n in childrenLength"
             :key="n"
             :class="{active: selectedIndex === n-1}"
-            @click="clickDots(n-1)">
-        {{n-1}}
+            @click="select(n-1)">
+        {{n}}
       </span>
     </div>
   </div>
@@ -38,7 +41,9 @@ export default {
 
   computed: {
     selectedIndex() {
-      return this.names.indexOf(this.selected) || 0;
+      let index = this.names.indexOf(this.selected);
+
+      return index === -1 ? 0 : index;
     },
     names() {
       return this.$children.map(vm => vm.name);
@@ -49,7 +54,9 @@ export default {
     return {
       childrenLength: 0,
       lastSelectedIndex: undefined,
-      timeId: undefined
+      timeId: undefined,
+      startTouch: undefined,
+      endTouch: undefined
     };
   },
 
@@ -62,16 +69,52 @@ export default {
   },
 
   updated() {
-    console.log(this.lastSelectedIndex);
-    console.log(this.selectedIndex);
     this.updateChildren();
   },
 
   methods: {
-    clickDots(index) {
+    onTouchStart(e) {
+      this.pause();
+      this.startTouch = e.touches[0];
+    },
+
+    onTouchMove() {},
+
+    onTouchEnd(e) {
+      this.playAutomatically();
+      this.endTouch = e.changedTouches[0];
+      if (this.userHasSlide() === false) return;
+
+      if (this.endTouch.clientX - this.startTouch.clientX < 0) {
+        console.log("往左边划");
+        this.select(this.selectedIndex + 1);
+      } else {
+        this.select(this.selectedIndex - 1);
+        console.log("往右边划");
+      }
+    },
+
+    userHasSlide() {
+      // 滚动的距离如果小于window的五分之一，就不认为用户在滑动
+      let windowWidth = this.$refs.window.clientWidth;
+      let scrollWidth = this.endTouch.clientX - this.startTouch.clientX;
+      if (Math.abs(scrollWidth) < windowWidth / 5) {
+        return false;
+      } else {
+        return true;
+      }
+    },
+
+    select(newIndex) {
       // 更新之前，保存旧的值index
+      if (newIndex === -1) {
+        newIndex = this.names.length - 1;
+      }
+      if (newIndex === this.names.length) {
+        newIndex = 0;
+      }
       this.lastSelectedIndex = this.selectedIndex;
-      this.$emit("update:selected", this.names[index]);
+      this.$emit("update:selected", this.names[newIndex]);
     },
 
     playAutomatically() {
@@ -79,13 +122,8 @@ export default {
       let run = () => {
         let index = this.names.indexOf(this.getSelected());
         let newIndex = index + 1;
-        if (newIndex === -1) {
-          newIndex = this.names.length + 1;
-        }
-        if (newIndex === this.names.length) {
-          newIndex = 0;
-        }
-        this.clickDots(newIndex); // 告诉外界选中 newIndex
+
+        this.select(newIndex); // 告诉外界选中 newIndex
         this.timeId = setTimeout(run, 3000);
       };
 
@@ -116,18 +154,21 @@ export default {
       this.$children.forEach(vm => {
         let reverse =
           this.selectedIndex > this.lastSelectedIndex ? false : true;
-        if (
-          this.lastSelectedIndex === this.$children.length - 1 &&
-          this.selectedIndex === 0
-        ) {
-          reverse = false;
+        if (this.timeId) {
+          if (
+            this.lastSelectedIndex === this.$children.length - 1 &&
+            this.selectedIndex === 0
+          ) {
+            reverse = false;
+          }
+          if (
+            this.selectedIndex === this.$children.length - 1 &&
+            this.lastSelectedIndex === 0
+          ) {
+            reverse = true;
+          }
         }
-        if (
-          this.selectedIndex === this.$children.length - 1 &&
-          this.lastSelectedIndex === 0
-        ) {
-          reverse = true;
-        }
+
         vm.reverse = reverse;
         this.$nextTick(() => {
           // 确保reverse生效后，再去修改selected
@@ -148,9 +189,30 @@ export default {
     }
   }
   .l-dots {
+    padding: 8px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     > span {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #ddd;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 8px;
+      font-size: 12px;
+      &:hover {
+        cursor: pointer;
+      }
       &.active {
-        color: red;
+        background: black;
+        color: #fff;
+        &:hover {
+          cursor: default;
+        }
       }
     }
   }
