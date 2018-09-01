@@ -68,7 +68,10 @@ body {
 .box {
   height: 300px;
   width: 100%;
-  border: 1px solid red;
   background: #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
 }
 </style>

@@ -45,7 +45,7 @@ export default {
 </script>
 <style lang='scss'>
 .slide-leave-active {
-  transition: all 3s;
+  transition: all 1s;
   // 离开的那个是绝对定位
   position: absolute;
   width: 100%;
@@ -55,7 +55,7 @@ export default {
 }
 
 .slide-enter-active {
-  transition: all 3s;
+  transition: all 1s;
 }
 .slide-enter {
   transform: translateX(100%);

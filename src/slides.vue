@@ -1,6 +1,8 @@
 <!-- slides -->
 <template>
-  <div class="l-slides">
+  <div class="l-slides"
+       @mouseenter="onMouseEnter"
+       @mouseleave="onMouseLeave">
     <div class="l-slides-window"
          ref="window">
       <div class="l-slides-wrapper">
@@ -46,7 +48,8 @@ export default {
   data() {
     return {
       childrenLength: 0,
-      lastSelectedIndex: undefined
+      lastSelectedIndex: undefined,
+      timeId: undefined
     };
   },
 
@@ -72,21 +75,35 @@ export default {
     },
 
     playAutomatically() {
-      let index = this.names.indexOf(this.getSelected());
-
+      if (this.timeId) return; // 看当前是否有动画，如果没有才播放.避免重复的动画
       let run = () => {
-        let newIndex = index - 1;
+        let index = this.names.indexOf(this.getSelected());
+        let newIndex = index + 1;
         if (newIndex === -1) {
-          newIndex = this.names.length - 1;
+          newIndex = this.names.length + 1;
         }
         if (newIndex === this.names.length) {
           newIndex = 0;
         }
-        this.clickDots(newIndex);
-        setTimeout(run, 3000);
+        this.clickDots(newIndex); // 告诉外界选中 newIndex
+        this.timeId = setTimeout(run, 3000);
       };
 
-      // setTimeout(run, 3000);
+      this.timeId = setTimeout(run, 3000);
+    },
+
+    pause() {
+      // 暂停，就是停止定时器。  当用户的鼠标移动到轮播图上时
+      window.clearTimeout(this.timeId);
+      this.timeId = undefined;
+    },
+
+    onMouseEnter() {
+      this.pause();
+    },
+
+    onMouseLeave() {
+      this.playAutomatically();
     },
 
     getSelected() {
@@ -97,7 +114,21 @@ export default {
     updateChildren() {
       let selected = this.getSelected();
       this.$children.forEach(vm => {
-        vm.reverse = this.selectedIndex > this.lastSelectedIndex ? false : true;
+        let reverse =
+          this.selectedIndex > this.lastSelectedIndex ? false : true;
+        if (
+          this.lastSelectedIndex === this.$children.length - 1 &&
+          this.selectedIndex === 0
+        ) {
+          reverse = false;
+        }
+        if (
+          this.selectedIndex === this.$children.length - 1 &&
+          this.lastSelectedIndex === 0
+        ) {
+          reverse = true;
+        }
+        vm.reverse = reverse;
         this.$nextTick(() => {
           // 确保reverse生效后，再去修改selected
           vm.selected = selected;
@@ -110,7 +141,6 @@ export default {
 <style lang='scss' scoped>
 .l-slides {
   display: block;
-  border: 1px solid black;
   .l-slides-window {
     overflow: hidden;
     .l-slides-wrapper {
