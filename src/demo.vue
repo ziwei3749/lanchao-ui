@@ -3,8 +3,9 @@
   <div id="app">
     <div>
       <!-- <h2>轮播图slide</h2> -->
-      <l-slides class='wrapper' :selected.sync="selected">
-        <l-slides-item name="fist">
+      <l-slides class='wrapper'
+                :selected.sync="selected">
+        <l-slides-item name="first">
           <div class="box">1</div>
         </l-slides-item>
         <l-slides-item name="second">

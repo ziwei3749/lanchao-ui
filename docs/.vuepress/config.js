@@ -26,6 +26,7 @@ module.exports = {
                     "/components/tabs",
                     "/components/toast",
                     "/components/cascader",
+                    "/components/slides",
                 ]
             },
             {
@@ -33,6 +34,7 @@ module.exports = {
                 collapsable: false,
                 children: [
                     "/guide/cascader",
+                    "/guide/slides",
                 ]
             }
         ]

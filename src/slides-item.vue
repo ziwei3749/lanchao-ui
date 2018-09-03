@@ -46,8 +46,7 @@ export default {
 <style lang='scss'>
 .slide-leave-active {
   transition: all 1s;
-  // 离开的那个是绝对定位
-  position: absolute;
+  position: absolute; // 离开的那个是绝对定位
   width: 100%;
   height: 100%;
   left: 0;

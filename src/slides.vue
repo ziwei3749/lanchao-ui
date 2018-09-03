@@ -82,9 +82,7 @@ export default {
 
   mounted() {
     this.updateChildren();
-    if (this.autoPlay) {
-      this.playAutomatically();
-    }
+    this.playAutomatically();
     this.childrenLength = this.slideItems.length;
   },
 
@@ -138,6 +136,7 @@ export default {
     },
 
     playAutomatically() {
+      if (this.autoPlay === false) return; // 不是自动轮播模式，就return
       if (this.timeId) return; // 看当前是否有动画，如果没有才播放.避免重复的动画
       let run = () => {
         let index = this.names.indexOf(this.getSelected());
