@@ -13,19 +13,25 @@
       </div>
     </div>
     <div class="l-dots">
-      <span @click="select(selectedIndex -1)"><l-icon name="left"></l-icon></span>
+      <span @click="select(selectedIndex -1)" data-action="prev">
+        <l-icon name="left"></l-icon>
+      </span>
       <span v-for="n in childrenLength"
             :key="n"
             :class="{active: selectedIndex === n-1}"
+            :data-index="n-1"
             @click="select(n-1)">
         {{n}}
       </span>
-      <span @click="select(selectedIndex + 1)"><l-icon name="right"></l-icon></span>
+      <span @click="select(selectedIndex + 1)" data-action="next">
+        <l-icon name="right"></l-icon>
+      </span>
     </div>
   </div>
 </template>
 
 <script>
+import Icon from "../src/icon.vue";
 export default {
   name: "l-slides",
 
@@ -35,11 +41,17 @@ export default {
     },
     autoPlay: {
       type: Boolean,
-      default: true
+      default: false
+    },
+    autoPlayDelay: {
+      type: Number,
+      default: 3000
     }
   },
 
-  components: {},
+  components: {
+    "l-icon": Icon
+  },
 
   computed: {
     selectedIndex() {
@@ -70,7 +82,9 @@ export default {
 
   mounted() {
     this.updateChildren();
-    this.playAutomatically();
+    if (this.autoPlay) {
+      this.playAutomatically();
+    }
     this.childrenLength = this.slideItems.length;
   },
 
@@ -130,10 +144,10 @@ export default {
         let newIndex = index + 1;
 
         this.select(newIndex); // 告诉外界选中 newIndex
-        this.timeId = setTimeout(run, 3000);
+        this.timeId = setTimeout(run, this.autoPlayDelay);
       };
 
-      this.timeId = setTimeout(run, 3000);
+      this.timeId = setTimeout(run, this.autoPlayDelay);
     },
 
     pause() {
