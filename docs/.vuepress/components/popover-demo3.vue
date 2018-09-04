@@ -14,7 +14,7 @@
 
 <script>
 import Popover from "../../../src/popover";
-import Button from "../../../src/button";
+import Button from "../../../src/button/button";
 
 export default {
     components: {

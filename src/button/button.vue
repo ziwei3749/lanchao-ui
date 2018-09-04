@@ -17,7 +17,7 @@
 
 <script>
 // 使用局部组件icon
-import Icon from "./icon.vue";
+import Icon from "../icon.vue";
 
 export default {
   name: "l-button",
@@ -67,7 +67,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-@import "var.scss";
+@import "../var.scss";
 
 .l-button {
   display: inline-flex;

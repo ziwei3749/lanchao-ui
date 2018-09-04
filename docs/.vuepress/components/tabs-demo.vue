@@ -23,7 +23,7 @@ import TabsHead from "../../../src/tabs-head";
 import TabsBody from "../../../src/tabs-body";
 import TabsItem from "../../../src/tabs-item";
 import TabsPane from "../../../src/tabs-pane";
-import Button from "../../../src/button";
+import Button from "../../../src/button/button";
 import Icon from "../../../src/icon";
 
 export default {
