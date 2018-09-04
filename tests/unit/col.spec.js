@@ -1,6 +1,6 @@
 import Vue from "vue";
-import Row from "@/row";
-import Col from "@/col";
+import Row from "../../src/grid/row";
+import Col from "../../src/grid/col";
 
 import chai, { expect } from "chai";
 import sinon from "sinon";

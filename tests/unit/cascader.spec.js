@@ -2,8 +2,8 @@ import chai, { expect } from "chai";
 import sinon from "sinon";
 import sinonChai from "sinon-chai";
 import { mount } from "@vue/test-utils";
-import Cascader from "@/cascader.vue";
-import CascaderItems from "@/cascader-items.vue";
+import Cascader from "../../src/cascader/cascader.vue";
+import CascaderItems from "../../src/cascader/cascader-items.vue";
 import Vue from "../../node_modules/vue/dist/vue";
 chai.use(sinonChai);
 

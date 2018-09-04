@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import Icon from "../src/icon.vue";
+import Icon from "../icon.vue";
 export default {
   name: "l-slides",
 

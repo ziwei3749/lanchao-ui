@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import Cascader from "../../../src/cascader";
+import Cascader from "../../../src/cascader/cascader";
 import Icon from "../../../src/icon";
 import db from "../../../tests/fixtures/db.js";
 

@@ -2,11 +2,11 @@ import chai, { expect } from "chai";
 import sinon from "sinon";
 import sinonChai from "sinon-chai";
 import Vue from "vue";
-import Tabs from "@/tabs.vue";
-import TabsHead from "@/tabs-head.vue";
-import TabsBody from "@/tabs-body.vue";
-import TabsItem from "@/tabs-item.vue";
-import TabsPane from "@/tabs-pane.vue";
+import Tabs from "../../src/tabs/tabs.vue";
+import TabsHead from "../../src/tabs/tabs-head.vue";
+import TabsBody from "../../src/tabs/tabs-body.vue";
+import TabsItem from "../../src/tabs/tabs-item.vue";
+import TabsPane from "../../src/tabs/tabs-pane.vue";
 
 chai.use(sinonChai);
 

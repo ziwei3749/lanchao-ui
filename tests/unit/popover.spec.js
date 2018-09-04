@@ -1,4 +1,4 @@
-import Popover from "@/popover";
+import Popover from "../../src/popover";
 import chai, { expect } from "chai";
 import sinon from "sinon";
 import sinonChai from "sinon-chai";

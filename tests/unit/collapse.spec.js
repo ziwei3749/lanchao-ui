@@ -8,8 +8,8 @@ Vue.config.productionTip = false;
 Vue.config.devtools = false;
 
 import Vue from "vue";
-import Collapse from "@/collapse";
-import CollapseItem from "@/collapse-item";
+import Collapse from "../../src/collapse/collapse";
+import CollapseItem from "../../src/collapse/collapse-item";
 Vue.component("g-collapse", Collapse);
 Vue.component("g-collapse-item", CollapseItem);
 

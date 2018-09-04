@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import Cascader from "../../../src/cascader";
+import Cascader from "../../../src/cascader/cascader";
 import Icon from "../../../src/icon";
 
 export default {

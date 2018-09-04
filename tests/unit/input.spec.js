@@ -14,7 +14,7 @@ import chai, { expect } from "chai";
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 import Vue from "vue";
-import Input from "@/input";
+import Input from "../../src/input";
 
 chai.use(sinonChai)
 

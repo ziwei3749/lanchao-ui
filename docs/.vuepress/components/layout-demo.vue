@@ -48,11 +48,11 @@
 </template>
 
 <script>
-import Layout from "../../../src/layout";
-import Header from "../../../src/header";
-import Sider from "../../../src/sider";
-import Content from "../../../src/content";
-import Footer from "../../../src/footer";
+import Layout from "../../../src/layout/layout";
+import Header from "../../../src/layout/header";
+import Sider from "../../../src/layout/sider";
+import Content from "../../../src/layout/content";
+import Footer from "../../../src/layout/footer";
 
 export default {
     components: {
