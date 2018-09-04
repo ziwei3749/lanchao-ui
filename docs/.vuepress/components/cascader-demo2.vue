@@ -22,7 +22,7 @@
 <script>
 import Cascader from "../../../src/cascader";
 import Icon from "../../../src/icon";
-import db from "../../../src/db.js";
+import db from "../../../tests/fixtures/db.js";
 
 function ajax(parent_id) {
     console.log("ajax");
