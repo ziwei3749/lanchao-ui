@@ -31,7 +31,6 @@ export default {
     "click-outside": {
       bind(el, binding) {
         let callback = e => {
-          console.log(1);
           if (el === e.target || el.contains(e.target)) {
             return;
           } else {
@@ -39,7 +38,6 @@ export default {
             document.removeEventListener("click", callback);
           }
         };
-        console.log(2);
         document.addEventListener("click", callback);
       }
     }
@@ -72,6 +70,7 @@ export default {
 };
 </script>
 <style lang='scss'>
+@import "var";
 .l-sub-menu {
   position: relative;
   .l-title {
@@ -81,8 +80,13 @@ export default {
     }
   }
   .l-sub-menu-popover {
-    border: 1px solid #000;
+    box-shadow: 0 0 3px fade_out(black, 0.8);
+    font-size: $font-size;
+    min-width: 9em;
+    border-radius: 2px;
+    margin-top: 4px;
     position: absolute;
+    background: #fff;
     top: 100%;
     left: 0;
     white-space: nowrap;
@@ -93,5 +97,6 @@ export default {
   top: 0;
   left: 100%;
   margin-left: 8px;
+  background: #fff;
 }
 </style>

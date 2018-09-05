@@ -15,13 +15,12 @@
           <l-sub-menu>
             <template slot="title">联系方式</template>
             <l-menu-item name="qq">QQ</l-menu-item>
+            <l-menu-item name="wx">微信</l-menu-item>
             <l-sub-menu>
               <template slot="title">手机</template>
               <l-menu-item name="移动">移动</l-menu-item>
               <l-menu-item name="联通">联通</l-menu-item>
             </l-sub-menu>
-            <l-menu-item name="wx">微信</l-menu-item>
-
           </l-sub-menu>
         </l-sub-menu>
         <l-menu-item name="hire">招聘</l-menu-item>
@@ -32,7 +31,7 @@
           <l-menu-item name="other3">其他3</l-menu-item>
         </l-sub-menu> -->
       </l-menu>
-
+      啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
     </div>
   </div>
 </template>
@@ -54,7 +53,7 @@ export default {
   mounted() {},
 
   methods: {
-    handleSelect(v) {
+    handleSelect() {
       // console.log(v);
     }
   }

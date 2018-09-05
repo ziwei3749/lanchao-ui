@@ -50,16 +50,18 @@ export default {
 
   methods: {
     selectItem(name) {
-      console.log(name);
       this.$emit("update:selected", name);
     }
   }
 };
 </script>
 <style lang='scss' scoped>
+@import "var";
 .l-menu {
   display: flex;
-  border: 1px solid red;
+  border-bottom: 1px solid grey;
+  color: $color;
+  cursor: pointer;
   &.mode-vertical {
     flex-direction: column;
   }

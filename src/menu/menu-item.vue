@@ -42,10 +42,29 @@ export default {
 };
 </script>
 <style lang='scss'>
+@import "var";
 .l-menu-item {
   padding: 10px 20px;
+  position: relative;
   &.active {
-    color: red;
+    color: $blue;
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0px;
+      bottom: 0px;
+      border-bottom: 2px solid $blue;
+      width: 100%;
+    }
+  }
+}
+.l-sub-menu .l-menu-item {
+  &.active {
+    color: $blue;
+    background: fade_out(#409eff, 0.9);
+    &::after {
+      display: none;
+    }
   }
 }
 </style>
