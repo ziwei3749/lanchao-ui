@@ -2,7 +2,9 @@
 <template>
     <div class="l-menu"
          :class="classStyle">
+         
         <slot></slot>
+        <div>{{namePath}}</div>
     </div>
 </template>
 
@@ -40,7 +42,7 @@ export default {
 
   data() {
     return {
-      eventBus: new Vue()
+      namePath: [] // 为了保存namePath的点击过的item的激活状态。css相关
     };
   },
 
@@ -49,7 +51,7 @@ export default {
   mounted() {},
 
   methods: {
-    selectItem(name) {
+    clickItem(name) {
       this.$emit("update:selected", name);
     }
   }

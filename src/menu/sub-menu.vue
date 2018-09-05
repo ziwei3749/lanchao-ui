@@ -1,14 +1,15 @@
 <!-- sub-menu -->
 <template>
     <div class="l-sub-menu"
+         v-click-outside="closePopover"
          ref="submenu">
         <div class="l-title"
-              @click="togglePopover">
+             :class="{'active' : isActive}"
+             @click="togglePopover">
             <slot name="title"></slot>
         </div>
 
         <div v-if="subMenuVisible"
-             v-click-outside="closePopover"
              ref="subMenuPopover"
              class="l-sub-menu-popover">
             <slot></slot>
@@ -18,39 +19,45 @@
 </template>
 
 <script>
+import ClickOutside from "../click-outside";
 export default {
   inject: ["rootMenu"],
 
+  directives: { ClickOutside },
   props: {
     name: {
-      type: String
+      type: String,
+      required: true
     }
   },
 
-  directives: {
-    "click-outside": {
-      bind(el, binding) {
-        let callback = e => {
-          if (el === e.target || el.contains(e.target)) {
-            return;
-          } else {
-            binding.value();
-            document.removeEventListener("click", callback);
-          }
-        };
-        document.addEventListener("click", callback);
-      }
-    }
-  },
+  //   directives: {
+  //     "click-outside": {
+  //       bind(el, binding) {
+  //         let callback = e => {
+  //           if (el === e.target || el.contains(e.target)) {
+  //             return;
+  //           } else {
+  //             binding.value();
+  //             document.removeEventListener("click", callback);
+  //           }
+  //         };
+  //         document.addEventListener("click", callback);
+  //       }
+  //     }
+  //   },
 
   components: {},
 
-  computed: {},
+  computed: {
+    isActive() {
+      return this.rootMenu.namePath.includes(this.name);
+    }
+  },
 
   data() {
     return {
-      subMenuVisible: false,
-      initActive: false
+      subMenuVisible: false
     };
   },
 
@@ -63,8 +70,14 @@ export default {
       this.subMenuVisible = !this.subMenuVisible;
     },
     closePopover() {
-      console.log("closePopover");
       this.subMenuVisible = false;
+    },
+    updateNamePath() {
+      this.rootMenu.namePath.unshift(this.name);
+      // 通知父元素，给自己加上isActive
+      if (this.$parent.updateNamePath) {
+        this.$parent.updateNamePath();
+      }
     }
   }
 };
@@ -75,8 +88,17 @@ export default {
   position: relative;
   .l-title {
     padding: 10px 20px;
+    position: relative;
     &.active {
-      color: red;
+      color: $blue;
+      &::after {
+        content: "";
+        position: absolute;
+        left: 0px;
+        bottom: 0px;
+        border-bottom: 2px solid $blue;
+        width: 100%;
+      }
     }
   }
   .l-sub-menu-popover {

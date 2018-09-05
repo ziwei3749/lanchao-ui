@@ -1,6 +1,6 @@
 <!-- menu-item -->
 <template>
-  <div class="l-menu-item"  :class="{'active': isActive}" @click="selectMenuItem">
+  <div class="l-menu-item"  :class="{'active': isActive}" @click="clickMenuItem">
       <slot></slot>
   </div>
 </template>
@@ -34,9 +34,15 @@ export default {
   mounted() {},
 
   methods: {
-    selectMenuItem() {
-      // 直接调用rootMenu组件的方法，emit触发selected的变化
-      this.rootMenu.selectItem(this.name);
+    clickMenuItem() {
+      // 直接调用root组件的方法，触发selected的变化
+      this.rootMenu.clickItem(this.name);
+      // 每次点击时，都清空之前保存的namePath，namePath情况，之前的激活样式就清空了
+      this.rootMenu.namePath = [];
+      // 通知父元素，给自己加上isActive
+      if (this.$parent.updateNamePath) {
+        this.$parent.updateNamePath();
+      }
     }
   }
 };

@@ -12,11 +12,11 @@
           <l-menu-item name="about1">关于1</l-menu-item>
           <l-menu-item name="about2">关于2</l-menu-item>
           <!-- <l-menu-item name="about3">联系方式</l-menu-item> -->
-          <l-sub-menu>
+          <l-sub-menu name="lian_xi_fang_shi">
             <template slot="title">联系方式</template>
             <l-menu-item name="qq">QQ</l-menu-item>
             <l-menu-item name="wx">微信</l-menu-item>
-            <l-sub-menu>
+            <l-sub-menu name="mobile">
               <template slot="title">手机</template>
               <l-menu-item name="移动">移动</l-menu-item>
               <l-menu-item name="联通">联通</l-menu-item>
@@ -44,7 +44,7 @@ export default {
 
   data() {
     return {
-      selected: "about1"
+      selected: "home"
     };
   },
 
