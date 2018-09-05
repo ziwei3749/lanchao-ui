@@ -2,19 +2,21 @@
 <template>
   <div id="app">
     <div>
-      <!-- <h2>轮播图slide</h2> -->
-      <l-slides class='wrapper'
-                :selected.sync="selected">
-        <l-slides-item name="first">
-          <div class="box">1</div>
-        </l-slides-item>
-        <l-slides-item name="second">
-          <div class="box">2</div>
-        </l-slides-item>
-        <l-slides-item name="third">
-          <div class="box">3</div>
-        </l-slides-item>
-      </l-slides>
+      <!-- horizontal -->
+      {{selected}}
+      <l-menu :selected.sync="selected" multiple mode="vertical">
+        <l-menu-item name="home">首页</l-menu-item>
+        <l-menu-item name="about">关于</l-menu-item>
+        <l-menu-item name="hire">招聘</l-menu-item>
+        <!-- <l-sub-menu index="2">
+          <template slot="title">关于</template>
+          <l-menu-item index="2-1">选项1</l-menu-item>
+          <l-menu-item index="2-2">选项2</l-menu-item>
+          <l-menu-item index="2-3">选项3</l-menu-item>
+        </l-sub-menu> -->
+        
+      </l-menu>
+
     </div>
   </div>
 </template>
@@ -27,24 +29,19 @@ export default {
 
   data() {
     return {
-      selected: undefined
+      selected: ["home", "about"]
     };
   },
 
-  created() {
-    // let n = 1;
-    // setInterval(() => {
-    //   if (n === 4) {
-    //     n = 1;
-    //   }
-    //   this.selected = n;
-    //   n++;
-    // }, 2000);
-  },
+  created() {},
 
   mounted() {},
 
-  methods: {}
+  methods: {
+    handleSelect(v) {
+      // console.log(v);
+    }
+  }
 };
 </script>
 <style lang='scss'>
