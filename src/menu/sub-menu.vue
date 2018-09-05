@@ -2,11 +2,11 @@
 <template>
     <div class="l-sub-menu"
          ref="submenu">
-        <span @click="subMenuVisible = !subMenuVisible"
-              class="l-title"
-              :class="{'active': isActive}">
+        <div class="l-title"
+              @click="togglePopover">
             <slot name="title"></slot>
-        </span>
+        </div>
+
         <div v-if="subMenuVisible"
              v-click-outside="closePopover"
              ref="subMenuPopover"
@@ -31,6 +31,7 @@ export default {
     "click-outside": {
       bind(el, binding) {
         let callback = e => {
+          console.log(1);
           if (el === e.target || el.contains(e.target)) {
             return;
           } else {
@@ -38,7 +39,7 @@ export default {
             document.removeEventListener("click", callback);
           }
         };
-
+        console.log(2);
         document.addEventListener("click", callback);
       }
     }
@@ -46,16 +47,12 @@ export default {
 
   components: {},
 
-  computed: {
-    isActive() {
-      let childrenNameArr = this.$children.map(v => v.name);
-      return childrenNameArr.includes(this.rootMenu.selected);
-    }
-  },
+  computed: {},
 
   data() {
     return {
-      subMenuVisible: false
+      subMenuVisible: false,
+      initActive: false
     };
   },
 
@@ -64,7 +61,11 @@ export default {
   mounted() {},
 
   methods: {
+    togglePopover() {
+      this.subMenuVisible = !this.subMenuVisible;
+    },
     closePopover() {
+      console.log("closePopover");
       this.subMenuVisible = false;
     }
   }
@@ -72,9 +73,9 @@ export default {
 </script>
 <style lang='scss'>
 .l-sub-menu {
-  padding: 10px 20px;
   position: relative;
   .l-title {
+    padding: 10px 20px;
     &.active {
       color: red;
     }
@@ -82,12 +83,15 @@ export default {
   .l-sub-menu-popover {
     border: 1px solid #000;
     position: absolute;
-    top: 120%;
+    top: 100%;
     left: 0;
-    > .l-menu-item {
-      padding: 10px 30px;
-      white-space: nowrap;
-    }
+    white-space: nowrap;
   }
+}
+
+.l-sub-menu .l-sub-menu .l-sub-menu-popover {
+  top: 0;
+  left: 100%;
+  margin-left: 8px;
 }
 </style>
