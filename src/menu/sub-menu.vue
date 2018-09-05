@@ -1,12 +1,16 @@
 <!-- sub-menu -->
 <template>
-    <div class="l-sub-menu">
-        <div @click="subMenuVisible = !subMenuVisible">
+    <div class="l-sub-menu"
+         ref="submenu">
+        <span @click="subMenuVisible = !subMenuVisible"
+              class="l-title"
+              :class="{'active': isActive}">
             <slot name="title"></slot>
-        </div>
-        <div v-show="subMenuVisible"
-             class="l-menu-items"
-             :class="subMenuClass">
+        </span>
+        <div v-if="subMenuVisible"
+             v-click-outside="closePopover"
+             ref="subMenuPopover"
+             class="l-sub-menu-popover">
             <slot></slot>
         </div>
 
@@ -15,50 +19,74 @@
 
 <script>
 export default {
-  inject: ["eventBus"],
+  inject: ["rootMenu"],
 
   props: {
     name: {
       type: String
     }
   },
+
+  directives: {
+    "click-outside": {
+      bind(el, binding) {
+        let callback = e => {
+          if (el === e.target || el.contains(e.target)) {
+            return;
+          } else {
+            binding.value();
+            document.removeEventListener("click", callback);
+          }
+        };
+
+        document.addEventListener("click", callback);
+      }
+    }
+  },
+
   components: {},
 
   computed: {
-    subMenuClass() {
-      return `mode-${this.subMode}`;
+    isActive() {
+      let childrenNameArr = this.$children.map(v => v.name);
+      return childrenNameArr.includes(this.rootMenu.selected);
     }
   },
 
   data() {
     return {
-      subMenuVisible: false,
-      subMode: ""
+      subMenuVisible: false
     };
   },
 
   created() {},
 
-  mounted() {
-    this.eventBus.$on("changeMode", mode => {
-      console.log("mode", mode);
-      this.subMode = mode;
-    });
-  },
+  mounted() {},
 
-  methods: {}
+  methods: {
+    closePopover() {
+      this.subMenuVisible = false;
+    }
+  }
 };
 </script>
 <style lang='scss'>
 .l-sub-menu {
-  flex: 1;
-  .l-menu-items {
-    display: flex;
-    &.mode-vertical {
-      flex-direction: column;
+  padding: 10px 20px;
+  position: relative;
+  .l-title {
+    &.active {
+      color: red;
     }
-    &.mode-horizontal {
-      flex-direction: row;
+  }
+  .l-sub-menu-popover {
+    border: 1px solid #000;
+    position: absolute;
+    top: 120%;
+    left: 0;
+    > .l-menu-item {
+      padding: 10px 30px;
+      white-space: nowrap;
     }
   }
 }

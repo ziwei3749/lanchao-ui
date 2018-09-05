@@ -7,7 +7,8 @@
 
 <script>
 export default {
-  inject: ["eventBus"],
+  //   inject: ["eventBus"],
+  inject: ["rootMenu"],
 
   props: {
     name: {
@@ -18,34 +19,31 @@ export default {
 
   components: {},
 
-  computed: {},
+  computed: {
+    isActive() {
+      return this.name === this.rootMenu.selected;
+    }
+  },
 
   data() {
-    return {
-      isActive: false
-    };
+    return {};
   },
 
-  created() {
-    this.eventBus.$on("update:active", selected => {
-      return (this.isActive = selected.includes(this.name));
-    });
-  },
+  created() {},
 
   mounted() {},
 
   methods: {
     selectMenuItem() {
-      this.eventBus.$emit("update:selected", this.name);
+      // 直接调用rootMenu组件的方法，emit触发selected的变化
+      this.rootMenu.selectItem(this.name);
     }
   }
 };
 </script>
 <style lang='scss'>
 .l-menu-item {
-  //   display: inline-flex;
   padding: 10px 20px;
-  //   flex: 1;
   &.active {
     color: red;
   }

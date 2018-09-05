@@ -4,17 +4,23 @@
     <div>
       <!-- horizontal -->
       {{selected}}
-      <l-menu :selected.sync="selected" multiple mode="vertical">
+      <l-menu :selected.sync="selected"
+              mode="horizontal">
         <l-menu-item name="home">首页</l-menu-item>
-        <l-menu-item name="about">关于</l-menu-item>
-        <l-menu-item name="hire">招聘</l-menu-item>
-        <!-- <l-sub-menu index="2">
+        <l-sub-menu name="about">
           <template slot="title">关于</template>
-          <l-menu-item index="2-1">选项1</l-menu-item>
-          <l-menu-item index="2-2">选项2</l-menu-item>
-          <l-menu-item index="2-3">选项3</l-menu-item>
-        </l-sub-menu> -->
-        
+          <l-menu-item name="about1">关于1</l-menu-item>
+          <l-menu-item name="about2">关于2</l-menu-item>
+          <l-menu-item name="about3">关于3</l-menu-item>
+        </l-sub-menu>
+        <!-- <l-menu-item name="about">关于</l-menu-item> -->
+        <l-menu-item name="hire">招聘</l-menu-item>
+        <l-sub-menu name="other">
+          <template slot="title">其他</template>
+          <l-menu-item name="other1">其他1</l-menu-item>
+          <l-menu-item name="other2">其他2</l-menu-item>
+          <l-menu-item name="other3">其他3</l-menu-item>
+        </l-sub-menu>
       </l-menu>
 
     </div>
@@ -29,7 +35,7 @@ export default {
 
   data() {
     return {
-      selected: ["home", "about"]
+      selected: "home"
     };
   },
 

@@ -13,7 +13,7 @@ export default {
 
   provide() {
     return {
-      eventBus: this.eventBus
+      rootMenu: this
     };
   },
 
@@ -27,15 +27,8 @@ export default {
     },
 
     selected: {
-      type: Array,
-      default() {
-        return [];
-      }
-    },
-
-    multiple: {
-      type: Boolean,
-      default: false
+      type: String,
+      default: ""
     }
   },
 
@@ -53,32 +46,14 @@ export default {
 
   created() {},
 
-  mounted() {
-    this.eventBus.$emit("update:active", this.selected);
-    this.eventBus.$emit("changeMode", this.mode);
+  mounted() {},
 
-    this.eventBus.$on("update:selected", name => {
-      // 如果数组已经存在该name的话，不能重复push
-      if (this.multiple) {
-        if (this.selected.indexOf(name) === -1) {
-          let arr = JSON.parse(JSON.stringify(this.selected));
-          arr.push(name);
-          this.$emit("update:selected", arr);
-          this.eventBus.$emit("update:active", arr);
-        } else {
-          let arr = JSON.parse(JSON.stringify(this.selected));
-          let index = this.selected.indexOf(name);
-          arr.splice(index, 1);
-          this.$emit("update:selected", arr);
-          this.eventBus.$emit("update:active", arr);
-        }
-      } else {
-        this.$emit("update:selected", [name]);
-      }
-    });
-  },
-
-  methods: {}
+  methods: {
+    selectItem(name) {
+      console.log(name);
+      this.$emit("update:selected", name);
+    }
+  }
 };
 </script>
 <style lang='scss' scoped>
