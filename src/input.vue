@@ -87,7 +87,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-@import "var.scss";
+@import "./styles/var.scss";
 $height: $input-height;
 
 .l-wrapper {

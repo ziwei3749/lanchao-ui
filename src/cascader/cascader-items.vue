@@ -131,7 +131,7 @@ export default {
 };
 </script>
 <style lang='scss'>
-@import "var.scss";
+@import "../styles/var.scss";
 
 .l-cascader-items {
   height: 200px;
@@ -161,7 +161,7 @@ export default {
       }
       > .l-icons {
         .icon-right-arrow {
-          transform: scale(0.5);
+          transform: scale(1);
         }
         .icon-loading {
           animation: spin 2s infinite linear;

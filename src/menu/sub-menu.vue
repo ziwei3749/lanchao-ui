@@ -7,6 +7,11 @@
              :class="{'active' : isActive}"
              @click="togglePopover">
             <slot name="title"></slot>
+            <l-icon class="arrow-icon" name="down" v-if="subMenuVisible"></l-icon>
+            <l-icon class="arrow-icon" name="right" v-else></l-icon>
+            
+            <!-- <span >-</span>
+            <span >+</span> -->
         </div>
 
         <div v-if="subMenuVisible"
@@ -19,6 +24,7 @@
 </template>
 
 <script>
+import Icon from "../icon";
 import ClickOutside from "../click-outside";
 export default {
   inject: ["rootMenu"],
@@ -47,7 +53,9 @@ export default {
   //     }
   //   },
 
-  components: {},
+  components: {
+    "l-icon": Icon
+  },
 
   computed: {
     isActive() {
@@ -99,6 +107,9 @@ export default {
         border-bottom: 2px solid $blue;
         width: 100%;
       }
+    }
+    > .arrow-icon {
+    //   transform: scale(0.8);
     }
   }
   .l-sub-menu-popover {

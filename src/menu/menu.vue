@@ -9,13 +9,14 @@
 </template>
 
 <script>
-import Vue from "vue";
 export default {
   components: {},
 
   provide() {
     return {
-      rootMenu: this
+      rootMenu: this,
+      testName: this.testString,
+      testObj: this.testObj
     };
   },
 
@@ -42,7 +43,11 @@ export default {
 
   data() {
     return {
-      namePath: [] // 为了保存namePath的点击过的item的激活状态。css相关
+      namePath: [], // 为了保存namePath的点击过的item的激活状态。css相关
+      testName: "吕子威3",
+      testObj: {
+        name: "吕子威"
+      }
     };
   },
 
