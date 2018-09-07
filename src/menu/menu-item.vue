@@ -50,7 +50,7 @@ export default {
 <style lang='scss'>
 @import "var";
 .l-menu-item {
-  padding: 10px 20px;
+  padding: 10px;
   position: relative;
   &.active {
     color: $blue;

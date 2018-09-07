@@ -2,9 +2,7 @@
 <template>
     <div class="l-menu"
          :class="classStyle">
-         
         <slot></slot>
-        <div>{{namePath}}</div>
     </div>
 </template>
 
@@ -69,6 +67,7 @@ export default {
   border-bottom: 1px solid grey;
   color: $color;
   cursor: pointer;
+  user-select: none;
   &.mode-vertical {
     flex-direction: column;
   }

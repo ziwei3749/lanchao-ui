@@ -1,26 +1,26 @@
 <!-- sub-menu -->
 <template>
-    <div class="l-sub-menu"
-         v-click-outside="closePopover"
-         ref="submenu">
-        <div class="l-title"
-             :class="{'active' : isActive}"
-             @click="togglePopover">
-            <slot name="title"></slot>
-            <l-icon class="arrow-icon" name="down" v-if="subMenuVisible"></l-icon>
-            <l-icon class="arrow-icon" name="right" v-else></l-icon>
-            
-            <!-- <span >-</span>
-            <span >+</span> -->
-        </div>
-
-        <div v-if="subMenuVisible"
-             ref="subMenuPopover"
-             class="l-sub-menu-popover">
-            <slot></slot>
-        </div>
-
+  <div class="l-sub-menu"
+       v-click-outside="closePopover"
+       ref="submenu">
+    <div class="l-title"
+         :class="{'active' : isActive}"
+         @click="togglePopover">
+      <slot name="title"></slot>
+      <span class="icon-wrapper"
+            :class="{'open':subMenuVisible}">
+        <l-icon name="right"
+                :class="{'open':subMenuVisible}"></l-icon>
+      </span>
     </div>
+
+    <div v-if="subMenuVisible"
+         ref="subMenuPopover"
+         class="l-sub-menu-popover">
+      <slot></slot>
+    </div>
+
+  </div>
 </template>
 
 <script>
@@ -37,29 +37,14 @@ export default {
     }
   },
 
-  //   directives: {
-  //     "click-outside": {
-  //       bind(el, binding) {
-  //         let callback = e => {
-  //           if (el === e.target || el.contains(e.target)) {
-  //             return;
-  //           } else {
-  //             binding.value();
-  //             document.removeEventListener("click", callback);
-  //           }
-  //         };
-  //         document.addEventListener("click", callback);
-  //       }
-  //     }
-  //   },
-
   components: {
     "l-icon": Icon
   },
 
   computed: {
     isActive() {
-      return this.rootMenu.namePath.includes(this.name);
+      // return this.rootMenu.namePath.includes(this.name);
+      return this.rootMenu.namePath[0] === this.name;
     }
   },
 
@@ -95,8 +80,12 @@ export default {
 .l-sub-menu {
   position: relative;
   .l-title {
-    padding: 10px 20px;
+    padding: 10px;
     position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
     &.active {
       color: $blue;
       &::after {
@@ -108,8 +97,12 @@ export default {
         width: 100%;
       }
     }
-    > .arrow-icon {
-    //   transform: scale(0.8);
+
+    .icon-wrapper {
+      transition: all 0.25s;
+      &.open {
+        transform: rotate(90deg);
+      }
     }
   }
   .l-sub-menu-popover {

@@ -1,2 +1,3 @@
 src/db.js
+src/svg.js
 tests/*
