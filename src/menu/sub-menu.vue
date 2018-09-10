@@ -85,9 +85,11 @@ export default {
       this.$refs.subMenuPopover.style.height = 200 + "px";
       this.subMenuVisible = !this.subMenuVisible;
     },
+
     closePopover() {
       this.subMenuVisible = false;
     },
+
     updateNamePath() {
       this.rootMenu.namePath.unshift(this.name);
       // 通知父元素，给自己加上isActive

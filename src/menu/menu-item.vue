@@ -1,6 +1,7 @@
 <!-- menu-item -->
 <template>
   <div class="l-menu-item"
+       :data-name="name"
        :class="[{'active': isActive},{'vertical-active':verticalActive}]"
        @click="clickMenuItem">
     <slot></slot>

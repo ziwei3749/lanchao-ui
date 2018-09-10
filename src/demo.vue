@@ -34,7 +34,9 @@
     </div>
 
     <div style="margin-top:20px">
+      {{selected2}}
       <l-menu :selected.sync="selected2"
+              @update:selected=handleSelect
               class="menu">
         <l-menu-item name="home">首页</l-menu-item>
         <l-sub-menu name="about">
@@ -82,8 +84,8 @@ export default {
   mounted() {},
 
   methods: {
-    handleSelect() {
-      // console.log(v);
+    handleSelect(v) {
+      console.log(v);
     }
   }
 };
