@@ -1,7 +1,9 @@
 <!-- menu-item -->
 <template>
-  <div class="l-menu-item"  :class="{'active': isActive}" @click="clickMenuItem">
-      <slot></slot>
+  <div class="l-menu-item"
+       :class="[{'active': isActive},{'vertical-active':verticalActive}]"
+       @click="clickMenuItem">
+    <slot></slot>
   </div>
 </template>
 
@@ -21,7 +23,16 @@ export default {
 
   computed: {
     isActive() {
-      return this.name === this.rootMenu.selected;
+      return (
+        this.rootMenu.mode === "horizontal" &&
+        this.name === this.rootMenu.selected
+      );
+    },
+    verticalActive() {
+      return (
+        this.rootMenu.mode === "vertical" &&
+        this.name === this.rootMenu.selected
+      );
     }
   },
 
@@ -47,10 +58,10 @@ export default {
   }
 };
 </script>
-<style lang='scss'>
+<style lang='scss' scoped>
 @import "../styles/var";
 .l-menu-item {
-  padding: 10px;
+  padding: 10px 20px;
   position: relative;
   &.active {
     color: $blue;
@@ -63,6 +74,9 @@ export default {
       width: 100%;
     }
   }
+  &.vertical-active {
+    color: $blue;
+  }
 }
 .l-sub-menu .l-menu-item {
   &.active {
@@ -72,5 +86,10 @@ export default {
       display: none;
     }
   }
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
 </style>

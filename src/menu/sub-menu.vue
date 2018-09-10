@@ -59,9 +59,12 @@ export default {
 
   computed: {
     isActive() {
-      // return this.rootMenu.namePath.includes(this.name);
-      return this.rootMenu.namePath[0] === this.name;
+      return (
+        this.rootMenu.mode === "horizontal" &&
+        this.rootMenu.namePath[0] === this.name
+      );
     },
+
     popoverClass() {
       return `l-sub-menu-popover-${this.rootMenu.mode}`;
     }
@@ -79,6 +82,7 @@ export default {
 
   methods: {
     togglePopover() {
+      this.$refs.subMenuPopover.style.height = 200 + "px";
       this.subMenuVisible = !this.subMenuVisible;
     },
     closePopover() {
@@ -128,12 +132,11 @@ export default {
   position: relative;
 
   .l-title {
-    padding: 10px;
+    padding: 10px 20px;
     position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     &.active {
       color: $blue;
       &::after {
@@ -145,7 +148,6 @@ export default {
         width: 100%;
       }
     }
-
     .icon-wrapper {
       transition: all 0.25s;
       &.open {
@@ -166,7 +168,6 @@ export default {
     top: 100%;
     left: 0;
     white-space: nowrap;
-    // transition: height 0.25s;
   }
   // 纵向的不需要绝对定位
   .l-sub-menu-popover-vertical {

@@ -7,7 +7,7 @@
       {{selected}}
       <l-menu :selected.sync="selected"
               mode="horizontal">
-        <l-menu-item name="home">首页</l-menu-item>
+        <l-menu-item name="home"><a href="https://github.com/ziwei3749">首页</a></l-menu-item>
         <l-sub-menu name="about">
           <template slot="title">关于</template>
           <l-menu-item name="about1">关于1</l-menu-item>
