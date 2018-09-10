@@ -3,9 +3,11 @@
   <div id="app">
     <div>
       <!-- horizontal -->
+      <!-- vertical -->
       {{selected}}
       <l-menu :selected.sync="selected"
-              mode="horizontal">
+      class="menu"
+              mode="vertical">
         <l-menu-item name="home">首页</l-menu-item>
         <l-sub-menu name="about">
           <template slot="title">关于</template>
@@ -84,5 +86,9 @@ body {
   justify-content: center;
   align-items: center;
   font-size: 30px;
+}
+
+.menu {
+  width: 300px;
 }
 </style>

@@ -61,10 +61,10 @@ export default {
 };
 </script>
 <style lang='scss' scoped>
-@import "var";
+@import "../styles/var";
 .l-menu {
   display: flex;
-  border-bottom: 1px solid grey;
+  border: 1px solid $grey;
   color: $color;
   cursor: pointer;
   user-select: none;

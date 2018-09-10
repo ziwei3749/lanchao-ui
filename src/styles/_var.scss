@@ -1,7 +1,7 @@
 // input
 $border-color-hover: #666;
 $border-color: #999;
-$border-color-light: lighten($border-color,30%);
+$border-color-light: lighten($border-color, 30%);
 $border-radius: 4px;
 $box-shadow-color: rgba(0, 0, 0, 0.5);
 $font-size: 14px;
@@ -17,24 +17,56 @@ $button-height: 32px;
 $color: #333;
 $font-size: 14px;
 $small-font-size: 12px;
+
 .box-shadow {
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.15)
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15)
 }
 
 @mixin box-shadow2 {
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.15)
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15)
 }
-
 
 $grey: #eee;
 $blue: #4a90e2;
 
-
 @keyframes spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
+  from {
+    transform: rotate(0deg);
   }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+// 轮播图组件的  name: l-slide的滑动过渡动画
+
+.slides-item-leave-active {
+  transition: all 1s;
+  position: absolute; // 离开的那个是绝对定位
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+
+.slides-item-enter-active {
+  transition: all 1s;
+}
+
+.slides-item-enter {
+  transform: translateX(100%);
+}
+
+.slides-item-leave-to {
+  transform: translateX(-100%);
+}
+
+.slides-item-enter.reverse {
+  transform: translateX(-100%);
+}
+
+.slides-item-leave-to.reverse {
+  transform: translateX(100%);
+}

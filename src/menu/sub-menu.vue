@@ -9,16 +9,18 @@
       <slot name="title"></slot>
       <span class="icon-wrapper"
             :class="{'open':subMenuVisible}">
-        <l-icon name="right"
-                :class="{'open':subMenuVisible}"></l-icon>
+        <l-icon name="right"></l-icon>
       </span>
     </div>
 
-    <div v-if="subMenuVisible"
-         ref="subMenuPopover"
-         class="l-sub-menu-popover">
-      <slot></slot>
-    </div>
+    <transition @leave="leave"
+                @enter="enter" @after-enter="afterEnter">
+      <div v-show="subMenuVisible"
+           ref="subMenuPopover"
+           :class="popoverClass">
+        <slot></slot>
+      </div>
+    </transition>
 
   </div>
 </template>
@@ -45,6 +47,9 @@ export default {
     isActive() {
       // return this.rootMenu.namePath.includes(this.name);
       return this.rootMenu.namePath[0] === this.name;
+    },
+    popoverClass() {
+      return `l-sub-menu-popover-${this.rootMenu.mode}`;
     }
   },
 
@@ -71,14 +76,43 @@ export default {
       if (this.$parent.updateNamePath) {
         this.$parent.updateNamePath();
       }
+    },
+
+    enter(el, done) {
+      el.style.height = "auto";
+      let { height } = el.getBoundingClientRect();
+      el.style.height = 0;
+      el.getBoundingClientRect(); // 强制让浏览器，不要合并渲染
+
+      el.style.height = height + "px";
+
+      el.addEventListener("transitionend", () => {
+        done();
+      });
+    },
+
+    afterEnter(el) {
+      el.style.height = "auto";
+    },
+
+    leave(el, done) {
+      let { height } = el.getBoundingClientRect();
+      el.style.height = height + "px";
+      el.getBoundingClientRect();
+      el.style.height = 0 + "px";
+      el.addEventListener("transitionend", () => {
+        done();
+      });
     }
   }
 };
 </script>
-<style lang='scss'>
-@import "var";
+<style lang='scss' scoped>
+@import "../styles/var";
+
 .l-sub-menu {
   position: relative;
+
   .l-title {
     padding: 10px;
     position: relative;
@@ -105,7 +139,8 @@ export default {
       }
     }
   }
-  .l-sub-menu-popover {
+  // 横向的需要绝对定位
+  .l-sub-menu-popover-horizontal {
     box-shadow: 0 0 3px fade_out(black, 0.8);
     font-size: $font-size;
     min-width: 9em;
@@ -117,9 +152,22 @@ export default {
     left: 0;
     white-space: nowrap;
   }
+  // 纵向的不需要绝对定位
+  .l-sub-menu-popover-vertical {
+    padding-left: 1.5em;
+    font-size: $font-size;
+    min-width: 9em;
+    background: #fff;
+    top: 100%;
+    left: 0;
+    white-space: nowrap;
+    transition: height 0.25s;
+    overflow: hidden;
+  }
 }
 
-.l-sub-menu .l-sub-menu .l-sub-menu-popover {
+// 选中2级菜单 水平模式
+.l-sub-menu .l-sub-menu .l-sub-menu-popover-horizontal {
   top: 0;
   left: 100%;
   margin-left: 8px;

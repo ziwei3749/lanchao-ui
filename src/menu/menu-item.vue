@@ -48,7 +48,7 @@ export default {
 };
 </script>
 <style lang='scss'>
-@import "var";
+@import "../styles/var";
 .l-menu-item {
   padding: 10px;
   position: relative;

@@ -1,6 +1,6 @@
 <!-- slides-item -->
 <template>
-  <transition name="slide">
+  <transition name="slides-item">
     <div class="l-slides-item"
          v-if="visible"
          :class="{reverse}">
@@ -43,32 +43,8 @@ export default {
   methods: {}
 };
 </script>
-<style lang='scss'>
-.slide-leave-active {
-  transition: all 1s;
-  position: absolute; // 离开的那个是绝对定位
-  width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
-}
-
-.slide-enter-active {
-  transition: all 1s;
-}
-.slide-enter {
-  transform: translateX(100%);
-}
-.slide-leave-to {
-  transform: translateX(-100%);
-}
-
-.slide-enter.reverse {
-  transform: translateX(-100%);
-}
-.slide-leave-to.reverse {
-  transform: translateX(100%);
-}
+<style lang='scss' scoped>
+@import "../styles/var";
 
 .l-slides-item {
 }
