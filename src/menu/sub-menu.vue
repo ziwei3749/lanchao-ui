@@ -13,14 +13,28 @@
       </span>
     </div>
 
-    <transition @leave="leave"
-                @enter="enter" @after-enter="afterEnter">
+    <!--  垂直菜单才需要动画 -->
+    <template v-if="this.rootMenu.mode==='vertical'">
+      <transition @leave="leave"
+                  @enter="enter"
+                  @after-enter="afterEnter"
+                  :css="false">
+        <div v-show="subMenuVisible"
+             ref="subMenuPopover"
+             :class="popoverClass">
+          <slot></slot>
+        </div>
+      </transition> 
+    </template>
+
+    <!-- 横向菜单不需要动画 -->
+    <template v-else>
       <div v-show="subMenuVisible"
            ref="subMenuPopover"
            :class="popoverClass">
         <slot></slot>
       </div>
-    </transition>
+    </template>
 
   </div>
 </template>
@@ -147,10 +161,12 @@ export default {
     border-radius: 2px;
     margin-top: 4px;
     position: absolute;
+    z-index: 30;
     background: #fff;
     top: 100%;
     left: 0;
     white-space: nowrap;
+    // transition: height 0.25s;
   }
   // 纵向的不需要绝对定位
   .l-sub-menu-popover-vertical {
