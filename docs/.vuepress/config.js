@@ -28,6 +28,7 @@ module.exports = {
                     "/components/toast",
                     "/components/cascader",
                     "/components/slides",
+                    "/components/menu",
                 ]
             },
             {
