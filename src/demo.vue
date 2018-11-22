@@ -2,11 +2,27 @@
 <template>
   <div id="app">
     <div>
+      <l-pager style="margin: 50px"  :total-page="10" :current-page.sync="currentPage" @currentChange="onCurrentChange">
+      </l-pager>
+    </div>
+    <div>
+      {{selectedArray}}
+      <l-collapse :selected.sync="selectedArray" :single="false"> 
+        <l-collapse-item title="title1" name="1">
+          <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
+          <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
+        </l-collapse-item>
+        <l-collapse-item title="title2" name="2">
+          <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
+          <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
+        </l-collapse-item>
+      </l-collapse>
+    </div>
+    <div>
       <!-- horizontal -->
       <!-- vertical -->
       {{selected}}
-      <l-menu :selected.sync="selected"
-              mode="horizontal">
+      <l-menu :selected.sync="selected" mode="horizontal">
         <l-menu-item name="home"><a href="https://github.com/ziwei3749">首页</a></l-menu-item>
         <l-sub-menu name="about">
           <template slot="title">关于</template>
@@ -35,9 +51,7 @@
 
     <div style="margin-top:20px">
       {{selected2}}
-      <l-menu :selected.sync="selected2"
-              @update:selected=handleSelect
-              class="menu">
+      <l-menu :selected.sync="selected2" @update:selected=handleSelect class="menu">
         <l-menu-item name="home">首页</l-menu-item>
         <l-sub-menu name="about">
           <template slot="title">关于</template>
@@ -74,6 +88,8 @@ export default {
 
   data() {
     return {
+      currentPage: 1,
+      selectedArray: ["2"],
       selected: "home",
       selected2: "hire"
     };
@@ -86,6 +102,10 @@ export default {
   methods: {
     handleSelect(v) {
       console.log(v);
+    },
+
+    onCurrentChange(e) {
+      console.log("onCurrentChange监听", e);
     }
   }
 };

@@ -50,7 +50,9 @@ export default {
       } else {
         selectedCopy.push(name);
       }
+      console.log("selectedCopy", selectedCopy);
       this.eventBus.$emit("update:selected", selectedCopy); // 通知子组件数据变化
+
       this.$emit("update:selected", selectedCopy); // 通知父组件数据变化
     });
     this.eventBus.$on("update:removeSelected", name => {
@@ -58,7 +60,7 @@ export default {
       let selectedCopy = JSON.parse(JSON.stringify(this.selected));
       let index = selectedCopy.indexOf(name);
       selectedCopy.splice(index, 1);
-
+      console.log("selectedCopy", selectedCopy);
       this.eventBus.$emit("update:selected", selectedCopy); // 通知子组件数据变化
       this.$emit("update:selected", selectedCopy); // 通知父组件数据变化
     });

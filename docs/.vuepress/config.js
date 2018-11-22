@@ -37,6 +37,7 @@ module.exports = {
                 children: [
                     "/guide/cascader",
                     "/guide/slides",
+                    "/guide/pager",
                 ]
             }
         ]
