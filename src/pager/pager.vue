@@ -1,9 +1,10 @@
 <!-- pager -->
 <template>
   <div class="l-pager" :class="{'hide': hideIfOnePage && totalPage === 1}">
-    <span @click="onClickPage(currentPage-1)" class="pager-nav-button" :class="{'unClickible':currentPage === 1}">
+    <span @click="onClickPage(currentPage-1)" class="pager-nav-button prev" :class="{'unClickible':currentPage === 1}">
       <l-icon name="left"></l-icon>
     </span>
+    <!-- eslint-disable-next-line  -->
     <span v-for="page in pages">
       <template v-if="page === currentPage">
         <span class="l-pager-item current">{{page}}</span>
@@ -17,7 +18,7 @@
         <span class="l-pager-item other" @click="onClickPage(page)">{{page}}</span>
       </template>
     </span>
-    <span @click="onClickPage(currentPage+1)" class="pager-nav-button" :class="{'unClickible':currentPage === totalPage}">
+    <span @click="onClickPage(currentPage+1)" class="pager-nav-button next" :class="{'unClickible':currentPage === totalPage}">
       <l-icon name="right"></l-icon>
     </span>
 
@@ -25,6 +26,8 @@
 </template>
 
 <script>
+import Icon from "../icon";
+
 export default {
   name: "l-pager",
 
@@ -43,21 +46,64 @@ export default {
     }
   },
 
-  components: {},
+  components: {
+    "l-icon": Icon
+  },
 
-  computed: {},
+  computed: {
+    pages() {
+      let pages = [
+        1,
+        this.currentPage - 1,
+        this.currentPage - 2,
+        this.currentPage,
+        this.currentPage + 1,
+        this.currentPage + 2,
+        this.totalPage
+      ];
+
+      function unique(arr) {
+        const obj = {};
+        arr.map(number => {
+          obj[number] = true;
+        });
+        return Object.keys(obj).map(item => Number(item));
+      }
+      // 去重
+      pages = unique(pages);
+
+      // 过滤小于1的数字,过滤大于总页码的
+      pages = pages.filter(num => {
+        return num >= 1 && num <= this.totalPage;
+      });
+
+      // 如果当前项和后一项的差值大于1，就在当前项后插入一个...
+      pages = pages.reduce((prevResult, current, index) => {
+        if (
+          pages[index + 1] !== undefined &&
+          pages[index + 1] - pages[index] > 1
+        ) {
+          prevResult.push(current);
+          prevResult.push("...");
+        } else {
+          prevResult.push(current);
+        }
+        return prevResult;
+      }, []);
+
+      pages = pages.sort((a, b) => a - b);
+
+      return pages;
+    }
+  },
 
   data() {
-    return {
-      pages: []
-    };
+    return {};
   },
 
   created() {},
 
-  mounted() {
-    this.reRender(this.currentPage);
-  },
+  mounted() {},
 
   methods: {
     onClickPage(page) {
@@ -66,8 +112,6 @@ export default {
       }
       this.$emit("update:currentPage", page);
       this.$emit("currentChange", page);
-      // 重新渲染page组件,渲染哪些页码应该是根据当前页码来决定的
-      this.reRender(page);
     },
 
     reRender(page) {
@@ -118,7 +162,7 @@ export default {
 };
 </script>
 <style lang='scss' scoped>
-@import "var";
+@import "../styles/var.scss";
 .l-pager {
   background: #fff;
   display: flex;
