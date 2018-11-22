@@ -2,6 +2,7 @@
 <template>
   <div id="app">
     <div>
+      测试
       <l-pager style="margin: 50px"  :total-page="10" :current-page.sync="currentPage" @currentChange="onCurrentChange">
       </l-pager>
     </div>
