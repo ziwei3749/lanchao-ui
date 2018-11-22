@@ -29,7 +29,6 @@ module.exports = {
                     "/components/cascader",
                     "/components/slides",
                     "/components/menu",
-                    "/components/pager",
                 ]
             },
             {
