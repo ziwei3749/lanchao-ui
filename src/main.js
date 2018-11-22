@@ -27,6 +27,7 @@ import SlidesItem from "./slides/slides-item.vue";
 import Menu from "./menu/menu.vue";
 import MenuItem from "./menu/menu-item.vue";
 import SubMenu from "./menu/sub-menu.vue";
+import Pager from "./pager/pager.vue";
 
 import plugin from "./plugin.js";
 
@@ -56,6 +57,7 @@ Vue.component("l-slides-item", SlidesItem);
 Vue.component("l-menu", Menu);
 Vue.component("l-menu-item", MenuItem);
 Vue.component("l-sub-menu", SubMenu);
+Vue.component("l-pager", Pager);
 
 Vue.use(plugin);
 
