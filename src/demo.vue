@@ -2,7 +2,7 @@
 <template>
   <div id="app">
     <div>
-      <l-pager style="margin: 200px" :total-page="20" :current-page="1">
+      <l-pager style="margin: 50px"  :total-page="10" :current-page.sync="currentPage" @currentChange="onCurrentChange">
       </l-pager>
     </div>
     <div>
@@ -88,6 +88,7 @@ export default {
 
   data() {
     return {
+      currentPage: 1,
       selectedArray: ["2"],
       selected: "home",
       selected2: "hire"
@@ -101,6 +102,10 @@ export default {
   methods: {
     handleSelect(v) {
       console.log(v);
+    },
+
+    onCurrentChange(e) {
+      console.log("onCurrentChange监听", e);
     }
   }
 };
