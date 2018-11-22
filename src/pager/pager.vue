@@ -40,6 +40,7 @@ export default {
       type: Number,
       required: true
     },
+
     hideIfOnePage: {
       type: Boolean,
       default: true
