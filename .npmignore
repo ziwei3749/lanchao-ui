@@ -1,0 +1,10 @@
+docs
+tests
+.eslintignore
+.travis.yml
+babel.config.js
+deploy.sh
+karma.conf.js
+package-lock.json
+vue.config.js
+yarn.lock
